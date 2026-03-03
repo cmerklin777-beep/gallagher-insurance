@@ -42,12 +42,10 @@ export default function AboutPage() {
             <h1 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
               Driven by Excellence
             </h1>
-            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-navy-100/80 sm:text-xl">
-              At eTags, our goal is to deliver exceptional coverage solutions that give
-              customers unmatched confidence and security. Driven by a passion for excellence, we
-              offer innovative coverage plans and dedicated support, earning us the trust of
-              homeowners and drivers nationwide. Transparency and clarity guide every service we
-              provide, ensuring we meet the unique needs of each customer.
+            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
+              We started eTags because we believe protecting your car shouldn&apos;t be
+              complicated. We&apos;re a small team with a big mission: making Vehicle Service
+              Contracts simple, transparent, and actually worth it.
             </p>
           </div>
         </div>
@@ -61,12 +59,11 @@ export default function AboutPage() {
               Building Trust Through Innovation
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-navy-600">
-              At eTags, our foundation is built upon a commitment to revolutionize home and
-              auto coverage through transparency and customer-focused solutions. From humble
-              beginnings, we&apos;ve grown into an industry leader, providing a variety of
-              personalized coverage plans designed to protect your investment. Our continuous
-              dedication to quality and innovation has solidified lasting relationships with our
-              customers nationwide.
+              We know what it&apos;s like to get hit with an unexpected repair bill — it&apos;s
+              stressful. That&apos;s why we built eTags to be different. No confusing jargon, no
+              surprise exclusions, just honest coverage you can count on. From our first customer
+              to today, we treat every person like family, because that&apos;s exactly how we&apos;d
+              want to be treated.
             </p>
           </div>
         </div>
@@ -107,10 +104,9 @@ export default function AboutPage() {
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             Secure Your Coverage Today
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-navy-100/80">
-            Discover the perfect coverage plan tailored to your needs. Reach out to eTags
-            now and ensure peace of mind on the road. Our team is ready to assist you in finding the
-            best coverage. Act now to protect your investment!
+          <p className="mt-6 text-lg leading-relaxed text-white/80">
+            We&apos;d love to help you find the right plan. Get a personalized quote in under a
+            minute — no pressure, no sales calls.
           </p>
           <Link
             href="/quote"
