@@ -2,15 +2,15 @@
 
 @theme inline {
   --color-background: #f8f8f9;
-  --color-foreground: #01132ca6;
-  --color-navy-950: #01132c;
-  --color-navy-900: #0F1F3D;
-  --color-navy-800: #1B365D;
-  --color-navy-700: #2A4A7F;
-  --color-navy-600: #3B6098;
-  --color-navy-500: #5A7EB5;
-  --color-navy-100: #C8D6E5;
-  --color-navy-50: #EDF2F7;
+  --color-foreground: #1a5276cc;
+  --color-navy-950: #1a5276;
+  --color-navy-900: #2471a3;
+  --color-navy-800: #2e86c1;
+  --color-navy-700: #3498db;
+  --color-navy-600: #5dade2;
+  --color-navy-500: #85c1e9;
+  --color-navy-100: #d6eaf8;
+  --color-navy-50: #ebf5fb;
   --color-accent: #00ae47;
   --color-accent-hover: #009a3e;
   --color-accent-light: #44b743;
@@ -60,7 +60,7 @@ html {
 
 /* ─── Hero section background ─── */
 .hero-mesh {
-  background: linear-gradient(165deg, #0A1628 0%, #0F1F3D 30%, #1B365D 70%, #2A4A7F 100%);
+  background: linear-gradient(165deg, #1a5276 0%, #2471a3 30%, #2e86c1 70%, #3498db 100%);
 }
 
 /* ─── Stagger animation ─── */
@@ -109,14 +109,14 @@ html {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #EDF2F7;
+  background: #ebf5fb;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C8D6E5;
+  background: #d6eaf8;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #5A7EB5;
+  background: #85c1e9;
 }
 
 /* ─── Chat bubble pulse ─── */
