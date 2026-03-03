@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, Mail, Send, ArrowRight, CheckCircle } from 'lucide-react';
 
 export default function ContactPage() {
@@ -36,7 +37,7 @@ export default function ContactPage() {
             <h3 className="mt-4 text-xl font-semibold text-accent sm:text-2xl">
               We&apos;re Here to Help You!
             </h3>
-            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
+            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
               Have a question about coverage, need help with a claim, or just want to say hi?
               Our team is friendly, responsive, and always happy to help.
             </p>
@@ -45,36 +46,46 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Info Cards */}
-      <section className="bg-white py-24">
+      <section className="bg-white/80 py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto flex max-w-2xl flex-wrap justify-center gap-6">
-            <div className="flex shrink-0 items-center gap-4 rounded-2xl border-l-4 border-accent bg-white p-6 shadow-lg transition hover:shadow-xl">
-              <div className="inline-flex shrink-0 rounded-full bg-accent-muted p-3">
-                <Phone className="h-6 w-6 text-accent" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-navy-500">Call Us</p>
-                <a
-                  href="tel:+1-800-555-0199"
-                  className="text-lg font-bold text-navy-900 transition hover:text-accent"
-                >
-                  (800) 555-0199
-                </a>
-              </div>
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div className="relative mx-auto h-72 w-full max-w-sm overflow-hidden rounded-2xl shadow-lg lg:mx-0">
+              <Image
+                src="/images/people/friendly-mechanic.jpg"
+                alt="Friendly mechanic ready to help"
+                fill
+                className="object-cover"
+              />
             </div>
-
-            <div className="flex shrink-0 items-center gap-4 rounded-2xl border-l-4 border-accent bg-white p-6 shadow-lg transition hover:shadow-xl">
-              <div className="inline-flex shrink-0 rounded-full bg-accent-muted p-3">
-                <Mail className="h-6 w-6 text-accent" />
+            <div className="flex flex-col gap-6">
+              <div className="flex shrink-0 items-center gap-4 rounded-2xl border-l-4 border-accent bg-white p-6 shadow-lg transition hover:shadow-xl">
+                <div className="inline-flex shrink-0 rounded-full bg-accent-muted p-3">
+                  <Phone className="h-6 w-6 text-accent" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-navy-500">Call Us</p>
+                  <a
+                    href="tel:+1-800-555-0199"
+                    className="text-lg font-bold text-navy-900 transition hover:text-accent"
+                  >
+                    (800) 555-0199
+                  </a>
+                </div>
               </div>
-              <div>
-                <p className="text-sm font-medium text-navy-500">Email Us</p>
-                <a
-                  href="mailto:support@etags.com"
-                  className="whitespace-nowrap text-lg font-bold text-navy-900 transition hover:text-accent"
-                >
-                  support@etags.com
-                </a>
+
+              <div className="flex shrink-0 items-center gap-4 rounded-2xl border-l-4 border-accent bg-white p-6 shadow-lg transition hover:shadow-xl">
+                <div className="inline-flex shrink-0 rounded-full bg-accent-muted p-3">
+                  <Mail className="h-6 w-6 text-accent" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-navy-500">Email Us</p>
+                  <a
+                    href="mailto:support@etags.com"
+                    className="whitespace-nowrap text-lg font-bold text-navy-900 transition hover:text-accent"
+                  >
+                    support@etags.com
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -82,7 +93,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="bg-navy-50 py-24">
+      <section className="bg-white/50 py-24">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-2xl bg-white p-8 shadow-xl sm:p-12">
             <div className="text-center">
@@ -195,12 +206,12 @@ export default function ContactPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-navy-900 relative py-24 text-center">
+      <section className="bg-navy-900/80 relative py-24 text-center">
         <div className="relative z-10 mx-auto max-w-3xl px-4">
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             Ready to get covered?
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-white/80">
+          <p className="mt-6 text-lg leading-relaxed text-white/90">
             Our team is here whenever you need us. In the meantime, grab a free
             quote and see how affordable real protection can be.
           </p>

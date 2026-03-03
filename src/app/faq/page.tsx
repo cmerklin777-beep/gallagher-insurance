@@ -78,7 +78,7 @@ export default function FaqPage() {
       </section>
 
       {/* FAQ Accordion Section */}
-      <section className="bg-white py-24">
+      <section className="bg-white/80 py-24">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-4">
             {faqItems.map((item, index) => (
@@ -119,7 +119,7 @@ export default function FaqPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-navy-900 relative py-24 text-center">
+      <section className="bg-navy-900/80 relative py-24 text-center">
         <div className="relative z-10 mx-auto max-w-3xl px-4">
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             Still Have Questions?

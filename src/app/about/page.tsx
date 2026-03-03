@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Shield, Users, Lightbulb, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -42,7 +43,7 @@ export default function AboutPage() {
             <h1 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
               Driven by Excellence
             </h1>
-            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
+            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
               We started eTags because we believe protecting your car shouldn&apos;t be
               complicated. We&apos;re a small team with a big mission: making Vehicle Service
               Contracts simple, transparent, and actually worth it.
@@ -52,25 +53,35 @@ export default function AboutPage() {
       </section>
 
       {/* Company Story Section */}
-      <section className="bg-white py-24">
+      <section className="bg-white/80 py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl rounded-2xl border-l-4 border-accent bg-white p-8 shadow-lg sm:p-12">
-            <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl">
-              Building Trust Through Innovation
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-navy-600">
-              We know what it&apos;s like to get hit with an unexpected repair bill — it&apos;s
-              stressful. That&apos;s why we built eTags to be different. No confusing jargon, no
-              surprise exclusions, just honest coverage you can count on. From our first customer
-              to today, we treat every person like family, because that&apos;s exactly how we&apos;d
-              want to be treated.
-            </p>
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div className="relative mx-auto h-80 w-full max-w-md overflow-hidden rounded-2xl shadow-lg lg:mx-0">
+              <Image
+                src="/images/people/team-support.jpg"
+                alt="eTags team working together"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="rounded-2xl border-l-4 border-accent bg-white p-8 shadow-lg sm:p-12">
+              <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl">
+                Building Trust Through Innovation
+              </h2>
+              <p className="mt-6 text-lg leading-relaxed text-navy-600">
+                We know what it&apos;s like to get hit with an unexpected repair bill — it&apos;s
+                stressful. That&apos;s why we built eTags to be different. No confusing jargon, no
+                surprise exclusions, just honest coverage you can count on. From our first customer
+                to today, we treat every person like family, because that&apos;s exactly how we&apos;d
+                want to be treated.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Core Values Section */}
-      <section className="bg-navy-50 py-24">
+      <section className="bg-white/50 py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl">
@@ -99,12 +110,12 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-navy-900 relative py-24 text-center">
+      <section className="bg-navy-900/80 relative py-24 text-center">
         <div className="relative z-10 mx-auto max-w-3xl px-4">
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             Secure Your Coverage Today
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-white/80">
+          <p className="mt-6 text-lg leading-relaxed text-white/90">
             We&apos;d love to help you find the right plan. Get a personalized quote in under a
             minute — no pressure, no sales calls.
           </p>

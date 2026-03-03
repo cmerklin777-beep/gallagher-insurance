@@ -20,16 +20,16 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="bg-navy-900 border-b border-navy-800">
+      <div className="bg-navy-900/90 backdrop-blur-sm border-b border-navy-800/50">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
               src="/images/etags-logo.png"
               alt="eTags"
-              width={48}
-              height={48}
-              className="h-12 w-12 rounded-lg"
+              width={64}
+              height={64}
+              className="h-16 w-16 rounded-lg"
             />
           </Link>
 
@@ -39,7 +39,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium tracking-wide transition-colors ${
+                className={`text-base font-medium tracking-wide transition-colors ${
                   pathname === link.href
                     ? 'text-accent'
                     : 'text-navy-100/70 hover:text-white'
@@ -54,14 +54,14 @@ export default function Header() {
           <div className="hidden items-center gap-4 lg:flex">
             <a
               href="tel:+1-800-555-0199"
-              className="hidden items-center gap-1.5 text-sm font-medium text-navy-100/70 transition-colors hover:text-white sm:flex"
+              className="hidden items-center gap-1.5 text-base font-medium text-navy-100/70 transition-colors hover:text-white sm:flex"
             >
               <Phone className="h-4 w-4" />
               <span>(800) 555-0199</span>
             </a>
             <Link
               href="/quote"
-              className="rounded-lg bg-action px-5 py-2 text-sm font-semibold text-navy-950 transition-colors hover:bg-action-hover"
+              className="rounded-lg bg-action px-5 py-2 text-base font-semibold text-navy-950 transition-colors hover:bg-action-hover"
             >
               Get Quote
             </Link>

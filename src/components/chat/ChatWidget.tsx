@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send } from 'lucide-react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { X, Send } from 'lucide-react';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -29,13 +29,47 @@ function renderMessageContent(content: string) {
   });
 }
 
+type MascotState = 'entering' | 'waving' | 'idle' | 'chatOpen';
+
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [mascotState, setMascotState] = useState<MascotState>('idle');
+  const [showBubble, setShowBubble] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Entrance animation sequence
+  useEffect(() => {
+    const hasEntered = sessionStorage.getItem('mascotEntered');
+    if (hasEntered) {
+      setMascotState('idle');
+      setShowBubble(true);
+      return;
+    }
+
+    // Play entrance sequence
+    setMascotState('entering');
+
+    // After slide-in completes (1.2s), switch to waving
+    const waveTimer = setTimeout(() => {
+      setMascotState('waving');
+    }, 1200);
+
+    // After waving completes (1.2s + 1.2s wave), switch to idle + show bubble
+    const idleTimer = setTimeout(() => {
+      setMascotState('idle');
+      setShowBubble(true);
+      sessionStorage.setItem('mascotEntered', 'true');
+    }, 2400);
+
+    return () => {
+      clearTimeout(waveTimer);
+      clearTimeout(idleTimer);
+    };
+  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -44,6 +78,26 @@ export default function ChatWidget() {
   useEffect(() => {
     if (isOpen) inputRef.current?.focus();
   }, [isOpen]);
+
+  const openChat = useCallback(() => {
+    setIsOpen(true);
+    setMascotState('chatOpen');
+    setShowBubble(false);
+  }, []);
+
+  const closeChat = useCallback(() => {
+    setIsOpen(false);
+    setMascotState('idle');
+    setShowBubble(true);
+  }, []);
+
+  const handleMascotClick = useCallback(() => {
+    if (isOpen) {
+      closeChat();
+    } else {
+      openChat();
+    }
+  }, [isOpen, openChat, closeChat]);
 
   const sendMessage = async () => {
     const trimmed = input.trim();
@@ -102,19 +156,28 @@ export default function ChatWidget() {
     }
   };
 
+  const spriteClass =
+    mascotState === 'entering'
+      ? 'mascot-entering'
+      : mascotState === 'waving'
+        ? 'mascot-waving'
+        : 'mascot-idle';
+
   return (
     <>
       {/* Chat Panel */}
       {isOpen && (
-        <div className="fixed bottom-20 right-4 z-50 flex w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-navy-100 bg-white shadow-2xl sm:w-[400px] sm:right-6"
-          style={{ height: 'min(500px, calc(100vh - 120px))' }}>
+        <div
+          className="fixed bottom-28 right-4 z-50 flex w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-navy-100 bg-white shadow-2xl sm:w-[400px] sm:right-6"
+          style={{ height: 'min(500px, calc(100vh - 160px))' }}
+        >
           {/* Header */}
           <div className="flex items-center justify-between bg-navy-900 px-4 py-3">
             <div className="flex items-center gap-2">
-              <MessageCircle className="h-5 w-5 text-accent" />
+              <div className="mascot-sprite shrink-0" style={{ width: 28, height: 28, backgroundSize: '400% 300%', backgroundPosition: '0% 0%' }} />
               <span className="font-semibold text-white">eTags Assistant</span>
             </div>
-            <button onClick={() => setIsOpen(false)} className="rounded-lg p-1 text-navy-100 transition hover:bg-white/10 hover:text-white" aria-label="Close chat">
+            <button onClick={closeChat} className="rounded-lg p-1 text-navy-100 transition hover:bg-white/10 hover:text-white" aria-label="Close chat">
               <X className="h-5 w-5" />
             </button>
           </div>
@@ -123,11 +186,13 @@ export default function ChatWidget() {
           <div className="flex-1 space-y-3 overflow-y-auto p-4">
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-                  msg.role === 'user'
-                    ? 'bg-accent text-white rounded-br-md'
-                    : 'bg-navy-50 text-navy-900 rounded-bl-md'
-                }`}>
+                <div
+                  className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+                    msg.role === 'user'
+                      ? 'bg-accent text-white rounded-br-md'
+                      : 'bg-navy-50 text-navy-900 rounded-bl-md'
+                  }`}
+                >
                   {msg.role === 'assistant' ? renderMessageContent(msg.content) : msg.content}
                 </div>
               </div>
@@ -170,16 +235,28 @@ export default function ChatWidget() {
         </div>
       )}
 
-      {/* Floating Bubble */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-accent/30 transition-all hover:bg-accent-hover hover:scale-105 sm:right-6 ${
-          !isOpen ? 'animate-pulse-subtle' : ''
-        }`}
-        aria-label={isOpen ? 'Close chat' : 'Open chat'}
-      >
-        {isOpen ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
-      </button>
+      {/* Mascot + Speech Bubble */}
+      <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end sm:right-6">
+        {/* Speech Bubble */}
+        {showBubble && !isOpen && (
+          <button
+            onClick={openChat}
+            className="mascot-bubble relative mb-2 cursor-pointer rounded-2xl bg-white px-4 py-2.5 text-sm font-semibold text-navy-900 shadow-lg transition hover:shadow-xl"
+            aria-label="Open chat assistant"
+          >
+            Need help?
+            {/* Triangle pointer */}
+            <span className="absolute -bottom-1.5 right-6 h-3 w-3 rotate-45 bg-white" />
+          </button>
+        )}
+
+        {/* Mascot Sprite */}
+        <button
+          onClick={handleMascotClick}
+          className={`mascot-sprite cursor-pointer transition-transform hover:scale-105 ${spriteClass}`}
+          aria-label={isOpen ? 'Close chat' : 'Open chat'}
+        />
+      </div>
     </>
   );
 }

@@ -2,18 +2,18 @@
 
 @theme inline {
   --color-background: #f8f8f9;
-  --color-foreground: #1a5276cc;
-  --color-navy-950: #1a5276;
-  --color-navy-900: #2471a3;
-  --color-navy-800: #2e86c1;
-  --color-navy-700: #3498db;
-  --color-navy-600: #5dade2;
-  --color-navy-500: #85c1e9;
+  --color-foreground: #0c2d48cc;
+  --color-navy-950: #0c2d48;
+  --color-navy-900: #14456a;
+  --color-navy-800: #1a5f8a;
+  --color-navy-700: #2980b9;
+  --color-navy-600: #2c6e99;
+  --color-navy-500: #3d7faa;
   --color-navy-100: #d6eaf8;
   --color-navy-50: #ebf5fb;
-  --color-accent: #00ae47;
-  --color-accent-hover: #009a3e;
-  --color-accent-light: #44b743;
+  --color-accent: #007a33;
+  --color-accent-hover: #006629;
+  --color-accent-light: #2e8b57;
   --color-accent-muted: rgba(0, 174, 71, 0.12);
   --color-action: #fac142;
   --color-action-hover: #e0ab35;
@@ -31,7 +31,8 @@
 }
 
 body {
-  background: var(--color-background);
+  background: linear-gradient(180deg, #1a5276 0%, #2471a3 8%, #3498db 18%, #5dade2 30%, #85c1e9 42%, #d6eaf8 58%, #ebf5fb 72%, #ffffff 88%, #ffffff 100%);
+  background-attachment: fixed;
   color: var(--color-foreground);
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
   -webkit-font-smoothing: antialiased;
@@ -60,7 +61,7 @@ html {
 
 /* ─── Hero section background ─── */
 .hero-mesh {
-  background: linear-gradient(165deg, #1a5276 0%, #2471a3 30%, #2e86c1 70%, #3498db 100%);
+  background: linear-gradient(165deg, rgba(12,45,72,0.7) 0%, rgba(20,69,106,0.55) 30%, rgba(26,95,138,0.4) 70%, rgba(41,128,185,0.25) 100%);
 }
 
 /* ─── Stagger animation ─── */
@@ -126,4 +127,60 @@ html {
 }
 .animate-pulse-subtle {
   animation: pulseSubtle 2s ease-in-out 3;
+}
+
+/* ─── Mascot sprite animation ─── */
+.mascot-sprite {
+  width: 100px;
+  height: 100px;
+  background: url('/images/mascot-sprite.png') no-repeat;
+  background-size: 400% 300%; /* 4 cols x 3 rows */
+  background-position: 0% 0%; /* frame 1: top-left */
+}
+
+/* Entrance: slide in from off-screen right */
+@keyframes mascotSlideIn {
+  from { transform: translateX(150%); }
+  to { transform: translateX(0); }
+}
+
+/* Walk cycle: row 3, frames 9-12 (4 frames) */
+@keyframes mascotWalk {
+  from { background-position: 0% 200%; }
+  to { background-position: 400% 200%; }
+}
+
+/* Wave: row 1, frames 1-4 */
+@keyframes mascotWave {
+  from { background-position: 0% 0%; }
+  to { background-position: 400% 0%; }
+}
+
+/* Idle bob: gentle float */
+@keyframes mascotBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Speech bubble entrance */
+@keyframes bubbleFadeIn {
+  from { opacity: 0; transform: translateY(4px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.mascot-entering {
+  animation: mascotSlideIn 1.2s ease-out both, mascotWalk 0.4s steps(4) 3;
+}
+
+.mascot-waving {
+  animation: mascotWave 0.6s steps(4) 2;
+}
+
+.mascot-idle {
+  animation: mascotBob 2s ease-in-out infinite;
+  background-position: 0% 0%; /* frame 1: waving pose */
+}
+
+.mascot-bubble {
+  animation: bubbleFadeIn 0.3s ease-out both;
 }

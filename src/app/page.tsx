@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Shield, Zap, Car, MapPin } from 'lucide-react';
 import HeroSection from '@/components/landing/HeroSection';
 import QuoteEntryForm from '@/components/landing/QuoteEntryForm';
@@ -13,32 +14,44 @@ export default function HomePage() {
       <QuoteEntryForm />
 
       {/* Why choose eTags */}
-      <section className="bg-white py-24">
-        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
-          <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl lg:text-5xl">
-            Your car takes care of you. Let us take care of it.
-          </h2>
-          <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-accent" />
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-navy-600">
-            Unexpected repairs happen — but they don&apos;t have to break the bank.
-            Our{' '}
-            <span className="font-semibold text-navy-900 underline decoration-accent/60 underline-offset-4">
-              Vehicle Service Contracts
-            </span>{' '}
-            give you the peace of mind that comes from knowing you&apos;re covered, no matter what
-            the road throws at you.
-          </p>
-          <Link
-            href="/quote"
-            className="mt-10 inline-block rounded-xl bg-action px-10 py-4 text-lg font-bold text-navy-950 shadow-lg shadow-action/20 transition hover:bg-action-hover hover:scale-105"
-          >
-            See Your Options
-          </Link>
+      <section className="bg-white/80 py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div className="relative mx-auto h-80 w-full max-w-md overflow-hidden rounded-2xl shadow-lg lg:mx-0">
+              <Image
+                src="/images/people/car-repair.jpg"
+                alt="Mechanic working on a car"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="text-center lg:text-left">
+              <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl lg:text-5xl">
+                Your car takes care of you. Let us take care of it.
+              </h2>
+              <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-accent lg:mx-0" />
+              <p className="mt-8 max-w-xl text-lg leading-relaxed text-navy-600">
+                Unexpected repairs happen — but they don&apos;t have to break the bank.
+                Our{' '}
+                <span className="font-semibold text-navy-900 underline decoration-accent/60 underline-offset-4">
+                  Vehicle Service Contracts
+                </span>{' '}
+                give you the peace of mind that comes from knowing you&apos;re covered, no matter what
+                the road throws at you.
+              </p>
+              <Link
+                href="/quote"
+                className="mt-10 inline-block rounded-xl bg-action px-10 py-4 text-lg font-bold text-navy-950 shadow-lg shadow-action/20 transition hover:bg-action-hover hover:scale-105"
+              >
+                See Your Options
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Feature Highlights */}
-      <section className="bg-navy-50 py-24">
+      <section className="bg-white/50 py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <div className="card-lift rounded-2xl bg-white p-6 shadow-sm">
@@ -94,7 +107,7 @@ export default function HomePage() {
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             Let&apos;s get you covered
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-white/80">
+          <p className="mt-6 text-lg leading-relaxed text-white/90">
             It takes less than a minute to see your personalized coverage options. No sales calls, no commitment — just honest protection for your vehicle.
           </p>
           <Link
