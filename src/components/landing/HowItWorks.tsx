@@ -3,38 +3,38 @@ import { Car, Search, ShieldCheck } from 'lucide-react';
 const steps = [
   {
     icon: Car,
-    step: '01',
-    title: 'Enter Vehicle Info',
+    step: '1',
+    title: 'Tell us about your car',
     description:
-      'Provide your VIN and current mileage. Takes less than 30 seconds.',
+      'Just enter your VIN and current mileage. It takes less than 30 seconds — seriously.',
   },
   {
     icon: Search,
-    step: '02',
-    title: 'Compare Coverage Plans',
+    step: '2',
+    title: 'Compare your options',
     description:
-      'We scan the manufacturer database and present tailored Vehicle Service Contract options.',
+      'We\'ll show you coverage plans tailored to your vehicle, with clear pricing and no hidden fees.',
   },
   {
     icon: ShieldCheck,
-    step: '03',
-    title: 'Get Protected',
+    step: '3',
+    title: 'Drive with confidence',
     description:
-      'Select your plan, complete checkout, and drive with confidence. Coverage starts immediately.',
+      'Pick your plan, check out online, and you\'re covered. It\'s that easy.',
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="relative bg-navy-50 py-20 sm:py-28">
+    <section id="how-it-works" className="relative bg-white py-20 sm:py-28">
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="text-center">
           <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl">
-            How It Works
+            Getting covered is easy
           </h2>
           <p className="mt-4 text-lg text-navy-600">
-            Three simple steps to mechanical breakdown coverage.
+            Three simple steps. No phone calls, no pressure.
           </p>
         </div>
 
@@ -47,14 +47,14 @@ export default function HowItWorks() {
                 <div className="absolute right-0 top-1/2 hidden w-8 -translate-y-1/2 translate-x-full border-t-2 border-dashed border-navy-100 lg:block" />
               )}
 
-              <div className="relative w-full overflow-hidden rounded-xl border border-navy-100 bg-white p-8 shadow-sm">
-                {/* Large step number background */}
+              <div className="relative w-full overflow-hidden rounded-2xl border border-navy-100 bg-navy-50 p-8 shadow-sm">
+                {/* Step number */}
                 <span className="absolute right-6 top-4 font-display text-6xl leading-none text-navy-100">
                   {item.step}
                 </span>
 
                 {/* Icon */}
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-navy-100 bg-accent-muted">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-muted">
                   <item.icon className="h-7 w-7 text-accent" />
                 </div>
 
