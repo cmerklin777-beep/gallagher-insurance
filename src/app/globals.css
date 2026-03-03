@@ -129,31 +129,93 @@ html {
   animation: pulseSubtle 2s ease-in-out 3;
 }
 
-/* ─── Mascot sprite animation ─── */
+/* ─── Mascot sprite animation (8x8 grid, 64 frames) ─── */
 .mascot-sprite {
   width: 100px;
   height: 100px;
   background: url('/images/mascot-sprite.png') no-repeat;
-  background-size: 400% 300%; /* 4 cols x 3 rows */
+  background-size: 800% 800%; /* 8 cols x 8 rows */
   background-position: 0% 0%; /* frame 1: top-left */
 }
 
-/* Entrance: slide in from off-screen right */
+/* Slide in from far off-screen right */
 @keyframes mascotSlideIn {
-  from { transform: translateX(150%); }
+  from { transform: translateX(500%); }
   to { transform: translateX(0); }
 }
 
-/* Walk cycle: row 3, frames 9-12 (4 frames) */
+/* Walk: frames 1-16 (rows 1-2), loops during slide-in */
 @keyframes mascotWalk {
-  from { background-position: 0% 200%; }
-  to { background-position: 400% 200%; }
+  0.000% { background-position: 0% 0%; }
+  6.250% { background-position: 14.29% 0%; }
+  12.500% { background-position: 28.57% 0%; }
+  18.750% { background-position: 42.86% 0%; }
+  25.000% { background-position: 57.14% 0%; }
+  31.250% { background-position: 71.43% 0%; }
+  37.500% { background-position: 85.71% 0%; }
+  43.750% { background-position: 100% 0%; }
+  50.000% { background-position: 0% 14.29%; }
+  56.250% { background-position: 14.29% 14.29%; }
+  62.500% { background-position: 28.57% 14.29%; }
+  68.750% { background-position: 42.86% 14.29%; }
+  75.000% { background-position: 57.14% 14.29%; }
+  81.250% { background-position: 71.43% 14.29%; }
+  87.500% { background-position: 85.71% 14.29%; }
+  93.750% { background-position: 100% 14.29%; }
+  100% { background-position: 100% 14.29%; }
 }
 
-/* Wave: row 1, frames 1-4 */
-@keyframes mascotWave {
-  from { background-position: 0% 0%; }
-  to { background-position: 400% 0%; }
+/* Perform: frames 17-64 (rows 3-8), salute + wave + 360° spin */
+@keyframes mascotPerform {
+  0.0000% { background-position: 0% 28.57%; }
+  2.0833% { background-position: 14.29% 28.57%; }
+  4.1667% { background-position: 28.57% 28.57%; }
+  6.2500% { background-position: 42.86% 28.57%; }
+  8.3333% { background-position: 57.14% 28.57%; }
+  10.4167% { background-position: 71.43% 28.57%; }
+  12.5000% { background-position: 85.71% 28.57%; }
+  14.5833% { background-position: 100% 28.57%; }
+  16.6667% { background-position: 0% 42.86%; }
+  18.7500% { background-position: 14.29% 42.86%; }
+  20.8333% { background-position: 28.57% 42.86%; }
+  22.9167% { background-position: 42.86% 42.86%; }
+  25.0000% { background-position: 57.14% 42.86%; }
+  27.0833% { background-position: 71.43% 42.86%; }
+  29.1667% { background-position: 85.71% 42.86%; }
+  31.2500% { background-position: 100% 42.86%; }
+  33.3333% { background-position: 0% 57.14%; }
+  35.4167% { background-position: 14.29% 57.14%; }
+  37.5000% { background-position: 28.57% 57.14%; }
+  39.5833% { background-position: 42.86% 57.14%; }
+  41.6667% { background-position: 57.14% 57.14%; }
+  43.7500% { background-position: 71.43% 57.14%; }
+  45.8333% { background-position: 85.71% 57.14%; }
+  47.9167% { background-position: 100% 57.14%; }
+  50.0000% { background-position: 0% 71.43%; }
+  52.0833% { background-position: 14.29% 71.43%; }
+  54.1667% { background-position: 28.57% 71.43%; }
+  56.2500% { background-position: 42.86% 71.43%; }
+  58.3333% { background-position: 57.14% 71.43%; }
+  60.4167% { background-position: 71.43% 71.43%; }
+  62.5000% { background-position: 85.71% 71.43%; }
+  64.5833% { background-position: 100% 71.43%; }
+  66.6667% { background-position: 0% 85.71%; }
+  68.7500% { background-position: 14.29% 85.71%; }
+  70.8333% { background-position: 28.57% 85.71%; }
+  72.9167% { background-position: 42.86% 85.71%; }
+  75.0000% { background-position: 57.14% 85.71%; }
+  77.0833% { background-position: 71.43% 85.71%; }
+  79.1667% { background-position: 85.71% 85.71%; }
+  81.2500% { background-position: 100% 85.71%; }
+  83.3333% { background-position: 0% 100%; }
+  85.4167% { background-position: 14.29% 100%; }
+  87.5000% { background-position: 28.57% 100%; }
+  89.5833% { background-position: 42.86% 100%; }
+  91.6667% { background-position: 57.14% 100%; }
+  93.7500% { background-position: 71.43% 100%; }
+  95.8333% { background-position: 85.71% 100%; }
+  97.9167% { background-position: 100% 100%; }
+  100% { background-position: 100% 100%; }
 }
 
 /* Idle bob: gentle float */
@@ -168,17 +230,19 @@ html {
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+/* Phase 1: walk in — slide + walk frames loop together */
 .mascot-entering {
-  animation: mascotSlideIn 1.2s ease-out both, mascotWalk 0.4s steps(4) 3;
+  animation: mascotSlideIn 3s ease-out both, mascotWalk 1.2s step-end infinite;
 }
 
-.mascot-waving {
-  animation: mascotWave 0.6s steps(4) 2;
+/* Phase 2: stationary — salute, wave, 360° spin */
+.mascot-performing {
+  animation: mascotPerform 4s step-end 1 both;
 }
 
 .mascot-idle {
   animation: mascotBob 2s ease-in-out infinite;
-  background-position: 0% 0%; /* frame 1: waving pose */
+  background-position: 0% 0%;
 }
 
 .mascot-bubble {

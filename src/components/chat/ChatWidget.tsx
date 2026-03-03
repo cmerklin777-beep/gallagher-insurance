@@ -29,7 +29,7 @@ function renderMessageContent(content: string) {
   });
 }
 
-type MascotState = 'entering' | 'waving' | 'idle' | 'chatOpen';
+type MascotState = 'entering' | 'performing' | 'idle' | 'chatOpen';
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,30 +43,31 @@ export default function ChatWidget() {
 
   // Entrance animation sequence
   useEffect(() => {
-    const hasEntered = sessionStorage.getItem('mascotEntered');
-    if (hasEntered) {
-      setMascotState('idle');
-      setShowBubble(true);
-      return;
-    }
+    // TODO: Re-enable session check after testing
+    // const hasEntered = sessionStorage.getItem('mascotEntered');
+    // if (hasEntered) {
+    //   setMascotState('idle');
+    //   setShowBubble(true);
+    //   return;
+    // }
 
-    // Play entrance sequence
+    // Phase 1: Walk in from off-screen (3s slide + walk frames looping)
     setMascotState('entering');
 
-    // After slide-in completes (1.2s), switch to waving
-    const waveTimer = setTimeout(() => {
-      setMascotState('waving');
-    }, 1200);
+    // Phase 2: After walk-in, play salute + wave + 360° spin (4s)
+    const performTimer = setTimeout(() => {
+      setMascotState('performing');
+    }, 3000);
 
-    // After waving completes (1.2s + 1.2s wave), switch to idle + show bubble
+    // Phase 3: After perform completes, switch to idle + show bubble
     const idleTimer = setTimeout(() => {
       setMascotState('idle');
       setShowBubble(true);
       sessionStorage.setItem('mascotEntered', 'true');
-    }, 2400);
+    }, 7200);
 
     return () => {
-      clearTimeout(waveTimer);
+      clearTimeout(performTimer);
       clearTimeout(idleTimer);
     };
   }, []);
@@ -159,8 +160,8 @@ export default function ChatWidget() {
   const spriteClass =
     mascotState === 'entering'
       ? 'mascot-entering'
-      : mascotState === 'waving'
-        ? 'mascot-waving'
+      : mascotState === 'performing'
+        ? 'mascot-performing'
         : 'mascot-idle';
 
   return (
@@ -174,7 +175,7 @@ export default function ChatWidget() {
           {/* Header */}
           <div className="flex items-center justify-between bg-navy-900 px-4 py-3">
             <div className="flex items-center gap-2">
-              <div className="mascot-sprite shrink-0" style={{ width: 28, height: 28, backgroundSize: '400% 300%', backgroundPosition: '0% 0%' }} />
+              <div className="mascot-sprite shrink-0" style={{ width: 28, height: 28, backgroundSize: '800% 800%', backgroundPosition: '0% 0%' }} />
               <span className="font-semibold text-white">eTags Assistant</span>
             </div>
             <button onClick={closeChat} className="rounded-lg p-1 text-navy-100 transition hover:bg-white/10 hover:text-white" aria-label="Close chat">
