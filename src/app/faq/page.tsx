@@ -7,46 +7,47 @@ const faqItems = [
   {
     question: 'What types of coverage does eTags offer?',
     answer:
-      'We offer four tiers of Vehicle Service Contracts, each designed to cater to different needs and budgets. Whether you\'re looking for basic powertrain coverage or comprehensive bumper-to-bumper protection, we have a plan for you.',
+      'We offer four coverage tiers so you can pick the one that fits your needs and budget. Whether you just want to cover the big stuff (engine & transmission) or want near-complete coverage, we\'ve got you.',
   },
   {
     question: 'What is auto coverage and why do I need it?',
     answer:
-      'Auto coverage is a service agreement that covers specific repairs and services for your vehicle. It provides financial protection against unexpected repair costs, ensuring your vehicle remains in optimal condition.',
+      'Think of it as a safety net for your car. If something mechanical breaks down, your Vehicle Service Contract helps cover the repair costs so you\'re not stuck with a huge bill out of nowhere.',
   },
   {
     question: 'Can I transfer my coverage if I sell my vehicle?',
     answer:
-      'Yes, most of our Vehicle Service Contracts are transferable. This can increase the resale value of your vehicle, providing added benefit to both you and the buyer.',
+      'Absolutely! Most of our plans are transferable, which is actually a great selling point when you go to sell your car. The new owner gets coverage, and your vehicle is worth more.',
   },
   {
     question: 'How does the purchasing process work at eTags?',
     answer:
-      'Our purchasing process is simple and straightforward. Browse our coverage plans, choose the one that suits your needs, and complete the purchase online.',
+      'It\'s really easy. Enter your VIN and mileage, compare plans, pick the one you like, and check out online. The whole thing takes a few minutes.',
   },
   {
     question: 'What is a Vehicle Service Contract?',
     answer:
-      'A Vehicle Service Contract is a service agreement that covers specific repairs and maintenance for your vehicle beyond the factory warranty. It provides financial protection against unexpected repair costs, keeping your vehicle running smoothly.',
+      'It\'s a service agreement that covers specific repairs after your factory warranty expires. Think of it as extended protection for your car — when something breaks, we help pay for it.',
   },
   {
     question: 'How do I file a claim with eTags?',
     answer:
-      'Filing a claim is easy. Simply navigate to our claims portal, or call the claims number on your fulfillment packet, provide the necessary details, and we\'ll guide you through the process to ensure a smooth experience.',
+      'Just call the claims number on your fulfillment packet or use the claims portal. Give them the details, and we\'ll take it from there. We pay the shop directly, so you don\'t have to deal with reimbursements.',
   },
   {
     question: 'Are there any additional benefits with an eTags coverage?',
-    answer: 'Yes, our coverages often include additional optional selections.',
+    answer:
+      'Yes! Most of our plans include roadside assistance and rental car reimbursement, so you\'re covered even while your car is in the shop.',
   },
   {
     question: 'How long does coverage last?',
     answer:
-      'The duration of coverage depends on the plan selected. We offer flexible terms to suit your needs, ranging from short-term to long-term.',
+      'That depends on the plan you choose. We offer flexible terms from short to long duration. Get a quote to see what\'s available for your specific vehicle.',
   },
   {
     question: 'What makes eTags different?',
     answer:
-      'eTags stands out with our commitment to customer satisfaction, transparent pricing, and comprehensive coverage options tailored to meet diverse needs.',
+      'Honestly? We keep it simple. Transparent pricing, no sales pressure, real people you can talk to, and a fast online process. We think buying coverage should be as easy as everything else you do online.',
   },
 ];
 
