@@ -31,14 +31,14 @@ export default function ContactPage() {
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
-              Get in Touch with eTags
+              We&apos;d love to hear from you
             </h1>
             <h3 className="mt-4 text-xl font-semibold text-accent sm:text-2xl">
               We&apos;re Here to Help You!
             </h3>
-            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-navy-100/80 sm:text-xl">
-              Whether you have questions about our coverage plans or need assistance, our team is
-              ready to assist you. Reach out to us today!
+            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
+              Have a question about coverage, need help with a claim, or just want to say hi?
+              Our team is friendly, responsive, and always happy to help.
             </p>
           </div>
         </div>
@@ -87,11 +87,10 @@ export default function ContactPage() {
           <div className="rounded-2xl bg-white p-8 shadow-xl sm:p-12">
             <div className="text-center">
               <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl">
-                Get in Touch with Us
+                Send us a message
               </h2>
               <p className="mt-3 text-lg text-navy-600">
-                We value your feedback and inquiries. Please fill out our contact form to reach our
-                team for any questions or support.
+                Fill out the form below and we&apos;ll get back to you as soon as we can.
               </p>
             </div>
 
@@ -199,11 +198,11 @@ export default function ContactPage() {
       <section className="bg-navy-900 relative py-24 text-center">
         <div className="relative z-10 mx-auto max-w-3xl px-4">
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
-            Need Assistance? Contact Us Today!
+            Ready to get covered?
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-navy-100/80">
-            Our dedicated team is here to answer your questions and help you find the perfect
-            coverage plan. Don&apos;t wait -- protect your investment now.
+          <p className="mt-6 text-lg leading-relaxed text-white/80">
+            Our team is here whenever you need us. In the meantime, grab a free
+            quote and see how affordable real protection can be.
           </p>
           <Link
             href="/quote"
