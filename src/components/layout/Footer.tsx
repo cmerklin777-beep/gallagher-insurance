@@ -158,7 +158,7 @@ export default function Footer() {
           </p>
           <p className="mt-3 text-navy-600 text-xs max-w-2xl mx-auto leading-relaxed">
             eTags sells Vehicle Service Contracts, not manufacturer
-            coverage. All plans are administered by PCRS and backed by licensed
+            coverage. All plans are administered by Lot Solutions Inc. and backed by licensed
             insurers. See your Service Contract for complete terms, conditions,
             and exclusions.
           </p>

@@ -244,7 +244,7 @@ export default function CheckoutStep() {
         if (failed) {
           setError(
             noteData || 
-            'Error adding note to PCRS'
+            'Error adding note to contract'
           );
         }
         
