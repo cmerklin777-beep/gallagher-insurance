@@ -52,7 +52,58 @@ function getOptionDescription(name: string): string {
   if (lower.includes('a/c') || lower.includes('air condition')) {
     return 'Covers the A/C compressor, condenser, evaporator, and related components to keep your cabin cool.';
   }
-  return 'Additional coverage option for enhanced vehicle protection. Click to add or remove from your plan.';
+  if (lower.includes('paint') || lower.includes('appearance') || lower.includes('exterior')) {
+    return 'Protects your vehicle\'s exterior finish against chips, scratches, fading, and environmental damage.';
+  }
+  if (lower.includes('interior') || lower.includes('upholstery') || lower.includes('fabric') || lower.includes('leather')) {
+    return 'Covers interior surfaces including seats, carpet, and headliner against stains, tears, and wear.';
+  }
+  if (lower.includes('theft') || lower.includes('anti-theft') || lower.includes('stolen')) {
+    return 'Provides theft-related benefits including deductible reimbursement and replacement assistance if your vehicle is stolen.';
+  }
+  if (lower.includes('electronics') || lower.includes('navigation') || lower.includes('infotainment')) {
+    return 'Covers electronic components including navigation, infotainment, and display systems against hardware failure.';
+  }
+  if (lower.includes('commercial') || lower.includes('business')) {
+    return 'Required surcharge for vehicles used for business or commercial purposes.';
+  }
+  if (lower.includes('high mileage') || lower.includes('mileage')) {
+    return 'Surcharge applied based on your vehicle\'s current odometer reading.';
+  }
+  if (lower.includes('luxury') || lower.includes('premium vehicle')) {
+    return 'Surcharge applied to luxury, high-performance, or specialty vehicles due to higher parts and labor costs.';
+  }
+  if (lower.includes('transfer') || lower.includes('case')) {
+    return 'Covers the transfer case, differentials, and 4WD/AWD engagement components for drivetrain protection.';
+  }
+  if (lower.includes('brake') || lower.includes('braking')) {
+    return 'Covers brake calipers, master cylinder, brake lines, hoses, and ABS actuator. Pads and rotors are maintenance items.';
+  }
+  if (lower.includes('cooling') || lower.includes('radiator') || lower.includes('water pump')) {
+    return 'Covers the radiator, water pump, thermostat, and all cooling circuit components that prevent engine overheating.';
+  }
+  if (lower.includes('steer') || lower.includes('power steering')) {
+    return 'Covers the rack and pinion, power steering pump, electric steering motor, and steering column components.';
+  }
+  if (lower.includes('fuel') || lower.includes('injection') || lower.includes('injector')) {
+    return 'Covers the fuel pump, injectors, fuel pressure regulator, and tank sending unit for reliable fuel delivery.';
+  }
+  if (lower.includes('cv') || lower.includes('axle') || lower.includes('drive shaft')) {
+    return 'Covers CV axle shafts, CV joints, and drive shaft assemblies that transfer power to your wheels.';
+  }
+  if (lower.includes('suspension') || lower.includes('shock') || lower.includes('strut')) {
+    return 'Covers suspension components including shocks, struts, control arms, and ball joints for a smooth ride.';
+  }
+  if (lower.includes('engine') || lower.includes('motor')) {
+    return 'Covers all internally lubricated engine components including pistons, crankshaft, camshaft, and cylinder heads.';
+  }
+  if (lower.includes('transmission') || lower.includes('transaxle')) {
+    return 'Covers the full transmission assembly including torque converter, valve body, clutch packs, and solenoid pack.';
+  }
+  if (lower.includes('electrical') || lower.includes('alternator') || lower.includes('starter')) {
+    return 'Covers the alternator, starter motor, wiring harness, and relay assemblies that power your vehicle\'s systems.';
+  }
+  return 'Extends your coverage for this specific component group. Adds additional protection beyond your base plan.';
 }
 
 export default function OptionsStep() {
@@ -264,7 +315,6 @@ export default function OptionsStep() {
           <div className="space-y-3">
             {addOns.map((lc) => {
               const isSelected = selectedAddOns.has(lc.coverageLossCodeId);
-              const isExpanded = expandedDescriptions.has(lc.coverageLossCodeId);
               return (
                 <div
                   key={lc.coverageLossCodeId}
@@ -274,12 +324,12 @@ export default function OptionsStep() {
                       : 'border-navy-100 bg-navy-50 hover:border-navy-200'
                   }`}
                 >
-                  <div className="flex items-center px-4 py-3">
-                    <button
-                      type="button"
-                      onClick={() => toggleAddOn(lc.coverageLossCodeId)}
-                      className="flex items-center gap-3 flex-1 text-left"
-                    >
+                  <button
+                    type="button"
+                    onClick={() => toggleAddOn(lc.coverageLossCodeId)}
+                    className="w-full flex items-center px-4 py-3 text-left"
+                  >
+                    <div className="flex items-center gap-3 flex-1 min-w-0">
                       <div
                         className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition ${
                           isSelected ? 'bg-accent text-white' : 'bg-navy-200 text-navy-500'
@@ -291,40 +341,19 @@ export default function OptionsStep() {
                           <Plus className="h-3.5 w-3.5" />
                         )}
                       </div>
-                      <span className={`text-sm font-medium ${isSelected ? 'text-accent' : 'text-navy-700'}`}>
-                        {lc.description}
-                      </span>
-                    </button>
-                    <div className="flex items-center gap-2 shrink-0">
-                      <span className={`text-sm font-semibold ${isSelected ? 'text-accent' : 'text-navy-600'}`}>
-                        +{formatCurrency(lc.dealerCost)}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => toggleDescription(lc.coverageLossCodeId)}
-                        className="p-1 rounded-full hover:bg-navy-100 transition"
-                        aria-label={`More info about ${lc.description}`}
-                      >
-                        {isExpanded ? (
-                          <ChevronUp className="h-4 w-4 text-navy-400" />
-                        ) : (
-                          <Info className="h-4 w-4 text-navy-400" />
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                  {isExpanded && (
-                    <div className="px-4 pb-3 pt-0 ml-10">
-                      <p className="text-xs text-navy-500 leading-relaxed">
-                        {getOptionDescription(lc.description)}
-                      </p>
-                      {isSelected && (
-                        <p className="mt-1 text-xs font-medium text-accent">
-                          Adds {formatCurrency(lc.dealerCost)} to your total
+                      <div className="min-w-0">
+                        <span className={`text-sm font-medium ${isSelected ? 'text-accent' : 'text-navy-700'}`}>
+                          {lc.description}
+                        </span>
+                        <p className="mt-0.5 text-xs text-navy-400 leading-relaxed">
+                          {getOptionDescription(lc.description)}
                         </p>
-                      )}
+                      </div>
                     </div>
-                  )}
+                    <span className={`text-sm font-semibold shrink-0 ml-3 ${isSelected ? 'text-accent' : 'text-navy-600'}`}>
+                      +{formatCurrency(lc.dealerCost)}
+                    </span>
+                  </button>
                 </div>
               );
             })}

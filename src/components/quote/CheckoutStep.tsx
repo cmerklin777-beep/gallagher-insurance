@@ -689,7 +689,7 @@ export default function CheckoutStep() {
             type="checkbox"
             checked={agreedToTerms}
             onChange={(e) => setAgreedToTerms(e.target.checked)}
-            className="mt-1 h-4 w-4 rounded border-navy-100 text-accent focus:ring-accent/20"
+            className="mt-0.5 h-5 w-5 shrink-0 rounded border-navy-200 text-accent focus:ring-accent/20"
           />
           <span className="text-sm text-navy-700">
             I have read and agree to the{' '}
@@ -704,7 +704,7 @@ export default function CheckoutStep() {
             type="checkbox"
             checked={agreedToConditions}
             onChange={(e) => setAgreedToConditions(e.target.checked)}
-            className="mt-1 h-4 w-4 rounded border-navy-100 text-accent focus:ring-accent/20"
+            className="mt-0.5 h-5 w-5 shrink-0 rounded border-navy-200 text-accent focus:ring-accent/20"
           />
           <span className="text-sm text-navy-700">
             I affirm that my vehicle has no pre-existing conditions and I understand there is a 30-day / 1,000-mile waiting period before I can file a claim.
