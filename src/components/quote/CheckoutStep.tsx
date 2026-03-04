@@ -65,6 +65,7 @@ export default function CheckoutStep() {
     hasBundleDiscount ? discountedTotal : masterPrice
   );
   const latestInitPaymentRef = useRef(initPayment);
+  const handleCollectResponseRef = useRef<(response: { token?: string; card?: { number?: string; exp?: string }; tokenType?: string }) => void>(() => {});
 
   const tokenizationKey = process.env.NEXT_PUBLIC_FORT_POINT_TOKENIZATION_KEY ?? '';
 
@@ -75,8 +76,6 @@ export default function CheckoutStep() {
         setLoading(false);
         return;
       }
-
-      const { paymentType } = useQuoteStore.getState();
 
       const {
         firstName,
@@ -90,6 +89,17 @@ export default function CheckoutStep() {
       } = latestFormRef.current;
 
       const currentInitPayment = latestInitPaymentRef.current;
+
+      // Read fresh state from store to avoid stale closures
+      const storeState = useQuoteStore.getState();
+      const { paymentType } = storeState;
+      const freshVehicles = storeState.vehicles;
+      const freshMasterPrice = storeState.getMasterPrice();
+      const freshCoveredVehicles = freshVehicles.filter((v: { vehicle: unknown; coverage: unknown }) => v.vehicle && v.coverage);
+      const freshBundleDiscount = freshCoveredVehicles.length >= 2 ? BUNDLE_DISCOUNT_PERCENT : 0;
+      const freshDiscountAmount = freshMasterPrice * (freshBundleDiscount / 100);
+      const freshDiscountedTotal = freshMasterPrice - freshDiscountAmount;
+      const freshHasBundleDiscount = freshBundleDiscount > 0;
 
       // Save customer to store
       const customerData = {
@@ -110,7 +120,7 @@ export default function CheckoutStep() {
 
       try {
         const termTotal = 6;
-        const monthlyPrice = hasBundleDiscount ? (discountedTotal - currentInitPayment) / termTotal : (masterPrice - currentInitPayment) / termTotal;
+        const monthlyPrice = freshHasBundleDiscount ? (freshDiscountedTotal - currentInitPayment) / termTotal : (freshMasterPrice - currentInitPayment) / termTotal;
         const paymentRes = await fetch('/api/payment/process', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -127,7 +137,7 @@ export default function CheckoutStep() {
         });
 
         const paymentData = await paymentRes.json();
-        if (!paymentRes.ok || paymentData.response_code !== '100') {
+        if (!paymentRes.ok || String(paymentData.response_code) !== '100') {
           setError(
             paymentData.responsetext ||
               'Transaction declined. Please check your payment information.'
@@ -140,7 +150,7 @@ export default function CheckoutStep() {
         let autoContractResults: Record<string, unknown>[] = [];
 
         // Create auto contracts
-        const coveredVehicles = vehicles.filter((v) => v.vehicle && v.coverage);
+        const coveredVehicles = freshCoveredVehicles;
         if (coveredVehicles.length > 0) {
           const contracts = coveredVehicles.map((v) => {
             const today = new Date().toISOString().split('T')[0];
@@ -173,12 +183,26 @@ export default function CheckoutStep() {
             : [];
 
           autoContractResults = results;
-          const failed = results.find((r: Record<string, unknown>) => !r.success);
+          const contractFailed = results.find((r: Record<string, unknown>) => !r.success);
 
-          if (failed) {
+          if (contractFailed) {
             autoSuccess = false;
+            // Attempt to cancel any successfully-created contracts
+            const successfulContracts = results.filter((r: Record<string, unknown>) => r.success);
+            if (successfulContracts.length > 0) {
+              console.error('Partial contract failure: cancelling successful contracts', successfulContracts);
+              try {
+                await fetch('/api/contract/cancel', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ contracts: successfulContracts }),
+                });
+              } catch (e) {
+                console.error('Failed to cancel orphaned contracts:', e);
+              }
+            }
             setError(
-              failed?.error?.error?.details?.[0]?.message ||
+              contractFailed?.error?.error?.details?.[0]?.message ||
                 'Auto contract failed to create. Please make sure you have filled out all vehicle descriptors or do not have a current plan active.'
             );
           }
@@ -216,7 +240,7 @@ export default function CheckoutStep() {
         });
 
         const captureData = await captureRes.json();
-        if (!captureRes.ok || captureData.response_code !== '100') {
+        if (!captureRes.ok || String(captureData.response_code) !== '100') {
           setError(
             captureData.responsetext ||
               'Payment capture failed. Please contact support.'
@@ -239,13 +263,10 @@ export default function CheckoutStep() {
         const noteData = await noteRes.json();
 
         const noteResults = Array.isArray(noteData) ? noteData : [];
-        const failed = noteResults.find((r: Record<string, unknown>) => !r.success);
+        const noteFailed = noteResults.find((r: Record<string, unknown>) => !r.success);
 
-        if (failed) {
-          setError(
-            noteData || 
-            'Error adding note to contract'
-          );
+        if (noteFailed) {
+          console.error('Failed to add note to contract:', noteData);
         }
         
 
@@ -257,9 +278,7 @@ export default function CheckoutStep() {
         setLoading(false);
       }
     },
-    [
-      masterPrice, vehicles, setCustomer, setStep,
-    ]
+    [setCustomer, setStep]
   );
 
   const latestFormRef = useRef({
@@ -288,6 +307,7 @@ export default function CheckoutStep() {
     };
 
     latestInitPaymentRef.current = initPayment;
+    handleCollectResponseRef.current = handleCollectResponse;
 
 
     if (collectReady && window.CollectJS && !configuredRef.current) {
@@ -300,19 +320,19 @@ export default function CheckoutStep() {
         fields: {
           ccnumber: {
             selector: '#ccnumber',
-            placeholder: 'Card Number',
+            placeholder: '',
           },
           ccexp: {
             selector: '#ccexp',
-            placeholder: 'MM / YY',
+            placeholder: '',
           },
           cvv: {
             selector: '#cvv',
-            placeholder: 'CVV',
+            placeholder: '',
           },
         },
         callback: (response: { token?: string; card?: { number?: string; exp?: string }; tokenType?: string }) => {
-          handleCollectResponse(response);
+          handleCollectResponseRef.current(response);
         },
       });
     }
@@ -628,7 +648,7 @@ export default function CheckoutStep() {
             <label className="block text-sm font-medium text-navy-700 mb-1">Card Number</label>
             <div
               id="ccnumber"
-              className="h-12 rounded-lg border border-navy-100 bg-navy-50 px-3 transition focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20"
+              className="flex items-center h-12 rounded-lg border border-navy-100 bg-navy-50 px-3 transition focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -636,14 +656,14 @@ export default function CheckoutStep() {
               <label className="block text-sm font-medium text-navy-700 mb-1">Expiration</label>
               <div
                 id="ccexp"
-                className="h-12 rounded-lg border border-navy-100 bg-navy-50 px-3 transition focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20"
+                className="flex items-center h-12 rounded-lg border border-navy-100 bg-navy-50 px-3 transition focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-navy-700 mb-1">CVV</label>
               <div
                 id="cvv"
-                className="h-12 rounded-lg border border-navy-100 bg-navy-50 px-3 transition focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20"
+                className="flex items-center h-12 rounded-lg border border-navy-100 bg-navy-50 px-3 transition focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20"
               />
             </div>
           </div>
