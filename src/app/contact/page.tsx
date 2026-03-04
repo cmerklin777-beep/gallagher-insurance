@@ -169,8 +169,6 @@ export default function ContactPage() {
                       Select a service
                     </option>
                     <option value="auto">Auto Coverage</option>
-                    <option value="home">Home Coverage</option>
-                    <option value="both">Both</option>
                     <option value="other">Other</option>
                   </select>
                 </div>
