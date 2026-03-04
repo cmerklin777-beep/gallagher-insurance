@@ -39,6 +39,7 @@ export default function CheckoutStep() {
   const [zip, setZip] = useState(customer?.address?.postalCode ?? '');
 
   const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [agreedToConditions, setAgreedToConditions] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [collectReady, setCollectReady] = useState(false);
@@ -363,6 +364,10 @@ export default function CheckoutStep() {
       setError('You must agree to the Vehicle Service Contract Terms to proceed.');
       return false;
     }
+    if (!agreedToConditions) {
+      setError('You must affirm that your vehicle has no pre-existing conditions and acknowledge the waiting period to proceed.');
+      return false;
+    }
     return true;
   }
 
@@ -678,7 +683,7 @@ export default function CheckoutStep() {
       </div>
 
       {/* Terms Agreement */}
-      <div className="rounded-2xl bg-white p-6 shadow-md">
+      <div className="rounded-2xl bg-white p-6 shadow-md space-y-4">
         <label className="flex items-start gap-3 cursor-pointer">
           <input
             type="checkbox"
@@ -692,6 +697,17 @@ export default function CheckoutStep() {
               Vehicle Service Contract Terms
             </Link>
             .
+          </span>
+        </label>
+        <label className="flex items-start gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={agreedToConditions}
+            onChange={(e) => setAgreedToConditions(e.target.checked)}
+            className="mt-1 h-4 w-4 rounded border-navy-100 text-accent focus:ring-accent/20"
+          />
+          <span className="text-sm text-navy-700">
+            I affirm that my vehicle has no pre-existing conditions and I understand there is a 30-day / 1,000-mile waiting period before I can file a claim.
           </span>
         </label>
       </div>
