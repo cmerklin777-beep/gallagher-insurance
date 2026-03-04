@@ -27,17 +27,17 @@ export default function HomePage() {
             </div>
             <div className="text-center lg:text-left">
               <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl lg:text-5xl">
-                Your car takes care of you. Let us take care of it.
+                The protection you&apos;d expect from a dealership — without the dealership price tag.
               </h2>
               <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-accent lg:mx-0" />
               <p className="mt-8 max-w-xl text-lg leading-relaxed text-navy-600">
-                Unexpected repairs happen — but they don&apos;t have to break the bank.
-                Our{' '}
+                Dealerships charge a premium because they can. We built a smarter way — the same
+                certified coverage, sold directly to you online. No showroom overhead, no broker
+                fees, just honest pricing on{' '}
                 <span className="font-semibold text-navy-900 underline decoration-accent/60 underline-offset-4">
                   Vehicle Service Contracts
                 </span>{' '}
-                give you the peace of mind that comes from knowing you&apos;re covered, no matter what
-                the road throws at you.
+                that actually protect you.
               </p>
               <Link
                 href="/quote"
@@ -60,7 +60,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-lg font-bold text-navy-900">Plans that fit your life</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
-                From basic powertrain to bumper-to-bumper, choose the coverage level that makes sense for you and your budget.
+                From powertrain basics to bumper-to-bumper, pick the tier that fits — priced without the dealership markup baked in.
               </p>
             </div>
 
@@ -68,9 +68,9 @@ export default function HomePage() {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-muted">
                 <Zap className="h-6 w-6 text-accent" />
               </div>
-              <h3 className="text-lg font-bold text-navy-900">Quick and easy enrollment</h3>
+              <h3 className="text-lg font-bold text-navy-900">Built for how you buy</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
-                No paperwork, no waiting rooms. Get covered online in minutes from the comfort of your couch.
+                No waiting rooms, no finance-office upsell. Our platform was designed from day one to get you covered online in minutes.
               </p>
             </div>
 
@@ -90,7 +90,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-lg font-bold text-navy-900">Repairs anywhere you are</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
-                Take your car to any ASE-Certified mechanic at thousands of repair shops across the country.
+                Use any ASE-Certified mechanic at thousands of shops nationwide. You choose where — not a dealership service department.
               </p>
             </div>
           </div>
@@ -105,10 +105,10 @@ export default function HomePage() {
       <section className="hero-mesh relative py-24 text-center">
         <div className="relative z-10 mx-auto max-w-3xl px-4">
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
-            Let&apos;s get you covered
+            See what coverage costs without the markup
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-white/90">
-            It takes less than a minute to see your personalized coverage options. No sales calls, no commitment — just honest protection for your vehicle.
+            It takes less than a minute to see your personalized options — priced directly, with nothing added on. No sales calls, no commitment.
           </p>
           <Link
             href="/quote"

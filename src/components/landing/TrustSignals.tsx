@@ -17,7 +17,7 @@ const signals = [
     icon: DollarSign,
     title: '$0 Deductible Options',
     description:
-      'Keep more money in your pocket. Choose a plan with zero out-of-pocket costs at the repair shop.',
+      'Zero out-of-pocket at the shop — savings we can offer because we don\'t have a showroom to pay for.',
   },
   {
     icon: Clock,
@@ -34,10 +34,10 @@ export default function TrustSignals() {
         {/* Section header */}
         <div className="text-center">
           <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl">
-            Why families trust us
+            Why drivers switch to us
           </h2>
           <p className="mt-4 text-lg text-navy-600">
-            We make protecting your vehicle simple, honest, and affordable.
+            Same certified protection. Direct pricing. No middlemen.
           </p>
         </div>
 

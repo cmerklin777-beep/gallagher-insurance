@@ -13,7 +13,7 @@ const steps = [
     step: '2',
     title: 'Compare your options',
     description:
-      'We\'ll show you coverage plans tailored to your vehicle, with clear pricing and no hidden fees.',
+      'See coverage plans tailored to your vehicle with direct-to-you pricing — no hidden fees, no dealer markups.',
   },
   {
     icon: ShieldCheck,
@@ -31,10 +31,10 @@ export default function HowItWorks() {
         {/* Section header */}
         <div className="text-center">
           <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl">
-            Getting covered is easy
+            We made it this simple on purpose
           </h2>
           <p className="mt-4 text-lg text-navy-600">
-            Three simple steps. No phone calls, no pressure.
+            No phone calls, no finance office, no pressure. Just you and your quote.
           </p>
         </div>
 

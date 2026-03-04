@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, ShieldCheck, MapPin, Star } from 'lucide-react';
+import { ArrowRight, DollarSign, MapPin, Star } from 'lucide-react';
 
 export default function HeroSection() {
   return (
@@ -11,17 +11,18 @@ export default function HeroSection() {
           <div className="text-center lg:text-left">
             <div className="animate-fade-up stagger-1 mb-6 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-1.5 text-sm text-white">
               <span className="h-1.5 w-1.5 rounded-full bg-action" />
-              Trusted by thousands of drivers
+              Direct-to-you coverage — no dealership markup
             </div>
 
             <h1 className="animate-fade-up stagger-2 font-display text-4xl leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-              We&apos;re here to keep you{' '}
-              <span className="text-action">on the road</span>.
+              Coverage built for you,{' '}
+              <span className="text-action">not for middlemen</span>.
             </h1>
 
             <p className="animate-fade-up stagger-3 mt-6 max-w-xl text-lg leading-relaxed text-white/90">
-              Real people, real coverage. Our team helps you find the right
-              Vehicle Service Contract so unexpected repairs never slow you down.
+              We cut out the dealership markup and broker commissions so you
+              get the same top-tier protection at a fraction of the cost — all
+              online, in minutes.
             </p>
 
             <div className="animate-fade-up stagger-4 mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
@@ -43,8 +44,8 @@ export default function HeroSection() {
             {/* Micro stats */}
             <div className="animate-fade-up stagger-5 mt-8 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
               <div className="flex items-center gap-2 text-sm text-white/90">
-                <ShieldCheck className="h-4 w-4 text-accent" />
-                <span>4 Coverage Tiers</span>
+                <DollarSign className="h-4 w-4 text-accent" />
+                <span>No Dealer Markup</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-white/90">
                 <MapPin className="h-4 w-4 text-accent" />
