@@ -68,7 +68,9 @@ export default function CartReview() {
         const contracts = data.contracts as Record<string, unknown>[];
         const contract = contracts[0].contract as Record<string, unknown>;
         const buckets = contract.buckets as { code: string; amount: number; description: string }[];
-        setVehiclePreview(index, buckets);
+        // Map result index back to actual vehicle index (coveredVehicles may be a subset)
+        const realVehicleIndex = vehicles.indexOf(coveredVehicles[index]);
+        setVehiclePreview(realVehicleIndex >= 0 ? realVehicleIndex : index, buckets);
       });
 
       setStep('checkout');
@@ -106,17 +108,18 @@ export default function CartReview() {
       {/* Vehicle Coverages */}
       {coveredVehicles.map((v, idx) => {
         // Find the actual index in the vehicles array (not the filtered index)
-        const realIndex = vehicles.indexOf(v);
+        const realIndex = vehicles.findIndex((veh) => veh === v);
+        const safeIndex = realIndex >= 0 ? realIndex : idx;
         return v.vehicle && v.coverage && v.costs ? (
-          <div key={realIndex}>
+          <div key={safeIndex}>
             <VehicleCoverageSummary
               vehicle={v.vehicle}
               coverage={v.coverage}
               costs={v.costs}
-              onEdit={() => handleEdit(realIndex)}
-              onRemove={() => setConfirmRemoveIdx(realIndex)}
+              onEdit={() => handleEdit(safeIndex)}
+              onRemove={() => setConfirmRemoveIdx(safeIndex)}
             />
-            {confirmRemoveIdx === realIndex && (
+            {confirmRemoveIdx === safeIndex && (
               <div className="mt-2 flex items-center justify-end gap-2 rounded-xl bg-red-50 px-4 py-3">
                 <span className="text-sm text-red-700 mr-auto">Remove this vehicle?</span>
                 <button
@@ -126,7 +129,7 @@ export default function CartReview() {
                   Cancel
                 </button>
                 <button
-                  onClick={() => handleRemove(realIndex)}
+                  onClick={() => handleRemove(safeIndex)}
                   className="rounded-lg bg-red-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-red-700"
                 >
                   Remove
