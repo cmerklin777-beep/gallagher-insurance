@@ -64,8 +64,23 @@ function getOptionDescription(name: string): string {
   if (lower.includes('electronics') || lower.includes('navigation') || lower.includes('infotainment')) {
     return 'Covers electronic components including navigation, infotainment, and display systems against hardware failure.';
   }
+  if (lower.includes('disappearing') || lower.includes('vanishing')) {
+    return 'Your deductible decreases over time with no claims. The longer you go claim-free, the less you pay out of pocket.';
+  }
+  if (lower.includes('ride share') || lower.includes('rideshare') || lower.includes('uber') || lower.includes('lyft')) {
+    return 'Extends coverage to vehicles used for ride-share services like Uber or Lyft — which are typically excluded from standard plans.';
+  }
+  if (lower.includes('salvage') || lower.includes('rebuilt')) {
+    return 'Enables coverage for vehicles with a salvage or rebuilt title — which are normally ineligible for service contracts.';
+  }
+  if (lower.includes('snowplow') || lower.includes('snow plow') || lower.includes('plow')) {
+    return 'Extends coverage to vehicles equipped with a snowplow attachment, which puts extra stress on drivetrain and electrical systems.';
+  }
+  if (lower.includes('lift') || lower.includes('leveling')) {
+    return 'Extends coverage to vehicles with aftermarket suspension lifts or leveling kits, which can affect warranty eligibility.';
+  }
   if (lower.includes('commercial') || lower.includes('business')) {
-    return 'Required surcharge for vehicles used for business or commercial purposes.';
+    return 'Extends coverage to vehicles used for commercial or business purposes, such as deliveries, fleet use, or company vehicles.';
   }
   if (lower.includes('high mileage') || lower.includes('mileage')) {
     return 'Surcharge applied based on your vehicle\'s current odometer reading.';
