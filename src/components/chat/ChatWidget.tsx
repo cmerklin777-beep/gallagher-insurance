@@ -19,11 +19,18 @@ function renderMessageContent(content: string) {
   return parts.map((part, i) => {
     const linkMatch = part.match(/\[([^\]]+)\]\(([^)]+)\)/);
     if (linkMatch) {
-      return (
-        <a key={i} href={linkMatch[2]} className="font-medium text-accent underline underline-offset-2 hover:text-accent-hover">
-          {linkMatch[1]}
-        </a>
-      );
+      const href = linkMatch[2];
+      // Sanitize: only allow http, https, and relative URLs
+      const isSafe = href.startsWith('/') || href.startsWith('http://') || href.startsWith('https://');
+      if (isSafe) {
+        return (
+          <a key={i} href={href} className="font-medium text-accent underline underline-offset-2 hover:text-accent-hover">
+            {linkMatch[1]}
+          </a>
+        );
+      }
+      // Render unsafe links as plain text
+      return <span key={i}>{linkMatch[1]}</span>;
     }
     return <span key={i}>{part}</span>;
   });
@@ -115,7 +122,8 @@ export default function ChatWidget() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          messages: updatedMessages.map((m) => ({ role: m.role, content: m.content })),
+          // Skip the welcome message (first message) to save API tokens
+          messages: updatedMessages.slice(1).map((m) => ({ role: m.role, content: m.content })),
         }),
       });
 
