@@ -7,10 +7,11 @@ import { ShoppingCart, AlertCircle } from 'lucide-react';
 import VehicleCoverageSummary from './VehicleCoverageSummary';
 
 export default function CartReview() {
-  const { vehicles, getMasterPrice, setStep, setVehiclePreview, addVehicleSlot } = useQuoteStore();
+  const { vehicles, getMasterPrice, setStep, setVehiclePreview, addVehicleSlot, setCurrentVehicleIndex, removeVehicle } = useQuoteStore();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [confirmRemoveIdx, setConfirmRemoveIdx] = useState<number | null>(null);
 
   const masterTotal = getMasterPrice();
 
@@ -78,6 +79,21 @@ export default function CartReview() {
     }
   }
 
+  function handleEdit(vehicleIndex: number) {
+    setCurrentVehicleIndex(vehicleIndex);
+    setStep('plan-selection');
+  }
+
+  function handleRemove(vehicleIndex: number) {
+    removeVehicle(vehicleIndex);
+    setConfirmRemoveIdx(null);
+    // If no covered vehicles remain, go back to vehicle info
+    const remaining = useQuoteStore.getState().vehicles.filter((v) => v.vehicle && v.coverage);
+    if (remaining.length === 0) {
+      setStep('vehicle-info');
+    }
+  }
+
   const canProceed = coveredVehicles.length > 0;
 
   return (
@@ -88,16 +104,38 @@ export default function CartReview() {
       </div>
 
       {/* Vehicle Coverages */}
-      {coveredVehicles.map((v, idx) =>
-        v.vehicle && v.coverage && v.costs ? (
-          <VehicleCoverageSummary
-            key={idx}
-            vehicle={v.vehicle}
-            coverage={v.coverage}
-            costs={v.costs}
-          />
-        ) : null
-      )}
+      {coveredVehicles.map((v, idx) => {
+        // Find the actual index in the vehicles array (not the filtered index)
+        const realIndex = vehicles.indexOf(v);
+        return v.vehicle && v.coverage && v.costs ? (
+          <div key={realIndex}>
+            <VehicleCoverageSummary
+              vehicle={v.vehicle}
+              coverage={v.coverage}
+              costs={v.costs}
+              onEdit={() => handleEdit(realIndex)}
+              onRemove={() => setConfirmRemoveIdx(realIndex)}
+            />
+            {confirmRemoveIdx === realIndex && (
+              <div className="mt-2 flex items-center justify-end gap-2 rounded-xl bg-red-50 px-4 py-3">
+                <span className="text-sm text-red-700 mr-auto">Remove this vehicle?</span>
+                <button
+                  onClick={() => setConfirmRemoveIdx(null)}
+                  className="rounded-lg px-3 py-1.5 text-sm font-medium text-navy-600 transition hover:bg-white"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => handleRemove(realIndex)}
+                  className="rounded-lg bg-red-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-red-700"
+                >
+                  Remove
+                </button>
+              </div>
+            )}
+          </div>
+        ) : null;
+      })}
 
       {/* Master Total */}
       <div className="rounded-2xl bg-navy-950 p-6 shadow-lg">
