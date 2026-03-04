@@ -14,7 +14,7 @@ export default function HomePage() {
       <QuoteEntryForm />
 
       {/* Why choose eTags */}
-      <section className="bg-white/80 py-24">
+      <section className="bg-white/90 py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="relative mx-auto h-80 w-full max-w-md overflow-hidden rounded-2xl shadow-lg lg:mx-0">
@@ -51,7 +51,7 @@ export default function HomePage() {
       </section>
 
       {/* Feature Highlights */}
-      <section className="bg-white/50 py-24">
+      <section className="bg-white/70 py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <div className="card-lift rounded-2xl bg-white p-6 shadow-sm">
@@ -102,7 +102,7 @@ export default function HomePage() {
       <HowItWorks />
 
       {/* Final CTA */}
-      <section className="hero-mesh relative py-24 text-center">
+      <section className="hero-mesh relative py-24 text-center section-fade-top">
         <div className="relative z-10 mx-auto max-w-3xl px-4">
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             See what coverage costs without the markup

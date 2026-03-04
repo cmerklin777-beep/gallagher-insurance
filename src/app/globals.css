@@ -13,7 +13,7 @@
   --color-navy-50: #ebf5fb;
   --color-accent: #007a33;
   --color-accent-hover: #006629;
-  --color-accent-light: #2e8b57;
+  --color-accent-light: #4ade80;
   --color-accent-muted: rgba(0, 174, 71, 0.12);
   --color-action: #fac142;
   --color-action-hover: #e0ab35;
@@ -62,6 +62,22 @@ html {
 /* ─── Hero section background ─── */
 .hero-mesh {
   background: linear-gradient(165deg, rgba(12,45,72,0.7) 0%, rgba(20,69,106,0.55) 30%, rgba(26,95,138,0.4) 70%, rgba(41,128,185,0.25) 100%);
+}
+
+/* ─── Smooth section transitions ─── */
+.section-fade-top {
+  position: relative;
+}
+.section-fade-top::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, rgba(20, 69, 106, 0.7));
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* ─── Stagger animation ─── */

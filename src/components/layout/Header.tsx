@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation';
 import { Phone, Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { label: 'Home', href: '/' },
   { label: 'Auto Coverage', href: '/auto-coverage' },
   { label: 'About', href: '/about' },
   { label: 'FAQ', href: '/faq' },
@@ -41,7 +40,7 @@ export default function Header() {
                 href={link.href}
                 className={`text-base font-medium tracking-wide transition-colors ${
                   pathname === link.href
-                    ? 'text-accent'
+                    ? 'text-accent-light'
                     : 'text-navy-100/70 hover:text-white'
                 }`}
               >
@@ -93,7 +92,7 @@ export default function Header() {
                   onClick={() => setMobileOpen(false)}
                   className={`block px-4 py-3 rounded-lg text-sm font-medium tracking-wide transition-colors hover:bg-navy-800 ${
                     pathname === link.href
-                      ? 'text-accent'
+                      ? 'text-accent-light'
                       : 'text-navy-100/70 hover:text-white'
                   }`}
                 >

@@ -64,7 +64,7 @@ export default function FaqPage() {
       <section className="hero-mesh relative overflow-hidden">
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent-light">
               FAQ
             </p>
             <h1 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
@@ -78,7 +78,7 @@ export default function FaqPage() {
       </section>
 
       {/* FAQ Accordion Section */}
-      <section className="bg-white/80 py-24">
+      <section className="bg-white/90 py-24">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-4">
             {faqItems.map((item, index) => (
@@ -119,7 +119,7 @@ export default function FaqPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-navy-900/80 relative py-24 text-center">
+      <section className="bg-navy-900/80 relative py-24 text-center section-fade-top">
         <div className="relative z-10 mx-auto max-w-3xl px-4">
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             Still Have Questions?

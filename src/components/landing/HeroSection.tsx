@@ -44,15 +44,15 @@ export default function HeroSection() {
             {/* Micro stats */}
             <div className="animate-fade-up stagger-5 mt-8 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
               <div className="flex items-center gap-2 text-sm text-white/90">
-                <DollarSign className="h-4 w-4 text-accent" />
+                <DollarSign className="h-4 w-4 text-accent-light" />
                 <span>No Dealer Markup</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-white/90">
-                <MapPin className="h-4 w-4 text-accent" />
+                <MapPin className="h-4 w-4 text-accent-light" />
                 <span>Nationwide Network</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-white/90">
-                <Star className="h-4 w-4 text-accent" />
+                <Star className="h-4 w-4 text-accent-light" />
                 <span>$0 Deductible Options</span>
               </div>
             </div>

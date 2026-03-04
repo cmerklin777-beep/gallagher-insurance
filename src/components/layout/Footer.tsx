@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="relative bg-navy-950 border-t border-navy-800">
+    <footer className="relative bg-navy-950 border-t border-navy-800/40">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         {/* Top section: Logo + Tagline + Accent Divider */}
         <div className="mb-12">
@@ -27,7 +27,7 @@ export default function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Column 1 — Company Information */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-5">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent-light mb-5">
               Company Information
             </h3>
             <ul className="space-y-3">
@@ -60,7 +60,7 @@ export default function Footer() {
 
           {/* Column 2 — Explore Our Services */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-5">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent-light mb-5">
               Explore Our Services
             </h3>
             <ul className="space-y-3">
@@ -85,7 +85,7 @@ export default function Footer() {
 
           {/* Column 3 — Legal & Privacy */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-5">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent-light mb-5">
               Legal &amp; Privacy
             </h3>
             <ul className="space-y-3">
@@ -126,7 +126,7 @@ export default function Footer() {
 
           {/* Column 4 — Support & Resources */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-5">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent-light mb-5">
               Support &amp; Resources
             </h3>
             <ul className="space-y-3">

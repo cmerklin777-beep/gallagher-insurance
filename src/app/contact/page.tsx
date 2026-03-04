@@ -34,7 +34,7 @@ export default function ContactPage() {
             <h1 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
               We&apos;d love to hear from you
             </h1>
-            <h3 className="mt-4 text-xl font-semibold text-accent sm:text-2xl">
+            <h3 className="mt-4 text-xl font-semibold text-accent-light sm:text-2xl">
               We&apos;re Here to Help You!
             </h3>
             <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
@@ -46,7 +46,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Info Cards */}
-      <section className="bg-white/80 py-24">
+      <section className="bg-white/90 py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="relative mx-auto h-72 w-full max-w-sm overflow-hidden rounded-2xl shadow-lg lg:mx-0">
@@ -93,7 +93,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="bg-white/50 py-24">
+      <section className="bg-white/70 py-24">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-2xl bg-white p-8 shadow-xl sm:p-12">
             <div className="text-center">
@@ -206,7 +206,7 @@ export default function ContactPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-navy-900/80 relative py-24 text-center">
+      <section className="bg-navy-900/80 relative py-24 text-center section-fade-top">
         <div className="relative z-10 mx-auto max-w-3xl px-4">
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             Ready to get covered?

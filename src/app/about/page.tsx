@@ -37,7 +37,7 @@ export default function AboutPage() {
       <section className="hero-mesh relative overflow-hidden">
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent-light">
               Our Commitment
             </p>
             <h1 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
@@ -53,7 +53,7 @@ export default function AboutPage() {
       </section>
 
       {/* Company Story Section */}
-      <section className="bg-white/80 py-24">
+      <section className="bg-white/90 py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="relative mx-auto h-80 w-full max-w-md overflow-hidden rounded-2xl shadow-lg lg:mx-0">
@@ -81,7 +81,7 @@ export default function AboutPage() {
       </section>
 
       {/* Core Values Section */}
-      <section className="bg-white/50 py-24">
+      <section className="bg-white/70 py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl">
@@ -110,7 +110,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-navy-900/80 relative py-24 text-center">
+      <section className="bg-navy-900/80 relative py-24 text-center section-fade-top">
         <div className="relative z-10 mx-auto max-w-3xl px-4">
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             Secure Your Coverage Today

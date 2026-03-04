@@ -185,7 +185,7 @@ export default function AutoCoveragePage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-navy-900 relative py-24 text-center">
+      <section className="bg-navy-900 relative py-24 text-center section-fade-top">
         <div className="relative z-10 mx-auto max-w-3xl px-4">
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             Secure Your Peace of Mind Today
