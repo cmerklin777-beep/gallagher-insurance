@@ -29,7 +29,7 @@ function getOptionDescription(name: string): string {
     return 'Protects against damage from road hazards like potholes, nails, and debris. Covers repair or replacement costs.';
   }
   if (lower.includes('key') || lower.includes('fob')) {
-    return 'Covers replacement of lost, stolen, or damaged key fobs and smart keys — which can cost hundreds at the dealer.';
+    return 'Covers replacement of lost, stolen, or damaged key fobs and smart keys — which can cost hundreds to replace.';
   }
   if (lower.includes('dent') || lower.includes('ding')) {
     return 'Covers paintless dent repair for minor dents and dings from parking lots, hail, and everyday mishaps.';

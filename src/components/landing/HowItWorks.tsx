@@ -13,7 +13,7 @@ const steps = [
     step: '2',
     title: 'Compare your options',
     description:
-      'See coverage plans tailored to your vehicle with direct-to-you pricing — no hidden fees, no dealer markups.',
+      'See coverage plans tailored to your vehicle with direct-to-you pricing — no hidden fees, no call center markups.',
   },
   {
     icon: ShieldCheck,

@@ -15,7 +15,7 @@ export default function HeroSection() {
             </h1>
 
             <p className="animate-fade-up stagger-2 mt-6 max-w-xl text-lg leading-relaxed text-white/90">
-              We cut out the dealership markup and broker commissions so you
+              We cut out the call center markup and broker commissions so you
               get the same top-tier protection at a fraction of the cost — all
               online, in minutes.
             </p>
@@ -40,7 +40,7 @@ export default function HeroSection() {
             <div className="animate-fade-up stagger-4 mt-8 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
               <div className="flex items-center gap-2 text-sm text-white/90">
                 <DollarSign className="h-4 w-4 text-accent-light" />
-                <span>No Dealer Markup</span>
+                <span>No Call Center Markup</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-white/90">
                 <MapPin className="h-4 w-4 text-accent-light" />

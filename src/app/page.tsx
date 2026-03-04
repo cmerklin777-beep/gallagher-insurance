@@ -27,12 +27,12 @@ export default function HomePage() {
             </div>
             <div className="text-center lg:text-left">
               <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl lg:text-5xl">
-                The protection you&apos;d expect from a dealership — without the dealership price tag.
+                The protection you&apos;d expect from a call center — without the call center price tag.
               </h2>
               <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-accent lg:mx-0" />
               <p className="mt-8 max-w-xl text-lg leading-relaxed text-navy-600">
-                Dealerships charge a premium because they can. We built a smarter way — the same
-                certified coverage, sold directly to you online. No showroom overhead, no broker
+                Call centers charge a premium because they can. We built a smarter way — the same
+                certified coverage, sold directly to you online. No call center overhead, no broker
                 fees, just honest pricing on{' '}
                 <span className="font-semibold text-navy-900 underline decoration-accent/60 underline-offset-4">
                   Vehicle Service Contracts
@@ -60,7 +60,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-lg font-bold text-navy-900">Plans that fit your life</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
-                From powertrain basics to bumper-to-bumper, pick the tier that fits — priced without the dealership markup baked in.
+                From powertrain basics to bumper-to-bumper, pick the tier that fits — priced without the call center markup baked in.
               </p>
             </div>
 
@@ -90,7 +90,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-lg font-bold text-navy-900">Repairs anywhere you are</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
-                Use any ASE-Certified mechanic at thousands of shops nationwide. You choose where — not a dealership service department.
+                Use any ASE-Certified mechanic at thousands of shops nationwide. You choose where, not them.
               </p>
             </div>
           </div>
