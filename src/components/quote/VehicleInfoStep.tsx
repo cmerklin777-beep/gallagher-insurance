@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useQuoteStore } from '@/store/quote-store';
-import { AlertCircle, Car, ArrowLeft, CheckCircle2, X, Loader2 } from 'lucide-react';
+import { AlertCircle, Car, ArrowLeft, CheckCircle2, X, Loader2, Info } from 'lucide-react';
 
 interface VehicleInfoStepProps {
   initialVin?: string;
@@ -21,6 +21,8 @@ export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleI
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showVinInfo, setShowVinInfo] = useState(false);
+  const vinInfoRef = useRef<HTMLDivElement>(null);
 
   // VIN decode state
   const [vinDecoding, setVinDecoding] = useState(false);
@@ -32,6 +34,18 @@ export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleI
     if (initialVin) setVin(initialVin);
     if (initialMileage !== undefined) setMileage(String(initialMileage));
   }, [initialVin, initialMileage]);
+
+  // Close VIN info popover on click outside
+  useEffect(() => {
+    if (!showVinInfo) return;
+    function handleClickOutside(e: MouseEvent) {
+      if (vinInfoRef.current && !vinInfoRef.current.contains(e.target as Node)) {
+        setShowVinInfo(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showVinInfo]);
 
   // Auto-decode VIN when it reaches 17 valid characters
   useEffect(() => {
@@ -234,10 +248,126 @@ export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleI
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* VIN — first field */}
             <div>
-              <label htmlFor="vehicle-vin" className="block text-sm font-medium text-navy-700">
-                VIN (Vehicle Identification Number)
-              </label>
-              <div className="relative">
+              <div className="relative" ref={vinInfoRef}>
+                <label htmlFor="vehicle-vin" className="flex items-center gap-1.5 text-sm font-medium text-navy-700">
+                  VIN (Vehicle Identification Number)
+                  <button
+                    type="button"
+                    onClick={() => setShowVinInfo(!showVinInfo)}
+                    className="inline-flex items-center justify-center h-4 w-4 rounded-full bg-navy-200 text-navy-600 hover:bg-accent hover:text-white transition-colors"
+                    aria-label="Where to find your VIN"
+                  >
+                    <Info className="h-2.5 w-2.5" />
+                  </button>
+                </label>
+
+                {/* VIN Info Popover */}
+                {showVinInfo && (
+                  <div className="absolute z-50 top-7 left-0 w-80 rounded-xl bg-white border border-navy-100 shadow-xl p-4 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="text-sm font-bold text-navy-900">Where to Find Your VIN</h4>
+                      <button type="button" onClick={() => setShowVinInfo(false)} className="text-navy-400 hover:text-navy-600">
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                    {/* Simple diagram */}
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent text-xs font-bold">1</div>
+                        <div>
+                          <p className="text-xs font-semibold text-navy-800">Dashboard</p>
+                          <p className="text-xs text-navy-500">Look through the windshield at the driver&apos;s side corner of the dashboard.</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent text-xs font-bold">2</div>
+                        <div>
+                          <p className="text-xs font-semibold text-navy-800">Driver&apos;s Door Jamb</p>
+                          <p className="text-xs text-navy-500">Open the driver&apos;s door and look at the sticker on the door frame.</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent text-xs font-bold">3</div>
+                        <div>
+                          <p className="text-xs font-semibold text-navy-800">Registration & Insurance</p>
+                          <p className="text-xs text-navy-500">Check your vehicle registration card or insurance documents.</p>
+                        </div>
+                      </div>
+                      {/* Detailed car diagram */}
+                      <div className="mt-2 rounded-lg bg-navy-50 p-3">
+                        <svg viewBox="0 0 340 160" className="w-full" aria-label="VIN location diagram">
+                          <defs>
+                            <linearGradient id="vinBodyGrad" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stopColor="#f1f5f9"/>
+                              <stop offset="100%" stopColor="#dde4ed"/>
+                            </linearGradient>
+                            <linearGradient id="vinGlassGrad" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stopColor="#dbeafe"/>
+                              <stop offset="100%" stopColor="#93c5fd"/>
+                            </linearGradient>
+                          </defs>
+
+                          {/* Shadow under car */}
+                          <ellipse cx="170" cy="135" rx="130" ry="8" fill="#94a3b8" opacity="0.15"/>
+
+                          {/* Car body */}
+                          <path d="M45,105 L52,82 L68,62 L95,42 L130,30 L230,28 L260,35 L282,50 L300,72 L310,95 L310,115 L45,115 Z" fill="url(#vinBodyGrad)" stroke="#94a3b8" strokeWidth="1.5"/>
+
+                          {/* Roof contour */}
+                          <path d="M98,43 L105,30 L240,28 L255,38" fill="none" stroke="#94a3b8" strokeWidth="1"/>
+
+                          {/* Windshield */}
+                          <path d="M72,64 L100,34 L160,30 L160,64 Z" fill="url(#vinGlassGrad)" stroke="#94a3b8" strokeWidth="1" opacity="0.9"/>
+                          {/* Side window 1 */}
+                          <path d="M162,30 L162,64 L228,64 L228,30 Z" fill="url(#vinGlassGrad)" stroke="#94a3b8" strokeWidth="0.8" opacity="0.85"/>
+                          {/* Side window 2 */}
+                          <path d="M230,30 L230,64 L260,38 L252,30 Z" fill="url(#vinGlassGrad)" stroke="#94a3b8" strokeWidth="0.8" opacity="0.8"/>
+
+                          {/* Door line */}
+                          <line x1="160" y1="64" x2="160" y2="112" stroke="#94a3b8" strokeWidth="0.8" opacity="0.5"/>
+                          <line x1="228" y1="64" x2="228" y2="112" stroke="#94a3b8" strokeWidth="0.8" opacity="0.5"/>
+
+                          {/* Door handle */}
+                          <rect x="180" y="76" width="16" height="3" rx="1.5" fill="#94a3b8" opacity="0.5"/>
+                          <rect x="248" y="76" width="16" height="3" rx="1.5" fill="#94a3b8" opacity="0.5"/>
+
+                          {/* Headlight */}
+                          <ellipse cx="54" cy="94" rx="8" ry="6" fill="#fbbf24" opacity="0.5" stroke="#f59e0b" strokeWidth="0.8"/>
+                          {/* Taillight */}
+                          <ellipse cx="306" cy="94" rx="6" ry="5" fill="#ef4444" opacity="0.4" stroke="#dc2626" strokeWidth="0.8"/>
+
+                          {/* Front wheel */}
+                          <circle cx="100" cy="118" r="20" fill="#1e293b"/>
+                          <circle cx="100" cy="118" r="15" fill="#334155"/>
+                          <circle cx="100" cy="118" r="9" fill="#475569"/>
+                          <circle cx="100" cy="118" r="4" fill="#64748b"/>
+                          {/* Rear wheel */}
+                          <circle cx="258" cy="118" r="20" fill="#1e293b"/>
+                          <circle cx="258" cy="118" r="15" fill="#334155"/>
+                          <circle cx="258" cy="118" r="9" fill="#475569"/>
+                          <circle cx="258" cy="118" r="4" fill="#64748b"/>
+
+                          {/* ── VIN LOCATION 1: Dashboard ── */}
+                          <circle cx="115" cy="60" r="7" fill="#0072CE" opacity="0.9"/>
+                          <text x="115" y="63" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">1</text>
+                          <line x1="108" y1="55" x2="68" y2="14" stroke="#0072CE" strokeWidth="1.2" strokeDasharray="3,2"/>
+                          <rect x="20" y="4" width="60" height="16" rx="4" fill="#0072CE" opacity="0.12"/>
+                          <text x="50" y="16" textAnchor="middle" fill="#0072CE" fontSize="8" fontWeight="700">Dashboard</text>
+
+                          {/* ── VIN LOCATION 2: Door Jamb ── */}
+                          <circle cx="162" cy="85" r="7" fill="#0072CE" opacity="0.9"/>
+                          <text x="162" y="89" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">2</text>
+                          <line x1="169" y1="82" x2="215" y2="14" stroke="#0072CE" strokeWidth="1.2" strokeDasharray="3,2"/>
+                          <rect x="185" y="4" width="66" height="16" rx="4" fill="#0072CE" opacity="0.12"/>
+                          <text x="218" y="16" textAnchor="middle" fill="#0072CE" fontSize="8" fontWeight="700">Door Jamb</text>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="relative mt-1">
                 <input
                   id="vehicle-vin"
                   type="text"
@@ -259,9 +389,6 @@ export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleI
                   </button>
                 )}
               </div>
-              <p className="mt-1 text-xs text-navy-500">
-                Found on your dashboard (driver&apos;s side) or inside the driver&apos;s door frame.
-              </p>
               {vinError && (
                 <p className="mt-1 text-xs text-amber-600">{vinError}</p>
               )}

@@ -37,6 +37,11 @@ interface QuoteState {
   availableRates: CoverageRate[];
   setAvailableRates: (rates: CoverageRate[]) => void;
 
+  // Pending tier selection (between tier-selection and options-addons steps)
+  pendingTierCode: string | null;
+  pendingTermIndex: number;
+  setPendingTier: (code: string, termIndex: number) => void;
+
   // Customer
   customer: Customer | null;
   setCustomer: (customer: Customer) => void;
@@ -99,6 +104,10 @@ export const useQuoteStore = create<QuoteState>((set, get) => ({
   availableRates: [],
   setAvailableRates: (rates) => set({ availableRates: rates }),
 
+  pendingTierCode: null,
+  pendingTermIndex: 0,
+  setPendingTier: (code, termIndex) => set({ pendingTierCode: code, pendingTermIndex: termIndex }),
+
   customer: null,
   setCustomer: (customer) => set({ customer }),
 
@@ -123,6 +132,8 @@ export const useQuoteStore = create<QuoteState>((set, get) => ({
       vehicles: [emptyVehicle()],
       currentVehicleIndex: 0,
       availableRates: [],
+      pendingTierCode: null,
+      pendingTermIndex: 0,
       customer: null,
       paymentType: 'full',
       amountPaidAtCheckout: null,

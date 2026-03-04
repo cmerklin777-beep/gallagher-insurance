@@ -4,6 +4,7 @@ import { useQuoteStore } from '@/store/quote-store';
 import type { WizardStep } from '@/lib/types';
 import VehicleInfoStep from './VehicleInfoStep';
 import PlanSelectionStep from './PlanSelectionStep';
+import OptionsStep from './OptionsStep';
 import CartReview from './CartReview';
 import CheckoutStep from './CheckoutStep';
 import SuccessPage from './SuccessPage';
@@ -16,6 +17,7 @@ interface QuoteWizardProps {
 const STEPS: { key: WizardStep; label: string }[] = [
   { key: 'vehicle-info', label: 'Vehicle Info' },
   { key: 'plan-selection', label: 'Select Plan' },
+  { key: 'options-addons', label: 'Options' },
   { key: 'cart-review', label: 'Review' },
   { key: 'checkout', label: 'Checkout' },
 ];
@@ -26,12 +28,14 @@ function getProgressIndex(step: WizardStep): number {
       return 0;
     case 'plan-selection':
       return 1;
-    case 'cart-review':
+    case 'options-addons':
       return 2;
-    case 'checkout':
+    case 'cart-review':
       return 3;
-    case 'success':
+    case 'checkout':
       return 4;
+    case 'success':
+      return 5;
     default:
       return 0;
   }
@@ -46,7 +50,7 @@ export default function QuoteWizard({ initialVin, initialMileage }: QuoteWizardP
     <div className="space-y-8">
       {/* Progress Bar */}
       {currentStep !== 'success' && (
-        <nav aria-label="Quote progress" className="mx-auto max-w-2xl">
+        <nav aria-label="Quote progress" className="mx-auto max-w-3xl">
           <ol className="flex items-center justify-between">
             {STEPS.map((step, idx) => {
               const isCompleted = idx < progressIndex;
@@ -98,6 +102,7 @@ export default function QuoteWizard({ initialVin, initialMileage }: QuoteWizardP
         <VehicleInfoStep initialVin={initialVin} initialMileage={initialMileage} />
       )}
       {currentStep === 'plan-selection' && <PlanSelectionStep />}
+      {currentStep === 'options-addons' && <OptionsStep />}
       {currentStep === 'cart-review' && <CartReview />}
       {currentStep === 'checkout' && <CheckoutStep />}
       {currentStep === 'success' && <SuccessPage />}

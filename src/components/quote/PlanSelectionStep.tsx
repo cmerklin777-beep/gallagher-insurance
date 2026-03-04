@@ -2,10 +2,11 @@
 
 import { useState, useMemo } from 'react';
 import { useQuoteStore } from '@/store/quote-store';
-import { TIER_ORDER, TIER_DESCRIPTIONS, formatCurrency } from '@/lib/constants';
-import type { CoverageRate, CoverageTerm, LossCode } from '@/lib/types';
+import { TIER_ORDER, formatCurrency } from '@/lib/constants';
+import type { CoverageRate, CoverageTerm } from '@/lib/types';
 import PlanCard from './PlanCard';
-import { ArrowLeft, Info } from 'lucide-react';
+import VehicleDiagram from './VehicleDiagram';
+import { ArrowLeft } from 'lucide-react';
 
 function getTierLevel(description: string): 1 | 2 | 3 | 4 {
   const lower = description.toLowerCase();
@@ -69,15 +70,15 @@ function getFeatures(tierName: string): string[] {
 }
 
 export default function PlanSelectionStep() {
-  const { availableRates, currentVehicleIndex, vehicles, setVehicleCoverage, setStep } =
+  const { availableRates, currentVehicleIndex, vehicles, setPendingTier, setStep } =
     useQuoteStore();
 
-  // Per-tier state: selected term index and selected add-on loss codes
+  // Per-tier state: selected term index
   const [selectedTermByTier, setSelectedTermByTier] = useState<Record<string, number>>({});
-  const [selectedAddOns, setSelectedAddOns] = useState<Record<string, Set<number>>>({});
-  const [expandedInfo, setExpandedInfo] = useState<string | null>(null);
-  // Which tier is highlighted (user-clicked); null = use recommended tier
+  // Which tier is highlighted (user-clicked); null = use recommended tier (Exclusive)
   const [highlightedTier, setHighlightedTier] = useState<string | null>(null);
+  // Which tier is being hovered for the diagram
+  const [hoveredTier, setHoveredTier] = useState<string | null>(null);
 
   // Sort rates by TIER_ORDER
   const sortedRates = useMemo(() => {
@@ -102,100 +103,28 @@ export default function PlanSelectionStep() {
     return getDefaultTermIndex(rate.terms);
   }
 
-  function getAddOnSet(tierName: string): Set<number> {
-    return selectedAddOns[tierName] ?? new Set();
-  }
-
-  function toggleAddOn(tierName: string, lossCodeId: number) {
-    setSelectedAddOns((prev) => {
-      const current = new Set(prev[tierName] ?? []);
-      if (current.has(lossCodeId)) {
-        current.delete(lossCodeId);
-      } else {
-        current.add(lossCodeId);
-      }
-      return { ...prev, [tierName]: current };
-    });
-  }
-
-  function calculateTotal(term: CoverageTerm, addOnIds: Set<number>): {
-    basePrice: number;
-    surchargeCost: number;
-    optionsCost: number;
-    totalPrice: number;
-  } {
-    const basePrice = term.dealerCost;
-
-    // Surcharges from components[0] (non-selectable loss codes)
-    let surchargeCost = 0;
-    if (term.components[0]) {
-      for (const lc of term.components[0].lossCodes) {
-        if (!lc.isSelectable && lc.isSelected) {
-          surchargeCost += lc.dealerCost;
-        }
-      }
-    }
-
-    // Optional add-ons from components[1] (selectable loss codes)
-    let optionsCost = 0;
-    if (term.components[1]) {
-      for (const lc of term.components[1].lossCodes) {
-        if (addOnIds.has(lc.coverageLossCodeId)) {
-          optionsCost += lc.dealerCost;
-        }
-      }
-    }
-
-    return {
-      basePrice,
-      surchargeCost,
-      optionsCost,
-      totalPrice: basePrice + surchargeCost + optionsCost,
-    };
-  }
-
   function handleSelect(rate: CoverageRate) {
-    const tierName = getTierName(rate.description);
     const termIdx = getTermIndex(rate);
-    const term = rate.terms[termIdx];
-    const addOnIds = getAddOnSet(tierName);
-    const costs = calculateTotal(term, addOnIds);
 
-    // Collect all loss code IDs (surcharges + selected add-ons)
-    const allLossCodes: number[] = [];
-    if (term.components[0]) {
-      for (const lc of term.components[0].lossCodes) {
-        if (lc.isSelected) allLossCodes.push(lc.coverageLossCodeId);
-      }
-    }
-    for (const id of addOnIds) {
-      allLossCodes.push(id);
-    }
-
-    setVehicleCoverage(
-      currentVehicleIndex,
-      {
-        planCode: rate.code,
-        planDescription: rate.description,
-        retailCost: costs.totalPrice,
-        termMonths: term.termMonths,
-        termOdometer: term.termOdometer,
-        deductible: term.deductible,
-        coverageLossCodes: allLossCodes,
-      },
-      costs
-    );
-
-    setStep('cart-review');
+    // Store pending tier selection and advance to options step
+    setPendingTier(rate.code, termIdx);
+    setStep('options-addons');
   }
 
-  // Determine the "recommended" tier (Premium if available, else highest)
+  // Recommended tier: Exclusive if available, else highest
   const recommendedTier = useMemo(() => {
     const names = sortedRates.map((r) => getTierName(r.description));
-    if (names.includes('Premium')) return 'Premium';
     if (names.includes('Exclusive')) return 'Exclusive';
+    if (names.includes('Premium')) return 'Premium';
     return names[names.length - 1] ?? '';
   }, [sortedRates]);
+
+  // Determine which tier level to show in the diagram
+  const diagramTierLevel: 1 | 2 | 3 | 4 = useMemo(() => {
+    const activeTier = hoveredTier ?? highlightedTier ?? recommendedTier;
+    const rate = sortedRates.find((r) => getTierName(r.description) === activeTier);
+    return rate ? getTierLevel(rate.description) : 4;
+  }, [hoveredTier, highlightedTier, recommendedTier, sortedRates]);
 
   if (sortedRates.length === 0) {
     return (
@@ -236,22 +165,33 @@ export default function PlanSelectionStep() {
         </div>
       </div>
 
+      {/* Vehicle Diagram — shows coverage for hovered/selected tier */}
+      <div className="rounded-2xl bg-white p-4 shadow-md border border-navy-100 transition-all">
+        <p className="text-xs font-semibold text-navy-500 uppercase tracking-wide mb-2 text-center">
+          Coverage Overview — {hoveredTier ?? highlightedTier ?? recommendedTier}
+        </p>
+        <VehicleDiagram tierLevel={diagramTierLevel} />
+      </div>
+
       {/* Plan Cards Grid */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
         {sortedRates.map((rate) => {
           const tierName = getTierName(rate.description);
           const tierLevel = getTierLevel(rate.description);
           const termIdx = getTermIndex(rate);
           const term = rate.terms[termIdx];
-          const addOnIds = getAddOnSet(tierName);
-          const costs = calculateTotal(term, addOnIds);
           const isHighlighted = tierName === (highlightedTier ?? recommendedTier);
 
           return (
-            <div key={rate.code} className="flex flex-col gap-4 h-full">
+            <div
+              key={rate.code}
+              className="flex flex-col gap-3 h-full"
+              onMouseEnter={() => setHoveredTier(tierName)}
+              onMouseLeave={() => setHoveredTier(null)}
+            >
               <PlanCard
                 name={tierName}
-                price={costs.totalPrice}
+                price={term.dealerCost}
                 frequency="one-time"
                 features={getFeatures(tierName)}
                 isRecommended={isHighlighted}
@@ -262,7 +202,7 @@ export default function PlanSelectionStep() {
               />
 
               {/* Term Selector */}
-              <div className="rounded-xl bg-white p-4 shadow-sm border border-navy-100">
+              <div className="rounded-xl bg-white p-3 shadow-sm border border-navy-100">
                 <label className="block text-xs font-semibold text-navy-500 uppercase tracking-wide mb-1.5">
                   Term Length
                 </label>
@@ -285,84 +225,9 @@ export default function PlanSelectionStep() {
                 </select>
 
                 {/* Deductible Display */}
-                <p className="mt-2 text-xs text-navy-500">
+                <p className="mt-1.5 text-xs text-navy-500">
                   Deductible: {formatCurrency(term.deductible.amount)} ({term.deductible.type})
                 </p>
-
-                {/* Tier Info Toggle */}
-                {TIER_DESCRIPTIONS[tierName] && (
-                  <button
-                    onClick={() =>
-                      setExpandedInfo(expandedInfo === tierName ? null : tierName)
-                    }
-                    className="mt-2 flex items-center gap-1 text-xs text-accent hover:underline"
-                  >
-                    <Info className="h-3 w-3" />
-                    What&apos;s covered?
-                  </button>
-                )}
-                {expandedInfo === tierName && TIER_DESCRIPTIONS[tierName] && (
-                  <p className="mt-2 text-xs text-navy-500 leading-relaxed">
-                    {TIER_DESCRIPTIONS[tierName].summary}
-                  </p>
-                )}
-
-                {/* Add-on Checkboxes (from components[1]) */}
-                {term.components[1] &&
-                  term.components[1].lossCodes.filter((lc: LossCode) => lc.isSelectable).length > 0 && (
-                    <div className="mt-3 border-t border-navy-100 pt-3">
-                      <p className="text-xs font-semibold text-navy-500 uppercase tracking-wide mb-2">
-                        Optional Add-Ons
-                      </p>
-                      <div className="space-y-1.5">
-                        {term.components[1].lossCodes
-                          .filter((lc: LossCode) => lc.isSelectable)
-                          .map((lc: LossCode) => (
-                            <label
-                              key={lc.coverageLossCodeId}
-                              className="flex items-center gap-2 text-xs cursor-pointer"
-                            >
-                              <input
-                                type="checkbox"
-                                checked={addOnIds.has(lc.coverageLossCodeId)}
-                                onChange={() => toggleAddOn(tierName, lc.coverageLossCodeId)}
-                                className="h-3.5 w-3.5 rounded border-navy-100 text-accent focus:ring-accent/20"
-                              />
-                              <span className="text-navy-600">{lc.description}</span>
-                              <span className="ml-auto text-navy-500">
-                                +{formatCurrency(lc.dealerCost)}
-                              </span>
-                            </label>
-                          ))}
-                      </div>
-                    </div>
-                  )}
-
-                {/* Cost Breakdown */}
-                {(costs.surchargeCost > 0 || costs.optionsCost > 0) && (
-                  <div className="mt-3 border-t border-navy-100 pt-3 space-y-1 text-xs text-navy-500">
-                    <div className="flex justify-between">
-                      <span>Base</span>
-                      <span>{formatCurrency(costs.basePrice)}</span>
-                    </div>
-                    {costs.surchargeCost > 0 && (
-                      <div className="flex justify-between">
-                        <span>Surcharges</span>
-                        <span>+{formatCurrency(costs.surchargeCost)}</span>
-                      </div>
-                    )}
-                    {costs.optionsCost > 0 && (
-                      <div className="flex justify-between">
-                        <span>Options</span>
-                        <span>+{formatCurrency(costs.optionsCost)}</span>
-                      </div>
-                    )}
-                    <div className="flex justify-between font-semibold text-navy-900 pt-1 border-t border-dashed border-navy-100">
-                      <span>Total</span>
-                      <span>{formatCurrency(costs.totalPrice)}</span>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           );

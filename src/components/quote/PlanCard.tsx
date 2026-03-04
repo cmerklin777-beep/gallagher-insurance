@@ -56,11 +56,11 @@ export default function PlanCard({
       tabIndex={onTierClick ? 0 : undefined}
       onKeyDown={onTierClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onTierClick(); } } : undefined}
     >
-      {/* Best Value Badge - only on Premium (recommended tier) */}
+      {/* Recommended Badge */}
       {showBestValueBadge && (
         <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
           <span className="inline-flex items-center gap-1 rounded-full bg-accent px-4 py-1 text-xs font-bold uppercase tracking-wide text-white shadow-md">
-            Best Value
+            Recommended
           </span>
         </div>
       )}

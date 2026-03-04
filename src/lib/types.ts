@@ -146,6 +146,7 @@ export interface CreateAutoContractPayload {
 export type WizardStep =
   | 'vehicle-info'
   | 'plan-selection'
+  | 'options-addons'
   | 'cart-review'
   | 'checkout'
   | 'success';
