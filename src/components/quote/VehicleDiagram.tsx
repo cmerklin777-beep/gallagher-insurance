@@ -130,19 +130,29 @@ export default function VehicleDiagram({ tierLevel }: VehicleDiagramProps) {
                 </div>
               )}
 
-              {/* Pin dot */}
+              {/* Checkmark / X icon */}
               <div
-                className="rounded-full transition-all duration-150"
+                className="flex items-center justify-center rounded-full transition-all duration-150"
                 style={{
-                  width: isActive ? 18 : 13,
-                  height: isActive ? 18 : 13,
-                  backgroundColor: covered ? 'var(--color-accent)' : '#cbd5e1',
-                  border: `2.5px solid ${isActive ? '#fff' : 'rgba(255,255,255,0.85)'}`,
+                  width: isActive ? 22 : 18,
+                  height: isActive ? 22 : 18,
+                  backgroundColor: covered ? 'var(--color-accent)' : '#94a3b8',
+                  border: `2px solid ${isActive ? '#fff' : 'rgba(255,255,255,0.9)'}`,
                   boxShadow: isActive
                     ? `0 0 0 4px ${covered ? 'rgba(0,122,51,0.25)' : 'rgba(148,163,184,0.25)'}, 0 2px 8px rgba(0,0,0,0.25)`
                     : '0 1px 4px rgba(0,0,0,0.25)',
                 }}
-              />
+              >
+                {covered ? (
+                  <svg width={isActive ? 12 : 10} height={isActive ? 12 : 10} viewBox="0 0 12 12" fill="none" className="text-white">
+                    <path d="M2.5 6L5 8.5L9.5 3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                ) : (
+                  <svg width={isActive ? 10 : 8} height={isActive ? 10 : 8} viewBox="0 0 10 10" fill="none" className="text-white">
+                    <path d="M2.5 2.5L7.5 7.5M7.5 2.5L2.5 7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                )}
+              </div>
             </div>
           );
         })}
