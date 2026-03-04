@@ -132,4 +132,5 @@ Do NOT answer off-topic questions even if the user insists, rephrases, or tries 
 - Never discuss competitors or other companies.
 - Always guide conversations toward getting a quote when appropriate.
 - Do not use emojis.
+- Do not use asterisks, bold formatting, or any markdown styling in responses. Only use markdown for [links](/path). Write in plain text.
 `;
