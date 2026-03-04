@@ -28,7 +28,7 @@ const PARTS: PartDef[] = [
   { id: 'transmission', label: 'Transmission', x: 24, y: 55, minTier: 1, desc: 'Automatic transmission assembly including torque converter, valve body, clutch packs, solenoid pack, and TCM.' },
   { id: 'transfer_case', label: 'Transfer Case / AWD', x: 86, y: 72, minTier: 1, desc: 'Transfer case assembly, front and rear differentials, and AWD/4WD engagement components.' },
   // Tier 2 — Essential Plus
-  { id: 'turbo', label: 'Turbo / Supercharger', x: 16, y: 13, minTier: 2, desc: 'Turbocharger or supercharger assembly including housing, shaft, bearings, and wastegate actuator.' },
+  { id: 'turbo', label: 'Turbo / Supercharger', x: 14, y: 20, minTier: 2, desc: 'Turbocharger or supercharger assembly including housing, shaft, bearings, and wastegate actuator.' },
   { id: 'ac', label: 'A/C Compressor', x: 92, y: 15, minTier: 2, desc: 'A/C compressor and clutch, condenser, evaporator core, expansion valve, and receiver/drier.' },
   { id: 'cv_joints', label: 'CV Joints', x: 30, y: 79, minTier: 2, desc: 'Front and rear CV axle shafts, CV joints, and drive shaft assemblies.' },
   { id: 'electrical', label: 'Electrical System', x: 72, y: 37, minTier: 2, desc: 'Alternator, starter motor, wiring harness, fuse box, and relay assemblies.' },
