@@ -22,8 +22,8 @@ const tiers = [
       'Transfer Case Coverage',
       'AWD Mechanism Coverage',
     ],
-    border: 'border-navy-100',
-    extra: '',
+    border: 'border-navy-200',
+    extra: 'shadow-sm',
     badge: null,
   },
   {
@@ -39,7 +39,7 @@ const tiers = [
       'A/C System',
     ],
     border: 'border-navy-200',
-    extra: '',
+    extra: 'shadow-sm',
     badge: null,
   },
   {

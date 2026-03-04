@@ -59,7 +59,7 @@ export default function HeroSection() {
 
           {/* Right — Person photo */}
           <div className="animate-fade-up stagger-3 hidden lg:flex justify-center">
-            <div className="relative h-96 w-80 rounded-3xl overflow-hidden shadow-2xl shadow-black/20">
+            <div className="relative aspect-[3/2] w-full max-w-md rounded-3xl overflow-hidden shadow-2xl shadow-black/20">
               <Image
                 src="/images/people/hero-mechanic.jpg"
                 alt="Smiling mechanic ready to help"
