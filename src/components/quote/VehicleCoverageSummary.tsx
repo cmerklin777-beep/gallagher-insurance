@@ -1,19 +1,23 @@
 'use client';
 
 import { formatCurrency } from '@/lib/constants';
-import { Car } from 'lucide-react';
+import { Car, Pencil, Trash2 } from 'lucide-react';
 import type { VehicleInfo, SelectedCoverage, CostBreakdown } from '@/lib/types';
 
 interface VehicleCoverageSummaryProps {
   vehicle: VehicleInfo;
   coverage: SelectedCoverage;
   costs: CostBreakdown;
+  onEdit?: () => void;
+  onRemove?: () => void;
 }
 
 export default function VehicleCoverageSummary({
   vehicle,
   coverage,
   costs,
+  onEdit,
+  onRemove,
 }: VehicleCoverageSummaryProps) {
   return (
     <div className="rounded-2xl bg-white p-6 shadow-md">
@@ -21,12 +25,34 @@ export default function VehicleCoverageSummary({
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-muted">
           <Car className="h-5 w-5 text-accent" />
         </div>
-        <div>
+        <div className="flex-1">
           <h3 className="font-bold text-navy-900">
             {vehicle.vehicleYear} {vehicle.make} {vehicle.model}
           </h3>
           <p className="text-xs text-navy-500">VIN: {vehicle.vin}</p>
         </div>
+        {(onEdit || onRemove) && (
+          <div className="flex items-center gap-1">
+            {onEdit && (
+              <button
+                onClick={onEdit}
+                className="rounded-lg p-2 text-navy-400 transition hover:bg-navy-50 hover:text-accent"
+                title="Edit coverage"
+              >
+                <Pencil className="h-4 w-4" />
+              </button>
+            )}
+            {onRemove && (
+              <button
+                onClick={onRemove}
+                className="rounded-lg p-2 text-navy-400 transition hover:bg-red-50 hover:text-red-500"
+                title="Remove vehicle"
+              >
+                <Trash2 className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="space-y-2 text-sm">
