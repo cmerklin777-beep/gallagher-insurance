@@ -9,23 +9,18 @@ export default function HeroSection() {
         <div className="grid items-start gap-12 lg:grid-cols-2">
           {/* Left — Copy */}
           <div className="text-center lg:text-left">
-            <div className="animate-fade-up stagger-1 mb-6 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-1.5 text-sm text-white">
-              <span className="h-1.5 w-1.5 rounded-full bg-action" />
-              Direct-to-you coverage — no dealership markup
-            </div>
-
-            <h1 className="animate-fade-up stagger-2 font-display text-4xl leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="animate-fade-up stagger-1 font-display text-4xl leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
               Coverage built for you,{' '}
               <span className="text-action">not for middlemen</span>.
             </h1>
 
-            <p className="animate-fade-up stagger-3 mt-6 max-w-xl text-lg leading-relaxed text-white/90">
+            <p className="animate-fade-up stagger-2 mt-6 max-w-xl text-lg leading-relaxed text-white/90">
               We cut out the dealership markup and broker commissions so you
               get the same top-tier protection at a fraction of the cost — all
               online, in minutes.
             </p>
 
-            <div className="animate-fade-up stagger-4 mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+            <div className="animate-fade-up stagger-3 mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
               <Link
                 href="/quote"
                 className="group inline-flex items-center justify-center gap-2 rounded-xl bg-action px-8 py-4 text-lg font-bold text-navy-950 shadow-lg shadow-action/20 transition hover:bg-action-hover hover:scale-105"
@@ -42,7 +37,7 @@ export default function HeroSection() {
             </div>
 
             {/* Micro stats */}
-            <div className="animate-fade-up stagger-5 mt-8 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
+            <div className="animate-fade-up stagger-4 mt-8 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
               <div className="flex items-center gap-2 text-sm text-white/90">
                 <DollarSign className="h-4 w-4 text-accent-light" />
                 <span>No Dealer Markup</span>
@@ -59,7 +54,7 @@ export default function HeroSection() {
           </div>
 
           {/* Right — Person photo */}
-          <div className="animate-fade-up stagger-3 hidden lg:flex justify-end items-start">
+          <div className="animate-fade-up stagger-2 hidden lg:flex justify-end items-start">
             <Image
               src="/images/people/hero-mechanic.png"
               alt="Smiling mechanic ready to help"
