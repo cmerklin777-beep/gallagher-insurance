@@ -6,7 +6,7 @@ export default function HeroSection() {
   return (
     <section className="hero-mesh relative overflow-hidden">
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-36">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div className="grid items-start gap-12 lg:grid-cols-2">
           {/* Left — Copy */}
           <div className="text-center lg:text-left">
             <div className="animate-fade-up stagger-1 mb-6 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-1.5 text-sm text-white">
@@ -58,17 +58,16 @@ export default function HeroSection() {
           </div>
 
           {/* Right — Person photo */}
-          <div className="animate-fade-up stagger-3 hidden lg:flex justify-center">
-            <div className="relative aspect-[3/2] w-full max-w-md rounded-3xl overflow-hidden shadow-2xl shadow-black/20">
-              <Image
-                src="/images/people/hero-mechanic.jpg"
-                alt="Smiling mechanic ready to help"
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-            </div>
+          <div className="animate-fade-up stagger-3 hidden lg:flex justify-end items-start">
+            <Image
+              src="/images/people/hero-mechanic.png"
+              alt="Smiling mechanic ready to help"
+              width={630}
+              height={882}
+              className="w-full max-w-md object-contain drop-shadow-2xl"
+              unoptimized
+              priority
+            />
           </div>
         </div>
       </div>
