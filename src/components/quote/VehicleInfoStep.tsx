@@ -180,7 +180,7 @@ export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleI
           make: make.trim(),
           model: model.trim(),
           vin: cleanVin,
-          vehicleAgeType: parsedMileage > 0 ? 'Used' : 'New',
+          vehicleAgeType: (parsedYear >= new Date().getFullYear() && parsedMileage <= 500) ? 'New' : 'Used',
         },
         parsedMileage
       );
