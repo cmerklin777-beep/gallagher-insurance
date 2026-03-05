@@ -56,7 +56,7 @@ export default function HeroSection() {
           {/* Right — Person photo */}
           <div className="animate-fade-up stagger-2 hidden lg:flex justify-end items-start">
             <Image
-              src="/images/people/hero-mechanic.png"
+              src="/images/people/hero-handyman.png"
               alt="Happy homeowner"
               width={630}
               height={882}

@@ -19,7 +19,7 @@ export default function Footer() {
           <p className="mt-1 text-xs text-navy-600">A Gallagher Company</p>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-navy-500">
             Protecting your home with trusted Home Warranty plans.
-            Nationwide coverage backed by licensed technicians.
+            Nationwide coverage backed by licensed handymen.
           </p>
           <div className="mt-6 h-px w-24 bg-navy-800" />
         </div>

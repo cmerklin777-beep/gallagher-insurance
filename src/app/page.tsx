@@ -90,7 +90,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-lg font-bold text-navy-900">Service anywhere you are</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
-                Use any licensed technician from our nationwide network. You choose the provider, not us.
+                Use any licensed handyman from our nationwide network. You choose the provider, not us.
               </p>
             </div>
           </div>

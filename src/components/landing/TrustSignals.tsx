@@ -3,9 +3,9 @@ import { Wrench, Globe, DollarSign, Clock } from 'lucide-react';
 const signals = [
   {
     icon: Wrench,
-    title: 'Licensed Technicians',
+    title: 'Licensed Handymen',
     description:
-      'Your home is in good hands. Every repair is handled by licensed, vetted technicians you can trust.',
+      'Your home is in good hands. Every repair is handled by licensed, vetted handymen you can trust.',
   },
   {
     icon: Globe,

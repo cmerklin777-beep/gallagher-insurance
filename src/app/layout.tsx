@@ -14,7 +14,7 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: 'AssuredPartners | Home Warranty Plans',
   description:
-    'Protect your home with trusted Home Warranty plans from AssuredPartners. Get a quote in seconds. Nationwide coverage, licensed technicians, $0 service fee options available.',
+    'Protect your home with trusted Home Warranty plans from AssuredPartners. Get a quote in seconds. Nationwide coverage, licensed handymen, $0 service fee options available.',
   keywords: 'home warranty, appliance coverage, home systems coverage, protection plan, assuredpartners',
 };
 
