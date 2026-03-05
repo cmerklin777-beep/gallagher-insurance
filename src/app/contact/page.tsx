@@ -52,7 +52,7 @@ export default function ContactPage() {
             <div className="relative mx-auto h-72 w-full max-w-sm overflow-hidden rounded-2xl shadow-lg lg:mx-0">
               <Image
                 src="/images/people/friendly-mechanic.jpg"
-                alt="Friendly mechanic ready to help"
+                alt="Friendly support agent ready to help"
                 fill
                 className="object-cover"
               />
@@ -80,10 +80,10 @@ export default function ContactPage() {
                 <div>
                   <p className="text-sm font-medium text-navy-500">Email Us</p>
                   <a
-                    href="mailto:support@etags.com"
+                    href="mailto:support@assuredpartners.com"
                     className="whitespace-nowrap text-lg font-bold text-navy-900 transition hover:text-accent"
                   >
-                    support@etags.com
+                    support@assuredpartners.com
                   </a>
                 </div>
               </div>
@@ -168,7 +168,7 @@ export default function ContactPage() {
                     <option value="" disabled>
                       Select a service
                     </option>
-                    <option value="auto">Auto Coverage</option>
+                    <option value="home">Home Coverage</option>
                     <option value="other">Other</option>
                   </select>
                 </div>

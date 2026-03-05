@@ -5,47 +5,47 @@ import { ChevronDown } from 'lucide-react';
 
 const faqItems = [
   {
-    question: 'What types of coverage does eTags offer?',
+    question: 'What types of coverage does AssuredPartners offer?',
     answer:
-      'We offer four coverage tiers so you can pick the one that fits your needs and budget. Whether you just want to cover the big stuff (engine & transmission) or want near-complete coverage, we\'ve got you.',
+      'We offer three coverage tiers so you can pick the one that fits your needs and budget. Whether you just want to cover appliances, home systems, or want complete whole-home coverage, we\'ve got you.',
   },
   {
-    question: 'What is auto coverage and why do I need it?',
+    question: 'What is a home warranty and why do I need one?',
     answer:
-      'Think of it as a safety net for your car. If something mechanical breaks down, your Vehicle Service Contract helps cover the repair costs so you\'re not stuck with a huge bill out of nowhere.',
+      'Think of it as a safety net for your home. If a covered appliance or system breaks down, your Home Warranty helps cover the repair or replacement costs so you\'re not stuck with a huge bill out of nowhere.',
   },
   {
-    question: 'Can I transfer my coverage if I sell my vehicle?',
+    question: 'Can I transfer my coverage if I sell my home?',
     answer:
-      'Absolutely! Most of our plans are transferable, which is actually a great selling point when you go to sell your car. The new owner gets coverage, and your vehicle is worth more.',
+      'Absolutely! Most of our plans are transferable, which is actually a great selling point when you go to sell your home. The new owner gets coverage, and your home is worth more.',
   },
   {
-    question: 'How does the purchasing process work at eTags?',
+    question: 'How does the purchasing process work at AssuredPartners?',
     answer:
-      'It\'s really easy. Enter your VIN and mileage, compare plans, pick the one you like, and check out online. The whole thing takes a few minutes.',
+      'It\'s really easy. Enter your home details, compare plans, pick the one you like, and check out online. The whole thing takes a few minutes.',
   },
   {
-    question: 'What is a Vehicle Service Contract?',
+    question: 'What is a Home Warranty Contract?',
     answer:
-      'It\'s a service agreement that covers specific repairs after your factory warranty expires. Think of it as extended protection for your car — when something breaks, we help pay for it.',
+      'It\'s a service agreement that covers specific repairs and replacements for your home\'s appliances and systems. Think of it as protection for your home — when something breaks, we help pay for it.',
   },
   {
-    question: 'How do I file a claim with eTags?',
+    question: 'How do I file a claim with AssuredPartners?',
     answer:
-      'Just call the claims number on your fulfillment packet or use the claims portal. Give them the details, and we\'ll take it from there. We pay the shop directly, so you don\'t have to deal with reimbursements.',
+      'Just call the claims number on your fulfillment packet or use the claims portal. Give them the details, and we\'ll take it from there. We pay the service provider directly, so you don\'t have to deal with reimbursements.',
   },
   {
-    question: 'Are there any additional benefits with an eTags coverage?',
+    question: 'Are there any additional benefits with an AssuredPartners coverage?',
     answer:
-      'Yes! Most of our plans include roadside assistance and rental car reimbursement, so you\'re covered even while your car is in the shop.',
+      'Yes! Most of our plans include 24/7 emergency service and additional coverage options, so you\'re covered even when the unexpected happens.',
   },
   {
     question: 'How long does coverage last?',
     answer:
-      'That depends on the plan you choose. We offer flexible terms from short to long duration. Get a quote to see what\'s available for your specific vehicle.',
+      'That depends on the plan you choose. We offer flexible terms from 1-year to multi-year duration. Get a quote to see what\'s available for your home.',
   },
   {
-    question: 'What makes eTags different?',
+    question: 'What makes AssuredPartners different?',
     answer:
       'Honestly? We keep it simple. Transparent pricing, no sales pressure, real people you can talk to, and a fast online process. We think buying coverage should be as easy as everything else you do online.',
   },

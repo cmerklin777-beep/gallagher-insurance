@@ -3,27 +3,27 @@ import { Wrench, Globe, DollarSign, Clock } from 'lucide-react';
 const signals = [
   {
     icon: Wrench,
-    title: 'ASE Certified Mechanics',
+    title: 'Licensed Technicians',
     description:
-      'Your car is in good hands. Every repair is handled by ASE Certified technicians you can trust.',
+      'Your home is in good hands. Every repair is handled by licensed, vetted technicians you can trust.',
   },
   {
     icon: Globe,
     title: 'Nationwide Coverage',
     description:
-      'Whether you\'re across town or across the country, your coverage travels with you at any licensed facility.',
+      'Whether you just moved or have been in your home for years, your coverage protects you at any address nationwide.',
   },
   {
     icon: DollarSign,
-    title: '$0 Deductible Options',
+    title: '$0 Service Fee Options',
     description:
-      'Zero out-of-pocket at the shop — savings we can offer because we don\'t have a showroom to pay for.',
+      'Zero out-of-pocket on service calls — savings we can offer because we don\'t have a showroom to pay for.',
   },
   {
     icon: Clock,
     title: 'Hassle-Free Claims',
     description:
-      'No paperwork headaches. We pay the repair shop directly so you can get back on the road faster.',
+      'No paperwork headaches. We pay the service provider directly so you can get back to your routine faster.',
   },
 ];
 
@@ -34,7 +34,7 @@ export default function TrustSignals() {
         {/* Section header */}
         <div className="text-center">
           <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl">
-            Why drivers switch to us
+            Why homeowners switch to us
           </h2>
           <p className="mt-4 text-lg text-navy-600">
             Same certified protection. Direct pricing. No middlemen.

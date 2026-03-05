@@ -121,7 +121,7 @@ export default function CartReview() {
             />
             {confirmRemoveIdx === safeIndex && (
               <div className="mt-2 flex items-center justify-end gap-2 rounded-xl bg-red-50 px-4 py-3">
-                <span className="text-sm text-red-700 mr-auto">Remove this vehicle?</span>
+                <span className="text-sm text-red-700 mr-auto">Remove this coverage?</span>
                 <button
                   onClick={() => setConfirmRemoveIdx(null)}
                   className="rounded-lg px-3 py-1.5 text-sm font-medium text-navy-600 transition hover:bg-white"

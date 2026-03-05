@@ -405,7 +405,7 @@ export default function OptionsStep() {
             </div>
           )}
           <div className="flex justify-between pt-2 border-t border-navy-700">
-            <span className="text-lg font-bold text-white">Vehicle Total</span>
+            <span className="text-lg font-bold text-white">Coverage Total</span>
             <span className="text-lg font-bold text-white">{formatCurrency(totalPrice)}</span>
           </div>
         </div>

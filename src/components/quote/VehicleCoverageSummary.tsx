@@ -1,7 +1,7 @@
 'use client';
 
 import { formatCurrency } from '@/lib/constants';
-import { Car, Pencil, Trash2 } from 'lucide-react';
+import { Home, Pencil, Trash2 } from 'lucide-react';
 import type { VehicleInfo, SelectedCoverage, CostBreakdown } from '@/lib/types';
 
 interface VehicleCoverageSummaryProps {
@@ -23,7 +23,7 @@ export default function VehicleCoverageSummary({
     <div className="rounded-2xl bg-white p-6 shadow-md">
       <div className="flex items-center gap-3 mb-4">
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-muted">
-          <Car className="h-5 w-5 text-accent" />
+          <Home className="h-5 w-5 text-accent" />
         </div>
         <div className="flex-1">
           <h3 className="font-bold text-navy-900">
@@ -63,7 +63,7 @@ export default function VehicleCoverageSummary({
         <div className="flex justify-between">
           <span className="text-navy-600">Term</span>
           <span className="font-medium text-navy-900">
-            {coverage.termMonths} months / {coverage.termOdometer.toLocaleString()} miles
+            {coverage.termMonths} months
           </span>
         </div>
         <div className="flex justify-between">
@@ -91,7 +91,7 @@ export default function VehicleCoverageSummary({
             </div>
           )}
           <div className="flex justify-between font-semibold text-navy-900 pt-1 border-t border-dashed border-navy-100">
-            <span>Vehicle Coverage Total</span>
+            <span>Coverage Total</span>
             <span>{formatCurrency(costs.totalPrice)}</span>
           </div>
         </div>

@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { Phone, Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { label: 'Auto Coverage', href: '/auto-coverage' },
+  { label: 'Home Coverage', href: '/home-coverage' },
   { label: 'About', href: '/about' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Contact', href: '/contact' },
@@ -24,11 +24,11 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
-              src="/images/etags-logo.png"
-              alt="eTags"
-              width={64}
-              height={64}
-              className="h-16 w-16 rounded-lg"
+              src="/images/assuredpartners-logo.svg"
+              alt="AssuredPartners"
+              width={200}
+              height={60}
+              className="h-15 w-auto brightness-0 invert"
             />
           </Link>
 

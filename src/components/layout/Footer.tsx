@@ -9,16 +9,17 @@ export default function Footer() {
         <div className="mb-12">
           <Link href="/" className="inline-block">
             <Image
-              src="/images/etags-logo.png"
-              alt="eTags"
-              width={48}
-              height={48}
-              className="h-12 w-12 rounded-lg"
+              src="/images/assuredpartners-logo.svg"
+              alt="AssuredPartners"
+              width={140}
+              height={40}
+              className="h-10 w-auto brightness-0 invert"
             />
           </Link>
+          <p className="mt-1 text-xs text-navy-600">A Gallagher Company</p>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-navy-500">
-            Protecting your investment with trusted Vehicle Service Contracts.
-            Nationwide coverage backed by ASE Certified mechanics.
+            Protecting your home with trusted Home Warranty plans.
+            Nationwide coverage backed by licensed technicians.
           </p>
           <div className="mt-6 h-px w-24 bg-navy-800" />
         </div>
@@ -36,7 +37,7 @@ export default function Footer() {
                   href="/about"
                   className="text-sm text-navy-500 hover:text-white transition-colors"
                 >
-                  About eTags
+                  About AssuredPartners
                 </Link>
               </li>
               <li>
@@ -66,10 +67,10 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/auto-coverage"
+                  href="/home-coverage"
                   className="text-sm text-navy-500 hover:text-white transition-colors"
                 >
-                  Auto Coverage
+                  Home Coverage
                 </Link>
               </li>
               <li>
@@ -153,13 +154,13 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 border-t border-navy-800/60 pt-6 text-center">
           <p className="text-sm text-navy-500">
-            &copy; {new Date().getFullYear()} eTags. All rights
+            &copy; {new Date().getFullYear()} AssuredPartners. All rights
             reserved.
           </p>
           <p className="mt-3 text-navy-600 text-xs max-w-2xl mx-auto leading-relaxed">
-            eTags sells Vehicle Service Contracts, not manufacturer
+            AssuredPartners sells Home Warranty plans, not manufacturer
             coverage. All plans are administered by Lot Solutions Inc. and backed by licensed
-            insurers. See your Service Contract for complete terms, conditions,
+            insurers. See your Home Warranty Contract for complete terms, conditions,
             and exclusions.
           </p>
         </div>

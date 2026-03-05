@@ -1,28 +1,23 @@
 // Tier descriptions for the info popups -- legally compliant (no forbidden terms)
 export const TIER_DESCRIPTIONS: Record<string, { stars: number; summary: string }> = {
-  Essential: {
+  Appliance: {
     stars: 1,
     summary:
-      'Essential Protection covers the engine, transmission/transaxle, and transfer case (or all-wheel drive mechanism). Ideal for high-mileage vehicles you want to keep on the road.',
+      'Appliance Plan covers major kitchen and laundry appliances including refrigerator, oven/range, dishwasher, built-in microwave, washer, and dryer. Ideal for homeowners who want to protect the essentials.',
   },
-  'Essential Plus': {
+  Systems: {
     stars: 2,
     summary:
-      'Essential Plus includes everything in Essential, plus CV joints, water pump, oil pump, fuel system, timing belt, electrical components, factory turbo/supercharger, A/C, seals and gaskets, and more.',
+      'Systems Plan covers critical home systems including HVAC (heating & cooling), electrical, plumbing, water heater, and ductwork. Perfect for protecting the infrastructure that keeps your home running.',
   },
-  Premium: {
+  Total: {
     stars: 3,
     summary:
-      'Premium is the most extensive listed-component contract. Includes Essential Plus coverage, plus the cooling system, brake system, steering, fluids, and more.',
-  },
-  Exclusive: {
-    stars: 4,
-    summary:
-      'Exclusive is the most comprehensive protection plan. Covers all vehicle components EXCEPT specifically listed exclusions (light bulbs, brake pads/rotors, keys/fobs, manual clutches, batteries, routine maintenance, tires, body panels, spark plugs). See Service Contract for full exclusion list.',
+      'Total Plan is the most comprehensive home warranty. Combines full Appliance and Systems coverage into one plan, plus additional items like garage door openers, ceiling fans, and more. Complete peace of mind for your entire home.',
   },
 };
 
-export const TIER_ORDER = ['Essential', 'Essential Plus', 'Premium', 'Exclusive'];
+export const TIER_ORDER = ['Appliance', 'Systems', 'Total'];
 
 export const US_STATES = [
   { code: 'AL', name: 'Alabama' }, { code: 'AK', name: 'Alaska' }, { code: 'AZ', name: 'Arizona' }, { code: 'AR', name: 'Arkansas' },

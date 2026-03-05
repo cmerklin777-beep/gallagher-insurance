@@ -1,12 +1,12 @@
-import { Car, Search, ShieldCheck } from 'lucide-react';
+import { Home, Search, ShieldCheck } from 'lucide-react';
 
 const steps = [
   {
-    icon: Car,
+    icon: Home,
     step: '1',
-    title: 'Tell us about your car',
+    title: 'Tell us about your home',
     description:
-      'Just enter your VIN and current mileage. It takes less than 30 seconds — seriously.',
+      'Just enter your home details. It takes less than 30 seconds — seriously.',
   },
   {
     icon: Search,

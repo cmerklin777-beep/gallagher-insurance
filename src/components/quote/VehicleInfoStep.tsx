@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useQuoteStore } from '@/store/quote-store';
-import { AlertCircle, Car, ArrowLeft, CheckCircle2, X, Loader2, Info } from 'lucide-react';
+import { US_STATES } from '@/lib/constants';
+import { AlertCircle, Home, ArrowLeft, CheckCircle2, X, Loader2, Info } from 'lucide-react';
 
 interface VehicleInfoStepProps {
   initialVin?: string;
@@ -12,31 +13,27 @@ interface VehicleInfoStepProps {
 
 export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleInfoStepProps) {
   const { currentVehicleIndex, setVehicleInfo, setAvailableRates, setStep } = useQuoteStore();
-  const currentYear = new Date().getFullYear();
 
   const [vin, setVin] = useState(initialVin ?? '');
-  const [year, setYear] = useState<string>('');
-  const [make, setMake] = useState('');
-  const [model, setModel] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState<string>('');
+  const [zipCode, setZipCode] = useState('');
+  const [homeType, setHomeType] = useState<string>('');
   const [mileage, setMileage] = useState(initialMileage !== undefined ? String(initialMileage) : '');
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showVinInfo, setShowVinInfo] = useState(false);
+  const [zipLooking, setZipLooking] = useState(false);
   const vinInfoRef = useRef<HTMLDivElement>(null);
-
-  // VIN decode state
-  const [vinDecoding, setVinDecoding] = useState(false);
-  const [vinDecoded, setVinDecoded] = useState(false);
-  const [vinError, setVinError] = useState('');
-  const hasDecodedRef = useRef(''); // track which VIN was decoded to avoid duplicate calls
+  const lastLookedUpZip = useRef('');
 
   useEffect(() => {
     if (initialVin) setVin(initialVin);
     if (initialMileage !== undefined) setMileage(String(initialMileage));
   }, [initialVin, initialMileage]);
 
-  // Close VIN info popover on click outside
+  // Close info popover on click outside
   useEffect(() => {
     if (!showVinInfo) return;
     function handleClickOutside(e: MouseEvent) {
@@ -48,108 +45,82 @@ export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleI
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showVinInfo]);
 
-  // Auto-decode VIN when it reaches 17 valid characters
+  // Auto-fill city & state when ZIP code reaches 5 digits
   useEffect(() => {
-    const cleanVin = vin.trim().toUpperCase();
-    if (cleanVin.length !== 17) {
-      // Reset decoded state if VIN changes away from 17
-      if (vinDecoded) {
-        setVinDecoded(false);
-        setYear('');
-        setMake('');
-        setModel('');
-      }
-      return;
-    }
-    if (/[IOQ]/.test(cleanVin)) return;
-    if (hasDecodedRef.current === cleanVin) return; // already decoded this VIN
+    const cleanZip = zipCode.replace(/\D/g, '');
+    if (cleanZip.length !== 5 || lastLookedUpZip.current === cleanZip) return;
+    lastLookedUpZip.current = cleanZip;
+    setZipLooking(true);
 
-    hasDecodedRef.current = cleanVin;
-    setVinDecoding(true);
-    setVinError('');
-    setVinDecoded(false);
-
-    fetch('/api/vehicles/decode-vin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ vin: cleanVin }),
-    })
-      .then((res) => res.json())
+    fetch(`https://api.zippopotam.us/us/${cleanZip}`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Invalid ZIP');
+        return res.json();
+      })
       .then((data) => {
-        if (data.error) {
-          setVinError(data.error);
-          setVinDecoded(false);
-        } else {
-          setYear(String(data.year));
-          setMake(data.make);
-          setModel(data.model);
-          setVinDecoded(true);
-          setVinError('');
+        const place = data.places?.[0];
+        if (place) {
+          setCity(place['place name'] || '');
+          // Match state abbreviation to our US_STATES list
+          const stateAbbr = place['state abbreviation'] || '';
+          if (US_STATES.some((s) => s.code === stateAbbr)) {
+            setState(stateAbbr);
+          }
         }
       })
       .catch(() => {
-        setVinError('Failed to decode VIN. Please enter details manually.');
-        setVinDecoded(false);
+        // ZIP not found — let user fill manually
       })
-      .finally(() => {
-        setVinDecoding(false);
-      });
-  }, [vin, vinDecoded]);
-
-  function handleClearVin() {
-    setVin('');
-    setYear('');
-    setMake('');
-    setModel('');
-    setVinDecoded(false);
-    setVinError('');
-    hasDecodedRef.current = '';
-  }
+      .finally(() => setZipLooking(false));
+  }, [zipCode]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError('');
 
-    const parsedYear = parseInt(year, 10);
+    const cleanAddress = vin.trim();
     const parsedMileage = parseInt(mileage, 10);
-    const cleanVin = vin.trim().toUpperCase();
 
-    if (isNaN(parsedYear) || parsedYear < 1990 || parsedYear > currentYear + 1) {
-      setError('Please enter a valid vehicle year (1990 - ' + (currentYear + 1) + ').');
+    if (!cleanAddress) {
+      setError('Please enter your property address.');
       return;
     }
-    if (!make.trim()) {
-      setError('Please enter the vehicle make.');
+    if (!city.trim()) {
+      setError('Please enter your city.');
       return;
     }
-    if (!model.trim()) {
-      setError('Please enter the vehicle model.');
+    if (!state) {
+      setError('Please select your state.');
+      return;
+    }
+    if (!zipCode.trim() || !/^\d{5}$/.test(zipCode.trim())) {
+      setError('Please enter a valid 5-digit ZIP code.');
+      return;
+    }
+    if (!homeType) {
+      setError('Please select your home type.');
       return;
     }
     if (isNaN(parsedMileage) || parsedMileage < 0 || parsedMileage > 300000) {
-      setError('Please enter a valid mileage (0 - 300,000).');
-      return;
-    }
-    if (cleanVin.length !== 17) {
-      setError('VIN must be exactly 17 characters.');
-      return;
-    }
-    if (/[IOQ]/i.test(cleanVin)) {
-      setError('VIN cannot contain the letters I, O, or Q.');
+      setError('Please enter a valid square footage (0 - 300,000).');
       return;
     }
 
     setLoading(true);
 
     try {
+      // Build a pseudo-VIN from address data for API compatibility
+      const pseudoVin = `HOME${zipCode.trim()}${Date.now().toString(36).slice(-8)}`.slice(0, 17).padEnd(17, '0').toUpperCase();
+      const currentYear = new Date().getFullYear();
+
       const response = await fetch('/api/coverage/rates', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          vehicleYear: parsedYear,
-          make: make.trim(),
-          model: model.trim(),
-          vin: cleanVin,
+          vehicleYear: currentYear,
+          make: zipCode.trim(),
+          model: homeType,
+          vin: pseudoVin,
           mileage: parsedMileage,
         }),
       });
@@ -163,7 +134,7 @@ export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleI
             (d: { code?: string }) => d.code === 'CNT0122'
           );
           if (notEligible) {
-            setError('Your vehicle is not eligible for coverage. This may be due to the age, mileage, or type of vehicle.');
+            setError('Your property is not eligible for coverage.');
             setLoading(false);
             return;
           }
@@ -176,11 +147,11 @@ export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleI
       setVehicleInfo(
         currentVehicleIndex,
         {
-          vehicleYear: parsedYear,
-          make: make.trim(),
-          model: model.trim(),
-          vin: cleanVin,
-          vehicleAgeType: (parsedYear >= new Date().getFullYear() && parsedMileage <= 500) ? 'New' : 'Used',
+          vehicleYear: currentYear,
+          make: zipCode.trim(),
+          model: homeType,
+          vin: pseudoVin,
+          vehicleAgeType: 'Used',
         },
         parsedMileage
       );
@@ -198,8 +169,8 @@ export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleI
   // Shared input class
   const inputClass =
     'mt-1 block w-full rounded-lg border border-navy-100 bg-navy-50 px-4 py-3 text-sm placeholder-navy-500 transition focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/20 focus:outline-none';
-  const readOnlyClass =
-    'mt-1 block w-full rounded-lg border border-green-200 bg-green-50/50 px-4 py-3 text-sm text-navy-800 cursor-not-allowed';
+  const selectClass =
+    'mt-1 block w-full rounded-lg border border-navy-100 bg-navy-50 px-4 py-3 text-sm text-navy-700 transition focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/20 focus:outline-none appearance-none cursor-pointer';
 
   return (
     <div className="mx-auto max-w-xl">
@@ -215,11 +186,11 @@ export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleI
         )}
         <div className="flex items-center gap-3 mb-6">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-muted">
-            <Car className="h-5 w-5 text-accent" />
+            <Home className="h-5 w-5 text-accent" />
           </div>
           <div>
-            <h2 className="text-xl font-bold font-display text-navy-900">Vehicle Information</h2>
-            <p className="text-sm text-navy-500">Tell us about your vehicle to see available coverage plans.</p>
+            <h2 className="text-xl font-bold font-display text-navy-900">Home Information</h2>
+            <p className="text-sm text-navy-500">Tell us about your home to see available coverage plans.</p>
           </div>
         </div>
 
@@ -232,7 +203,7 @@ export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleI
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                 </svg>
-                Scanning Manufacturer Database...
+                Checking Property Details...
               </div>
             </div>
             <div className="space-y-3">
@@ -247,184 +218,153 @@ export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleI
         {/* Form */}
         {!loading && (
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* VIN — first field */}
+            {/* Property Address */}
             <div>
               <div className="relative" ref={vinInfoRef}>
-                <label htmlFor="vehicle-vin" className="flex items-center gap-1.5 text-sm font-medium text-navy-700">
-                  VIN (Vehicle Identification Number)
+                <label htmlFor="property-address" className="flex items-center gap-1.5 text-sm font-medium text-navy-700">
+                  Property Address
                   <button
                     type="button"
                     onClick={() => setShowVinInfo(!showVinInfo)}
                     className="inline-flex items-center justify-center h-4 w-4 rounded-full bg-navy-200 text-navy-600 hover:bg-accent hover:text-white transition-colors"
-                    aria-label="Where to find your VIN"
+                    aria-label="Property address help"
                   >
                     <Info className="h-2.5 w-2.5" />
                   </button>
                 </label>
 
-                {/* VIN Info Popover */}
+                {/* Info Popover */}
                 {showVinInfo && (
                   <div className="absolute z-50 top-7 left-0 w-80 rounded-xl bg-white border border-navy-100 shadow-xl p-4 animate-in fade-in slide-in-from-top-2 duration-200">
                     <div className="flex items-center justify-between mb-3">
-                      <h4 className="text-sm font-bold text-navy-900">Where to Find Your VIN</h4>
+                      <h4 className="text-sm font-bold text-navy-900">Property Address Details</h4>
                       <button type="button" onClick={() => setShowVinInfo(false)} className="text-navy-400 hover:text-navy-600">
                         <X className="h-4 w-4" />
                       </button>
                     </div>
-                    {/* Simple diagram */}
                     <div className="space-y-3">
                       <div className="flex items-start gap-3">
                         <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent text-xs font-bold">1</div>
                         <div>
-                          <p className="text-xs font-semibold text-navy-800">Dashboard</p>
-                          <p className="text-xs text-navy-500">Look through the windshield at the driver&apos;s side corner of the dashboard.</p>
+                          <p className="text-xs font-semibold text-navy-800">Full Street Address</p>
+                          <p className="text-xs text-navy-500">Enter the complete street address of the property you want to cover.</p>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent text-xs font-bold">2</div>
                         <div>
-                          <p className="text-xs font-semibold text-navy-800">Driver&apos;s Door Jamb</p>
-                          <p className="text-xs text-navy-500">Open the driver&apos;s door and look at the sticker on the door frame.</p>
+                          <p className="text-xs font-semibold text-navy-800">Property Details</p>
+                          <p className="text-xs text-navy-500">We use this information to look up your property details and determine eligible coverage plans.</p>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent text-xs font-bold">3</div>
                         <div>
-                          <p className="text-xs font-semibold text-navy-800">Registration & Insurance</p>
-                          <p className="text-xs text-navy-500">Check your vehicle registration card or insurance documents.</p>
+                          <p className="text-xs font-semibold text-navy-800">Ownership Records</p>
+                          <p className="text-xs text-navy-500">Check your deed, mortgage statement, or property tax records for the exact address.</p>
                         </div>
-                      </div>
-                      {/* Detailed car diagram */}
-                      <div className="mt-2 rounded-lg bg-navy-50 p-2 overflow-hidden">
-                        <Image
-                          src="/images/vin-location-diagram.jpg"
-                          alt="Sedan showing VIN locations: 1 - Dashboard, 2 - Door Jamb"
-                          width={400}
-                          height={220}
-                          className="w-full h-auto rounded"
-                        />
                       </div>
                     </div>
                   </div>
                 )}
               </div>
 
-              <div className="relative mt-1">
-                <input
-                  id="vehicle-vin"
-                  type="text"
-                  maxLength={17}
-                  placeholder="e.g. 1HGCG5655WA014677"
-                  value={vin}
-                  onChange={(e) => setVin(e.target.value.toUpperCase())}
-                  className={`${inputClass} font-mono tracking-wider ${vinDecoded ? 'pr-10 border-green-300 bg-green-50/50' : 'pr-4'}`}
-                  required
-                />
-                {vinDecoded && (
-                  <button
-                    type="button"
-                    onClick={handleClearVin}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-navy-400 hover:text-navy-600 transition"
-                    title="Clear VIN and re-enter"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                )}
-              </div>
-              {vinError && (
-                <p className="mt-1 text-xs text-amber-600">{vinError}</p>
-              )}
+              <input
+                id="property-address"
+                type="text"
+                placeholder="123 Street Rd"
+                value={vin}
+                onChange={(e) => setVin(e.target.value)}
+                className={inputClass}
+                required
+              />
             </div>
 
-            {/* Decoded vehicle info or manual entry */}
-            {/* Year */}
+            {/* City */}
             <div>
-              <label htmlFor="vehicle-year" className="flex items-center gap-1.5 text-sm font-medium text-navy-700">
-                Year
-                {vinDecoded && <CheckCircle2 className="h-3.5 w-3.5 text-green-500" />}
-              </label>
-              {vinDecoding ? (
-                <div className="mt-1 flex items-center gap-2 rounded-lg border border-navy-100 bg-navy-50 px-4 py-3">
-                  <Loader2 className="h-4 w-4 animate-spin text-accent" />
-                  <span className="text-sm text-navy-400">Decoding VIN...</span>
-                </div>
-              ) : (
-                <input
-                  id="vehicle-year"
-                  type="number"
-                  min={1990}
-                  max={currentYear + 1}
-                  placeholder="e.g. 2020"
-                  value={year}
-                  onChange={(e) => setYear(e.target.value)}
-                  className={vinDecoded ? readOnlyClass : inputClass}
-                  readOnly={vinDecoded}
-                  required
-                />
-              )}
-            </div>
-
-            {/* Make */}
-            <div>
-              <label htmlFor="vehicle-make" className="flex items-center gap-1.5 text-sm font-medium text-navy-700">
-                Make
-                {vinDecoded && <CheckCircle2 className="h-3.5 w-3.5 text-green-500" />}
-              </label>
-              {vinDecoding ? (
-                <div className="mt-1 flex items-center gap-2 rounded-lg border border-navy-100 bg-navy-50 px-4 py-3">
-                  <Loader2 className="h-4 w-4 animate-spin text-accent" />
-                  <span className="text-sm text-navy-400">Decoding VIN...</span>
-                </div>
-              ) : (
-                <input
-                  id="vehicle-make"
-                  type="text"
-                  placeholder="e.g. Honda"
-                  value={make}
-                  onChange={(e) => setMake(e.target.value)}
-                  className={vinDecoded ? readOnlyClass : inputClass}
-                  readOnly={vinDecoded}
-                  required
-                />
-              )}
-            </div>
-
-            {/* Model */}
-            <div>
-              <label htmlFor="vehicle-model" className="flex items-center gap-1.5 text-sm font-medium text-navy-700">
-                Model
-                {vinDecoded && <CheckCircle2 className="h-3.5 w-3.5 text-green-500" />}
-              </label>
-              {vinDecoding ? (
-                <div className="mt-1 flex items-center gap-2 rounded-lg border border-navy-100 bg-navy-50 px-4 py-3">
-                  <Loader2 className="h-4 w-4 animate-spin text-accent" />
-                  <span className="text-sm text-navy-400">Decoding VIN...</span>
-                </div>
-              ) : (
-                <input
-                  id="vehicle-model"
-                  type="text"
-                  placeholder="e.g. Accord"
-                  value={model}
-                  onChange={(e) => setModel(e.target.value)}
-                  className={vinDecoded ? readOnlyClass : inputClass}
-                  readOnly={vinDecoded}
-                  required
-                />
-              )}
-            </div>
-
-            {/* Mileage */}
-            <div>
-              <label htmlFor="vehicle-mileage" className="block text-sm font-medium text-navy-700">
-                Current Mileage
+              <label htmlFor="property-city" className="flex items-center gap-1.5 text-sm font-medium text-navy-700">
+                City
+                {zipLooking && <Loader2 className="h-3.5 w-3.5 animate-spin text-accent" />}
               </label>
               <input
-                id="vehicle-mileage"
+                id="property-city"
+                type="text"
+                placeholder="Enter city or fill ZIP below"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                className={`${inputClass} ${city && !zipLooking ? 'border-green-200 bg-green-50/50' : ''}`}
+                required
+              />
+            </div>
+
+            {/* State Dropdown */}
+            <div>
+              <label htmlFor="property-state" className="block text-sm font-medium text-navy-700">
+                State
+              </label>
+              <select
+                id="property-state"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                className={selectClass}
+                required
+              >
+                <option value="" disabled>Select your state</option>
+                {US_STATES.map((s) => (
+                  <option key={s.code} value={s.code}>
+                    {s.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* ZIP Code */}
+            <div>
+              <label htmlFor="property-zip" className="block text-sm font-medium text-navy-700">
+                ZIP Code
+              </label>
+              <input
+                id="property-zip"
+                type="text"
+                inputMode="numeric"
+                maxLength={5}
+                placeholder="e.g. 90210"
+                value={zipCode}
+                onChange={(e) => setZipCode(e.target.value.replace(/\D/g, ''))}
+                className={inputClass}
+                required
+              />
+            </div>
+
+            {/* Home Type Dropdown */}
+            <div>
+              <label htmlFor="home-type" className="block text-sm font-medium text-navy-700">
+                Home Type
+              </label>
+              <select
+                id="home-type"
+                value={homeType}
+                onChange={(e) => setHomeType(e.target.value)}
+                className={selectClass}
+                required
+              >
+                <option value="" disabled>Select home type</option>
+                <option value="Home">Home</option>
+                <option value="Condo">Condo</option>
+              </select>
+            </div>
+
+            {/* Square Footage */}
+            <div>
+              <label htmlFor="square-footage" className="block text-sm font-medium text-navy-700">
+                Square Footage
+              </label>
+              <input
+                id="square-footage"
                 type="number"
                 min={0}
                 max={300000}
-                placeholder="e.g. 45000"
+                placeholder="e.g. 2500"
                 value={mileage}
                 onChange={(e) => setMileage(e.target.value)}
                 className={inputClass}
@@ -443,7 +383,6 @@ export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleI
             {/* Submit */}
             <button
               type="submit"
-              disabled={vinDecoding}
               className="w-full rounded-lg bg-action px-6 py-3.5 text-base font-semibold text-navy-950 shadow-lg shadow-action/20 transition hover:bg-action-hover hover:scale-[1.02] active:scale-100 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               Check My Coverage Options

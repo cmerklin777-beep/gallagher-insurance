@@ -111,7 +111,7 @@ export async function POST(request: NextRequest) {
     const lastMessage = messages[messages.length - 1];
     if (lastMessage?.content && lastMessage.content.length > 500) {
       return new Response(
-        'Your message is too long. Please keep questions brief and focused on eTags coverage.',
+        'Your message is too long. Please keep questions brief and focused on AssuredPartners coverage.',
         { headers: { 'Content-Type': 'text/plain; charset=utf-8' } }
       );
     }

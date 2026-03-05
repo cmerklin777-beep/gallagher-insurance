@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact | eTags',
+  title: 'Contact | AssuredPartners',
   description:
-    'Get in touch with eTags for questions about our coverage plans or assistance.',
+    'Get in touch with AssuredPartners for questions about our home warranty plans or assistance.',
 };
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {

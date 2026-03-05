@@ -33,7 +33,7 @@ export default function SuccessPage() {
       <div>
         <h1 className="text-3xl font-extrabold font-display text-navy-900">Your Coverage is Active!</h1>
         <p className="mt-2 text-navy-500">
-          Thank you for choosing eTags. Your protection is now in effect.
+          Thank you for choosing AssuredPartners. Your protection is now in effect.
         </p>
       </div>
 
@@ -86,7 +86,7 @@ export default function SuccessPage() {
 
       {/* Legal Footer */}
       <p className="text-xs text-navy-500 leading-relaxed">
-        Your Vehicle Service Contract details will be emailed to you at the address provided.
+        Your Home Warranty Contract details will be emailed to you at the address provided.
         Please allow up to 24 hours for delivery. If you have questions about your coverage,
         please contact our support team.
       </p>

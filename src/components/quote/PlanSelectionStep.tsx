@@ -8,11 +8,10 @@ import PlanCard from './PlanCard';
 import VehicleDiagram from './VehicleDiagram';
 import { ArrowLeft } from 'lucide-react';
 
-function getTierLevel(description: string): 1 | 2 | 3 | 4 {
+function getTierLevel(description: string): 1 | 2 | 3 {
   const lower = description.toLowerCase();
-  if (lower.includes('exclusive')) return 4;
-  if (lower.includes('premium')) return 3;
-  if (lower.includes('essential plus')) return 2;
+  if (lower.includes('total')) return 3;
+  if (lower.includes('systems')) return 2;
   return 1;
 }
 
@@ -32,38 +31,12 @@ function getDefaultTermIndex(terms: CoverageTerm[]): number {
 
 function getFeatures(tierName: string): string[] {
   switch (tierName) {
-    case 'Essential':
-      return [
-        'Engine Coverage',
-        'Transmission / Transaxle',
-        'Transfer Case / AWD',
-      ];
-    case 'Essential Plus':
-      return [
-        'Everything in Essential',
-        'CV Joints & Water Pump',
-        'Fuel System & Oil Pump',
-        'Electrical Components',
-        'Factory Turbo / Supercharger',
-        'A/C Compressor',
-        'Seals & Gaskets',
-      ];
-    case 'Premium':
-      return [
-        'Everything in Essential Plus',
-        'Cooling System',
-        'Brake System',
-        'Steering Components',
-        'Fluids & Lubricants',
-      ];
-    case 'Exclusive':
-      return [
-        'All Components Covered',
-        'Exclusion-Based (Most Comprehensive)',
-        'High-Tech Electronics',
-        'Navigation & Infotainment',
-        'Advanced Driver Assist Systems',
-      ];
+    case 'Appliance':
+      return ['Refrigerator', 'Oven / Range / Cooktop', 'Dishwasher', 'Built-In Microwave', 'Washer & Dryer', 'Garbage Disposal'];
+    case 'Systems':
+      return ['HVAC (Heating & Cooling)', 'Electrical System', 'Plumbing System', 'Water Heater', 'Ductwork', 'Exhaust Fans'];
+    case 'Total':
+      return ['All Appliance Coverage', 'All Systems Coverage', 'Garage Door Opener', 'Ceiling Fans', 'Doorbells', 'Additional Items'];
     default:
       return ['Coverage Included'];
   }
@@ -111,19 +84,19 @@ export default function PlanSelectionStep() {
     setStep('options-addons');
   }
 
-  // Recommended tier: Exclusive if available, else highest
+  // Recommended tier: Total if available, else Systems, else highest
   const recommendedTier = useMemo(() => {
     const names = sortedRates.map((r) => getTierName(r.description));
-    if (names.includes('Exclusive')) return 'Exclusive';
-    if (names.includes('Premium')) return 'Premium';
+    if (names.includes('Total')) return 'Total';
+    if (names.includes('Systems')) return 'Systems';
     return names[names.length - 1] ?? '';
   }, [sortedRates]);
 
   // Determine which tier level to show in the diagram
-  const diagramTierLevel: 1 | 2 | 3 | 4 = useMemo(() => {
+  const diagramTierLevel: 1 | 2 | 3 = useMemo(() => {
     const activeTier = hoveredTier ?? highlightedTier ?? recommendedTier;
     const rate = sortedRates.find((r) => getTierName(r.description) === activeTier);
-    return rate ? getTierLevel(rate.description) : 4;
+    return rate ? getTierLevel(rate.description) : 3;
   }, [hoveredTier, highlightedTier, recommendedTier, sortedRates]);
 
   if (sortedRates.length === 0) {
@@ -165,7 +138,7 @@ export default function PlanSelectionStep() {
         </div>
       </div>
 
-      {/* Vehicle Diagram — shows coverage for hovered/selected tier */}
+      {/* Coverage Diagram — shows coverage for hovered/selected tier */}
       <div className="rounded-2xl bg-white p-4 shadow-md border border-navy-100 transition-all">
         <p className="text-xs font-semibold text-navy-500 uppercase tracking-wide mb-2 text-center">
           Coverage Overview — {hoveredTier ?? highlightedTier ?? recommendedTier}
@@ -174,7 +147,7 @@ export default function PlanSelectionStep() {
       </div>
 
       {/* Plan Cards Grid */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
         {sortedRates.map((rate) => {
           const tierName = getTierName(rate.description);
           const tierLevel = getTierLevel(rate.description);

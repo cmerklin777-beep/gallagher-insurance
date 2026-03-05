@@ -1,5 +1,5 @@
 {
-  "name": "etags",
+  "name": "assuredpartners-vsc",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -18,6 +18,7 @@
     "zustand": "^5.0.11"
   },
   "devDependencies": {
+    "@napi-rs/canvas": "^0.1.96",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

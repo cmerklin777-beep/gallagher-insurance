@@ -1,38 +1,93 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, AlertCircle } from 'lucide-react';
+import { ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
+import { US_STATES } from '@/lib/constants';
 
 export default function QuoteEntryForm() {
   const router = useRouter();
-  const [vin, setVin] = useState('');
-  const [mileage, setMileage] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [homeType, setHomeType] = useState('');
+  const [sqft, setSqft] = useState('');
   const [error, setError] = useState('');
+  const [zipLooking, setZipLooking] = useState(false);
+  const lastLookedUpZip = useRef('');
+
+  // Auto-fill city & state when ZIP code reaches 5 digits
+  useEffect(() => {
+    const cleanZip = zipCode.replace(/\D/g, '');
+    if (cleanZip.length !== 5 || lastLookedUpZip.current === cleanZip) return;
+    lastLookedUpZip.current = cleanZip;
+    setZipLooking(true);
+
+    fetch(`https://api.zippopotam.us/us/${cleanZip}`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Invalid ZIP');
+        return res.json();
+      })
+      .then((data) => {
+        const place = data.places?.[0];
+        if (place) {
+          setCity(place['place name'] || '');
+          const stateAbbr = place['state abbreviation'] || '';
+          if (US_STATES.some((s) => s.code === stateAbbr)) {
+            setState(stateAbbr);
+          }
+        }
+      })
+      .catch(() => {
+        // ZIP not found — let user fill manually
+      })
+      .finally(() => setZipLooking(false));
+  }, [zipCode]);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError('');
 
-    const cleanVin = vin.trim().toUpperCase();
-    if (cleanVin.length !== 17) {
-      setError('VIN must be exactly 17 characters.');
+    if (!address.trim()) {
+      setError('Please enter your property address.');
       return;
     }
-    if (/[IOQ]/i.test(cleanVin)) {
-      setError('VIN cannot contain the letters I, O, or Q.');
+    if (!city.trim()) {
+      setError('Please enter your city.');
+      return;
+    }
+    if (!state) {
+      setError('Please select your state.');
+      return;
+    }
+    if (!zipCode.trim() || !/^\d{5}$/.test(zipCode.trim())) {
+      setError('Please enter a valid 5-digit ZIP code.');
+      return;
+    }
+    if (!homeType) {
+      setError('Please select your home type.');
       return;
     }
 
-    const miles = parseInt(mileage, 10);
-    if (isNaN(miles) || miles < 0 || miles > 300000) {
-      setError('Please enter a valid mileage (0 - 300,000).');
+    const footage = parseInt(sqft, 10);
+    if (isNaN(footage) || footage < 0 || footage > 300000) {
+      setError('Please enter a valid square footage.');
       return;
     }
 
-    const params = new URLSearchParams({ vin: cleanVin, mileage: String(miles) });
+    // Pass data to the quote wizard via query params (mapped to existing API field names)
+    const params = new URLSearchParams({
+      vin: address.trim(),
+      mileage: String(footage),
+    });
     router.push(`/quote?${params.toString()}`);
   }
+
+  const inputClass =
+    'mt-2 block w-full rounded-lg border border-navy-100 bg-navy-50/50 px-4 py-3 text-sm placeholder-navy-400 transition focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/20 focus:outline-none';
+  const selectClass =
+    'mt-2 block w-full rounded-lg border border-navy-100 bg-navy-50/50 px-4 py-3 text-sm text-navy-700 transition focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/20 focus:outline-none appearance-none cursor-pointer';
 
   return (
     <section className="relative -mt-8 z-20 pb-16">
@@ -46,47 +101,115 @@ export default function QuoteEntryForm() {
           </p>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-            {/* VIN Field */}
+            {/* Property Address */}
             <div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="vin" className="block text-sm font-medium text-navy-900">
-                  Vehicle Identification Number (VIN)
-                </label>
-                <span className="rounded bg-navy-100 px-2 py-0.5 font-mono text-xs text-navy-600">
-                  17 characters
-                </span>
-              </div>
+              <label htmlFor="vin" className="block text-sm font-medium text-navy-900">
+                Property Address
+              </label>
               <input
                 id="vin"
                 type="text"
-                maxLength={17}
-                placeholder="e.g. 1HGCG5655WA014677"
-                value={vin}
-                onChange={(e) => setVin(e.target.value.toUpperCase())}
-                className="mt-2 block w-full rounded-lg border border-navy-100 bg-navy-50/50 px-4 py-3 font-mono text-sm tracking-wider placeholder-navy-400 transition focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/20 focus:outline-none"
+                placeholder="123 Street Rd"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                className={inputClass}
                 required
               />
               <p className="mt-1.5 text-xs text-navy-500">
-                Found on your dashboard (driver&apos;s side) or inside the driver&apos;s door frame.
+                Enter your full property address
               </p>
             </div>
 
-            {/* Mileage Field */}
+            {/* City */}
             <div>
-              <label htmlFor="mileage" className="block text-sm font-medium text-navy-900">
-                Current Mileage
+              <label htmlFor="city" className="flex items-center gap-1.5 text-sm font-medium text-navy-900">
+                City
+                {zipLooking && <Loader2 className="h-3.5 w-3.5 animate-spin text-accent" />}
               </label>
               <input
-                id="mileage"
-                type="number"
-                min={0}
-                max={300000}
-                placeholder="e.g. 45000"
-                value={mileage}
-                onChange={(e) => setMileage(e.target.value)}
-                className="mt-2 block w-full rounded-lg border border-navy-100 bg-navy-50/50 px-4 py-3 text-sm placeholder-navy-400 transition focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/20 focus:outline-none"
+                id="city"
+                type="text"
+                placeholder="Enter city or fill ZIP below"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                className={`${inputClass} ${city && !zipLooking ? 'border-green-200 bg-green-50/50' : ''}`}
                 required
               />
+            </div>
+
+            {/* State & ZIP side by side */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="state" className="block text-sm font-medium text-navy-900">
+                  State
+                </label>
+                <select
+                  id="state"
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  className={selectClass}
+                  required
+                >
+                  <option value="" disabled>Select state</option>
+                  {US_STATES.map((s) => (
+                    <option key={s.code} value={s.code}>
+                      {s.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="zip" className="block text-sm font-medium text-navy-900">
+                  ZIP Code
+                </label>
+                <input
+                  id="zip"
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={5}
+                  placeholder="e.g. 90210"
+                  value={zipCode}
+                  onChange={(e) => setZipCode(e.target.value.replace(/\D/g, ''))}
+                  className={inputClass}
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Home Type & Square Footage side by side */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="homeType" className="block text-sm font-medium text-navy-900">
+                  Home Type
+                </label>
+                <select
+                  id="homeType"
+                  value={homeType}
+                  onChange={(e) => setHomeType(e.target.value)}
+                  className={selectClass}
+                  required
+                >
+                  <option value="" disabled>Select type</option>
+                  <option value="Home">Home</option>
+                  <option value="Condo">Condo</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="mileage" className="block text-sm font-medium text-navy-900">
+                  Square Footage
+                </label>
+                <input
+                  id="mileage"
+                  type="number"
+                  min={0}
+                  max={300000}
+                  placeholder="e.g. 2500"
+                  value={sqft}
+                  onChange={(e) => setSqft(e.target.value)}
+                  className={inputClass}
+                  required
+                />
+              </div>
             </div>
 
             {/* Error display */}

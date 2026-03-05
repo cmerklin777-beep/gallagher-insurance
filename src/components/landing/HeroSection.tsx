@@ -16,7 +16,7 @@ export default function HeroSection() {
 
             <p className="animate-fade-up stagger-2 mt-6 max-w-xl text-lg leading-relaxed text-white/90">
               We cut out the call center markup and broker commissions so you
-              get the same top-tier protection at a fraction of the cost — all
+              get the same top-tier home protection at a fraction of the cost — all
               online, in minutes.
             </p>
 
@@ -57,7 +57,7 @@ export default function HeroSection() {
           <div className="animate-fade-up stagger-2 hidden lg:flex justify-end items-start">
             <Image
               src="/images/people/hero-mechanic.png"
-              alt="Smiling mechanic ready to help"
+              alt="Happy homeowner"
               width={630}
               height={882}
               className="w-full max-w-md object-contain drop-shadow-2xl"

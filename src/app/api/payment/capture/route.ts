@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     captureParams.append("security_key", FORT_POINT_SECURITY_KEY || "");
     captureParams.append("transactionid", transactionId);
     captureParams.append("amount", amount);
-    captureParams.append("merchant_defined_field_1", "This transaction was processed through the eTags website");
+    captureParams.append("merchant_defined_field_1", "This transaction was processed through the AssuredPartners website");
     
     if (autoDetails && Array.isArray(autoDetails) && autoDetails.length > 0) {
       // collect all contract numbers from autoDetails

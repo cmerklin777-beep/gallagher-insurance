@@ -11,7 +11,7 @@ interface Message {
 const WELCOME_MESSAGE: Message = {
   role: 'assistant',
   content:
-    "Hi! I'm the eTags Assistant. I can help you learn about our Vehicle Service Contracts, coverage tiers, or navigate the site. What can I help you with?",
+    "Hi! I'm the AssuredPartners Assistant. I can help you learn about our Home Warranty plans, coverage plans, or navigate the site. What can I help you with?",
 };
 
 function renderMessageContent(content: string) {
@@ -184,7 +184,7 @@ export default function ChatWidget() {
           <div className="flex items-center justify-between bg-navy-900 px-4 py-3">
             <div className="flex items-center gap-2">
               <div className="mascot-sprite shrink-0" style={{ width: 28, height: 28, backgroundSize: '800% 800%', backgroundPosition: '0% 0%' }} />
-              <span className="font-semibold text-white">eTags Assistant</span>
+              <span className="font-semibold text-white">AssuredPartners Assistant</span>
             </div>
             <button onClick={closeChat} className="rounded-lg p-1 text-navy-100 transition hover:bg-white/10 hover:text-white" aria-label="Close chat">
               <X className="h-5 w-5" />

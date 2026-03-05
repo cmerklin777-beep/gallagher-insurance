@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Cookies Policy | eTags',
+    title: 'Cookies Policy | AssuredPartners',
     description:
-        'Read how eTags uses cookies and similar technologies on this website.',
+        'Read how AssuredPartners uses cookies and similar technologies on this website.',
 };
 
 export default function CookiesPage() {
@@ -84,7 +84,7 @@ export default function CookiesPage() {
                         <li>
                             <strong>Company</strong> (referred to as either &quot;the
                             Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot;
-                            in this Cookies Policy) refers to eTags.
+                            in this Cookies Policy) refers to AssuredPartners.
                         </li>
                         <li>
                             <strong>Cookies</strong> means small files that are placed on Your
@@ -93,15 +93,15 @@ export default function CookiesPage() {
                             its many uses.
                         </li>
                         <li>
-                            <strong>Website</strong> refers to eTags, accessible
+                            <strong>Website</strong> refers to AssuredPartners, accessible
                             from{' '}
                             <a
-                                href="https://etags.vercel.app"
+                                href="https://assuredpartners.vercel.app"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-accent underline underline-offset-2"
                             >
-                                https://etags.vercel.app
+                                https://assuredpartners.vercel.app
                             </a>
                             .
                         </li>
@@ -266,10 +266,10 @@ export default function CookiesPage() {
                         <li>
                             By email:{' '}
                             <a
-                                href="mailto:support@etags.com"
+                                href="mailto:support@assuredpartners.com"
                                 className="text-accent underline underline-offset-2"
                             >
-                                support@etags.com
+                                support@assuredpartners.com
                             </a>
                         </li>
                         <li>By phone: (800) 555-0199</li>

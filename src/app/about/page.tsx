@@ -4,9 +4,9 @@ import Image from 'next/image';
 import { Shield, Users, Lightbulb, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'About | eTags',
+  title: 'About | AssuredPartners',
   description:
-    'Learn about eTags - our commitment to exceptional coverage solutions for vehicles and homes.',
+    'Learn about AssuredPartners - our commitment to exceptional home warranty coverage solutions.',
 };
 
 const coreValues = [
@@ -44,9 +44,9 @@ export default function AboutPage() {
               Driven by Excellence
             </h1>
             <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
-              We started eTags because we believe protecting your car shouldn&apos;t be
-              complicated. We&apos;re a small team with a big mission: making Vehicle Service
-              Contracts simple, transparent, and actually worth it.
+              We started AssuredPartners because we believe protecting your home shouldn&apos;t be
+              complicated. We&apos;re a small team with a big mission: making Home Warranty
+              plans simple, transparent, and actually worth it.
             </p>
           </div>
         </div>
@@ -59,7 +59,7 @@ export default function AboutPage() {
             <div className="relative mx-auto h-80 w-full max-w-md overflow-hidden rounded-2xl shadow-lg lg:mx-0">
               <Image
                 src="/images/people/team-support.jpg"
-                alt="eTags team working together"
+                alt="AssuredPartners team working together"
                 fill
                 className="object-cover"
               />
@@ -70,7 +70,7 @@ export default function AboutPage() {
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-navy-600">
                 We know what it&apos;s like to get hit with an unexpected repair bill — it&apos;s
-                stressful. That&apos;s why we built eTags to be different. No confusing jargon, no
+                stressful. That&apos;s why we built AssuredPartners to be different. No confusing jargon, no
                 surprise exclusions, just honest coverage you can count on. From our first customer
                 to today, we treat every person like family, because that&apos;s exactly how we&apos;d
                 want to be treated.

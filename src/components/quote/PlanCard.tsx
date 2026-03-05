@@ -10,24 +10,22 @@ interface PlanCardProps {
   isRecommended?: boolean;
   /** Show "Best Value" badge (e.g. only on Premium tier) */
   showBestValueBadge?: boolean;
-  tierLevel: 1 | 2 | 3 | 4;
+  tierLevel: 1 | 2 | 3;
   onSelect: () => void;
   /** Called when the user clicks the card to focus/highlight it */
   onTierClick?: () => void;
 }
 
 const EXCLUDED_BY_TIER: Record<number, string[]> = {
-  1: ['High-Tech Electronics', 'Cooling System', 'Brake System', 'Steering Components'],
-  2: ['Cooling System', 'Brake System', 'Steering Components'],
-  3: ['Exclusion-Based Coverage'],
-  4: [],
+  1: ['HVAC System', 'Plumbing System', 'Electrical System'],
+  2: ['Appliance Coverage', 'Garage Door Opener'],
+  3: [],
 };
 
 const TIER_STARS: Record<number, number> = {
   1: 1,
   2: 2,
   3: 3,
-  4: 4,
 };
 
 export default function PlanCard({
@@ -69,7 +67,7 @@ export default function PlanCard({
         {/* Header */}
         <div className="mb-4">
           <div className="flex items-center gap-1 mb-1">
-            {Array.from({ length: 4 }).map((_, i) => (
+            {Array.from({ length: 3 }).map((_, i) => (
               <svg
                 key={i}
                 className={`h-4 w-4 ${i < stars ? 'text-accent' : 'text-navy-100'}`}

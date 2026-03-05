@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'FAQ | eTags',
+  title: 'FAQ | AssuredPartners',
   description:
-    'Frequently asked questions about eTags vehicle service contracts and home coverage plans.',
+    'Frequently asked questions about AssuredPartners home warranty plans and coverage.',
 };
 
 export default function FaqLayout({ children }: { children: React.ReactNode }) {

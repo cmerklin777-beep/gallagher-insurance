@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Shield, Zap, Car, MapPin } from 'lucide-react';
+import { Shield, Zap, Home, MapPin } from 'lucide-react';
 import HeroSection from '@/components/landing/HeroSection';
 import QuoteEntryForm from '@/components/landing/QuoteEntryForm';
 import TrustSignals from '@/components/landing/TrustSignals';
@@ -13,14 +13,14 @@ export default function HomePage() {
       <HeroSection />
       <QuoteEntryForm />
 
-      {/* Why choose eTags */}
+      {/* Why choose AssuredPartners */}
       <section className="bg-white/90 py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="relative mx-auto h-80 w-full max-w-md overflow-hidden rounded-2xl shadow-lg lg:mx-0">
               <Image
                 src="/images/people/car-repair.jpg"
-                alt="Mechanic working on a car"
+                alt="Family in front of their home"
                 fill
                 className="object-cover"
               />
@@ -35,7 +35,7 @@ export default function HomePage() {
                 certified coverage, sold directly to you online. No call center overhead, no broker
                 fees, just honest pricing on{' '}
                 <span className="font-semibold text-navy-900 underline decoration-accent/60 underline-offset-4">
-                  Vehicle Service Contracts
+                  Home Warranty plans
                 </span>{' '}
                 that actually protect you.
               </p>
@@ -60,7 +60,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-lg font-bold text-navy-900">Plans that fit your life</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
-                From powertrain basics to bumper-to-bumper, pick the tier that fits — priced without the call center markup baked in.
+                From appliance basics to whole-home coverage, pick the tier that fits — priced without the call center markup baked in.
               </p>
             </div>
 
@@ -76,11 +76,11 @@ export default function HomePage() {
 
             <div className="card-lift rounded-2xl bg-white p-6 shadow-sm">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-muted">
-                <Car className="h-6 w-6 text-accent" />
+                <Home className="h-6 w-6 text-accent" />
               </div>
-              <h3 className="text-lg font-bold text-navy-900">Four tiers of protection</h3>
+              <h3 className="text-lg font-bold text-navy-900">Three tiers of protection</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
-                Essential, Essential Plus, Premium, or Exclusive — we have coverage for every vehicle and every driver.
+                Appliance, Systems, or Total — we have coverage for every home and every homeowner.
               </p>
             </div>
 
@@ -88,9 +88,9 @@ export default function HomePage() {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-muted">
                 <MapPin className="h-6 w-6 text-accent" />
               </div>
-              <h3 className="text-lg font-bold text-navy-900">Repairs anywhere you are</h3>
+              <h3 className="text-lg font-bold text-navy-900">Service anywhere you are</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
-                Use any ASE-Certified mechanic at thousands of shops nationwide. You choose where, not them.
+                Use any licensed technician from our nationwide network. You choose the provider, not us.
               </p>
             </div>
           </div>

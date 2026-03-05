@@ -15,7 +15,7 @@ interface QuoteWizardProps {
 }
 
 const STEPS: { key: WizardStep; label: string }[] = [
-  { key: 'vehicle-info', label: 'Vehicle Info' },
+  { key: 'vehicle-info', label: 'Home Info' },
   { key: 'plan-selection', label: 'Select Plan' },
   { key: 'options-addons', label: 'Options' },
   { key: 'cart-review', label: 'Review' },

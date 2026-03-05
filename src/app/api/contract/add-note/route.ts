@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
               note: {
                 contractNumber: number,
                 type: "Information",
-                text: `This contract was created using the eTags website.\n The transaction was processed through FortPoint with transactionID: ${transactionid}`,
+                text: `This contract was created using the AssuredPartners website.\n The transaction was processed through FortPoint with transactionID: ${transactionid}`,
               }
             }
 

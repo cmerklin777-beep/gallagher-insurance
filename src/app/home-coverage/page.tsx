@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { Shield, DollarSign, ShieldCheck, Check, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Auto Coverage | eTags',
+  title: 'Home Coverage | AssuredPartners',
   description:
-    'Explore our comprehensive vehicle service contract coverage tiers. From basic powertrain to complete bumper-to-bumper protection.',
+    'Explore our comprehensive home warranty coverage tiers. From appliance protection to whole-home coverage.',
 };
 
 /* ------------------------------------------------------------------ */
@@ -14,48 +14,45 @@ export const metadata: Metadata = {
 
 const tiers = [
   {
-    name: 'Essential',
+    name: 'Appliance',
     tier: 1,
     items: [
-      'Engine Coverage',
-      'Transmission Coverage',
-      'Transfer Case Coverage',
-      'AWD Mechanism Coverage',
+      'Refrigerator',
+      'Oven / Range / Cooktop',
+      'Dishwasher',
+      'Built-In Microwave',
+      'Washer & Dryer',
+      'Garbage Disposal',
     ],
     border: 'border-navy-200',
     extra: 'shadow-sm',
     badge: null,
   },
   {
-    name: 'Essential Plus',
+    name: 'Systems',
     tier: 2,
     items: [
-      'Everything in Tier 1, PLUS:',
-      'Water Pump',
-      'Oil Pump',
-      'Fuel System',
-      'Timing Chain',
+      'HVAC (Heating & Cooling)',
       'Electrical System',
-      'A/C System',
+      'Plumbing System',
+      'Water Heater',
+      'Ductwork',
+      'Exhaust Fans',
     ],
     border: 'border-navy-200',
     extra: 'shadow-sm',
     badge: null,
   },
   {
-    name: 'Premium',
+    name: 'Total',
     tier: 3,
-    items: ['Everything in Tier 2, PLUS:', 'Audio Components'],
-    border: 'border-navy-300',
-    extra: 'shadow-md',
-    badge: null,
-  },
-  {
-    name: 'Exclusive',
-    tier: 4,
     items: [
-      'Everything in Tier 3, PLUS:',
-      'Comprehensive Coverage (covers every component except exclusions)',
+      'Everything in Appliance & Systems',
+      'Garage Door Opener',
+      'Ceiling Fans',
+      'Doorbells',
+      'Central Vacuum',
+      'Additional Appliance Coverage',
     ],
     border: 'border-accent',
     extra: 'ring-1 ring-accent/20 shadow-xl',
@@ -75,7 +72,7 @@ export default function AutoCoveragePage() {
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
-              Discover Comprehensive Vehicle Coverages
+              Discover Comprehensive Home Coverage
             </h1>
           </div>
 
@@ -87,7 +84,7 @@ export default function AutoCoveragePage() {
               </div>
               <h3 className="text-lg font-bold text-navy-900">Comprehensive Coverage</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
-                Our service contracts cover a wide range of repairs, ensuring your car stays in top
+                Our home warranty plans cover a wide range of repairs, ensuring your home stays in top
                 condition.
               </p>
             </div>
@@ -109,14 +106,14 @@ export default function AutoCoveragePage() {
       <section className="bg-white py-24">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl">
-            Explore Comprehensive Vehicle Protection
+            Explore Comprehensive Home Protection
           </h2>
           <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-accent" />
           <p className="mt-8 text-lg leading-relaxed text-navy-600">
-            At eTags, we offer customized coverage tiers designed specifically to fit your
+            At AssuredPartners, we offer customized coverage tiers designed specifically to fit your
             family&apos;s lifestyles and budget. Enjoy complete peace of mind with our plans ranging
-            from basic safeguards to premium coverages, protecting your car from unexpected costs.
-            Key benefits include Engine, Transmission, and additional vehicle component coverage.
+            from basic appliance protection to whole-home coverage, protecting your home from
+            unexpected costs. Key benefits include Appliance, Systems, and combined Total coverage.
           </p>
         </div>
       </section>
@@ -134,7 +131,7 @@ export default function AutoCoveragePage() {
             </p>
           </div>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {tiers.map((t) => (
               <div
                 key={t.name}
@@ -193,7 +190,7 @@ export default function AutoCoveragePage() {
           <p className="mt-6 text-lg leading-relaxed text-navy-100/80">
             Choose the coverage tier that best suits your needs and drive with confidence knowing
             you&apos;re protected. Explore our comprehensive coverage options and take the first step
-            towards worry-free driving.
+            towards worry-free homeownership.
           </p>
           <Link
             href="/quote"

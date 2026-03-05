@@ -12,10 +12,10 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: 'eTags | Vehicle Service Contracts',
+  title: 'AssuredPartners | Home Warranty Plans',
   description:
-    'Protect your investment with trusted Vehicle Service Contracts from eTags. Get a quote in seconds. Nationwide coverage, ASE Certified mechanics, $0 deductible options available.',
-  keywords: 'vehicle service contract, auto coverage, mechanical breakdown coverage, protection plan, etags',
+    'Protect your home with trusted Home Warranty plans from AssuredPartners. Get a quote in seconds. Nationwide coverage, licensed technicians, $0 service fee options available.',
+  keywords: 'home warranty, appliance coverage, home systems coverage, protection plan, assuredpartners',
 };
 
 export default function RootLayout({

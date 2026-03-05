@@ -3,24 +3,24 @@ import { Star } from 'lucide-react';
 const testimonials = [
   {
     name: 'Sarah M.',
-    vehicle: '2019 Honda CR-V',
+    home: '3-Bedroom Ranch',
     rating: 5,
     quote:
-      'When my transmission started acting up, I was dreading the repair bill. eTags covered the entire repair — I only paid my deductible. The process was so smooth!',
+      'When my HVAC system broke down in the middle of summer, I was dreading the repair bill. AssuredPartners covered the entire repair — I only paid my service fee. The process was so smooth!',
   },
   {
     name: 'James T.',
-    vehicle: '2020 Ford F-150',
+    home: '4-Bedroom Colonial',
     rating: 5,
     quote:
-      'I was skeptical about Vehicle Service Contracts, but the team at eTags walked me through everything. Three months later, my A/C compressor failed and it was fully covered.',
+      'I was skeptical about home warranties, but the team at AssuredPartners walked me through everything. Three months later, my water heater failed and it was fully covered.',
   },
   {
     name: 'Maria L.',
-    vehicle: '2018 Toyota Camry',
+    home: '2-Bedroom Condo',
     rating: 5,
     quote:
-      'The online process took me less than five minutes. No pushy sales calls, just straightforward coverage. I recommend eTags to everyone I know.',
+      'The online process took me less than five minutes. No pushy sales calls, just straightforward coverage. I recommend AssuredPartners to everyone I know.',
   },
 ];
 
@@ -31,10 +31,10 @@ export default function Testimonials() {
         {/* Section header */}
         <div className="text-center">
           <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl">
-            Real stories from real drivers
+            Real stories from real homeowners
           </h2>
           <p className="mt-4 text-lg text-navy-600">
-            See why thousands of customers trust us with their vehicles.
+            See why thousands of homeowners trust us with their homes.
           </p>
         </div>
 
@@ -63,7 +63,7 @@ export default function Testimonials() {
               {/* Attribution */}
               <div className="mt-6 border-t border-navy-100 pt-4">
                 <p className="font-semibold text-navy-900">{t.name}</p>
-                <p className="text-xs text-navy-500">{t.vehicle}</p>
+                <p className="text-xs text-navy-500">{t.home}</p>
               </div>
             </div>
           ))}

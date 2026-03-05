@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Terms of Service | eTags',
+    title: 'Terms of Service | AssuredPartners',
     description:
-        'Read the terms and conditions that govern your use of eTags services and website.',
+        'Read the terms and conditions that govern your use of AssuredPartners services and website.',
 };
 
 export default function TermsPage() {
@@ -21,7 +21,7 @@ export default function TermsPage() {
                             Terms of Service
                         </h1>
                         <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-navy-100/80 sm:text-xl">
-                            These Terms of Service explain how eTags provides its services and how you
+                            These Terms of Service explain how AssuredPartners provides its services and how you
                             may use this website and our coverage offerings.
                         </p>
                     </div>
@@ -36,7 +36,7 @@ export default function TermsPage() {
                             1. Acceptance of These Terms
                         </h2>
                         <p>
-                            By accessing or using the eTags website, requesting a quote, or purchasing
+                            By accessing or using the AssuredPartners website, requesting a quote, or purchasing
                             coverage through our platform, you agree to be bound by these Terms of Service and
                             any additional terms referenced here. If you do not agree, you must not use this
                             website or our services.
@@ -48,10 +48,10 @@ export default function TermsPage() {
                             2. Nature of Our Services
                         </h2>
                         <p>
-                            eTags sells Vehicle Service Contracts and related protection products. We do
+                            AssuredPartners sells Home Warranty plans and related protection products. We do
                             not provide manufacturer warranties, and coverage is administered by third‑party
                             administrators and backed by licensed insurers. The specific terms, conditions,
-                            limitations, and exclusions governing your coverage are set out in the Service
+                            limitations, and exclusions governing your coverage are set out in the Home Warranty
                             Contract you receive at purchase.
                         </p>
                     </section>
@@ -98,7 +98,7 @@ export default function TermsPage() {
                         </h2>
                         <p>
                             All trademarks, logos, designs, text, graphics, and other content on this website are
-                            owned by or licensed to eTags and may not be reproduced, distributed, or
+                            owned by or licensed to AssuredPartners and may not be reproduced, distributed, or
                             used without our prior written permission, except as necessary for your personal,
                             non‑commercial use of the site.
                         </p>
@@ -133,7 +133,7 @@ export default function TermsPage() {
                             9. Limitation of Liability
                         </h2>
                         <p>
-                            To the extent permitted by law, eTags and its affiliates will not be liable
+                            To the extent permitted by law, AssuredPartners and its affiliates will not be liable
                             for indirect, incidental, special, consequential, or punitive damages arising out of
                             or related to your use of this website or our services. Our total liability in
                             connection with any claim will be limited to the amount you paid for the specific

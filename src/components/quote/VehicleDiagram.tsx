@@ -1,16 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 
 /**
- * Interactive exploded-view vehicle diagram with coverage hotspot pins.
+ * Interactive home diagram with coverage hotspot pins.
  * Pins are color-coded by coverage status based on the selected tier.
- * Tier 1 = Essential, 2 = Essential Plus, 3 = Premium, 4 = Exclusive
+ * Tier 1 = Appliance, 2 = Systems, 3 = Total
  */
 
 interface VehicleDiagramProps {
-  tierLevel: 1 | 2 | 3 | 4;
+  tierLevel: 1 | 2 | 3;
 }
 
 interface PartDef {
@@ -23,32 +22,30 @@ interface PartDef {
 }
 
 const PARTS: PartDef[] = [
-  // Tier 1 — Essential  (pin x/y = % position on the exploded-view image)
-  { id: 'engine', label: 'Engine', x: 16, y: 53, minTier: 1, desc: 'All internally lubricated engine components including pistons, crankshaft, camshaft, cylinder heads, and timing components.' },
-  { id: 'transmission', label: 'Transmission', x: 24, y: 55, minTier: 1, desc: 'Automatic transmission assembly including torque converter, valve body, clutch packs, solenoid pack, and TCM.' },
-  { id: 'transfer_case', label: 'Transfer Case / AWD', x: 87, y: 75, minTier: 1, desc: 'Transfer case assembly, front and rear differentials, and AWD/4WD engagement components.' },
-  // Tier 2 — Essential Plus
-  { id: 'turbo', label: 'Turbo / Supercharger', x: 14, y: 20, minTier: 2, desc: 'Turbocharger or supercharger assembly including housing, shaft, bearings, and wastegate actuator.' },
-  { id: 'ac', label: 'A/C Compressor', x: 92, y: 15, minTier: 2, desc: 'A/C compressor and clutch, condenser, evaporator core, expansion valve, and receiver/drier.' },
-  { id: 'cv_joints', label: 'CV Joints', x: 30, y: 79, minTier: 2, desc: 'Front and rear CV axle shafts, CV joints, and drive shaft assemblies.' },
-  { id: 'electrical', label: 'Electrical System', x: 72, y: 37, minTier: 2, desc: 'Alternator, starter motor, wiring harness, fuse box, and relay assemblies.' },
-  { id: 'fuel_system', label: 'Fuel System', x: 58, y: 60, minTier: 2, desc: 'Fuel pump, high-pressure fuel pump, injectors, fuel pressure regulator, and tank sending unit.' },
-  { id: 'seals', label: 'Seals & Gaskets', x: 17, y: 28, minTier: 2, desc: 'All internal seals and gaskets required as part of a covered repair.' },
-  // Tier 3 — Premium
-  { id: 'cooling', label: 'Cooling System', x: 5, y: 42, minTier: 3, desc: 'Radiator, water pump, thermostat, intercooler, coolant reservoir, and all associated cooling circuit components.' },
-  { id: 'brakes', label: 'Brake System', x: 20, y: 73, minTier: 3, desc: 'Brake calipers, master cylinder, brake lines and hoses, and ABS actuator. Pads and rotors are maintenance exclusions.' },
-  { id: 'steering', label: 'Steering', x: 33, y: 52, minTier: 3, desc: 'Rack and pinion assembly, power steering pump, electric power steering motor, column, and tie rod ends.' },
-  // Tier 4 — Exclusive
-  { id: 'hi_tech', label: 'Hi-Tech Electronics', x: 38, y: 42, minTier: 4, desc: 'ECM/PCM, body control module, ABS module, and SRS modules. Hardware failure covered.' },
-  { id: 'navigation', label: 'Navigation / Infotainment', x: 48, y: 32, minTier: 4, desc: 'Navigation head unit, display, infotainment system, and connectivity modules.' },
-  { id: 'adas', label: 'ADAS / Driver Assist', x: 30, y: 22, minTier: 4, desc: 'Radar modules, camera arrays, blind-spot sensors, and lane departure hardware.' },
+  // Tier 1 — Appliance  (pin x/y = % position on the house illustration)
+  { id: 'refrigerator', label: 'Refrigerator', x: 68, y: 62, minTier: 1, desc: 'Refrigerator and freezer including compressor, thermostat, ice maker, and internal components.' },
+  { id: 'oven', label: 'Oven / Range / Cooktop', x: 55, y: 64, minTier: 1, desc: 'Oven, range, or cooktop including burners, igniters, heating elements, thermostats, and internal components.' },
+  { id: 'dishwasher', label: 'Dishwasher', x: 78, y: 66, minTier: 1, desc: 'Dishwasher including pump, motor, spray arms, timer, and electronic controls.' },
+  { id: 'microwave', label: 'Built-In Microwave', x: 55, y: 52, minTier: 1, desc: 'Built-in microwave including magnetron, turntable motor, door switches, and control panel.' },
+  { id: 'washer_dryer', label: 'Washer & Dryer', x: 82, y: 80, minTier: 1, desc: 'Clothes washer and dryer including motors, pumps, timers, belts, and heating elements.' },
+  { id: 'disposal', label: 'Garbage Disposal', x: 65, y: 74, minTier: 1, desc: 'Garbage disposal unit including motor, grinding mechanism, and internal components.' },
+  // Tier 2 — Systems
+  { id: 'hvac', label: 'HVAC System', x: 50, y: 22, minTier: 2, desc: 'Central heating and air conditioning including furnace, compressor, condenser, evaporator coil, and blower motor.' },
+  { id: 'electrical', label: 'Electrical System', x: 25, y: 45, minTier: 2, desc: 'Interior electrical system including wiring, outlets, switches, circuit breakers, and junction boxes.' },
+  { id: 'plumbing', label: 'Plumbing System', x: 35, y: 70, minTier: 2, desc: 'Interior plumbing including supply lines, drain lines, faucets, valves, and toilet components.' },
+  { id: 'water_heater', label: 'Water Heater', x: 20, y: 78, minTier: 2, desc: 'Water heater including tank, heating elements, thermostat, pressure relief valve, and gas valve.' },
+  { id: 'ductwork', label: 'Ductwork', x: 40, y: 30, minTier: 2, desc: 'Ductwork including supply and return ducts, dampers, registers, and grilles.' },
+  { id: 'exhaust_fans', label: 'Exhaust Fans', x: 72, y: 38, minTier: 2, desc: 'Kitchen and bathroom exhaust fans including motors, blades, and switches.' },
+  // Tier 3 — Total (additional items beyond Appliance + Systems)
+  { id: 'garage_door', label: 'Garage Door Opener', x: 12, y: 65, minTier: 3, desc: 'Garage door opener including motor, chain/belt drive, remote receiver, and safety sensors.' },
+  { id: 'ceiling_fans', label: 'Ceiling Fans', x: 50, y: 42, minTier: 3, desc: 'Ceiling fans including motor, blades, pull chains, speed controls, and light kits.' },
+  { id: 'doorbells', label: 'Doorbells', x: 15, y: 52, minTier: 3, desc: 'Doorbell systems including chimes, transformers, wired buttons, and wiring.' },
 ];
 
 const TIER_LABELS: Record<number, string> = {
-  1: 'Essential',
-  2: 'Essential Plus',
-  3: 'Premium',
-  4: 'Exclusive',
+  1: 'Appliance',
+  2: 'Systems',
+  3: 'Total',
 };
 
 export default function VehicleDiagram({ tierLevel }: VehicleDiagramProps) {
@@ -77,17 +74,92 @@ export default function VehicleDiagram({ tierLevel }: VehicleDiagramProps) {
         </div>
       </div>
 
-      {/* Exploded vehicle image with hotspot pins */}
-      <div className="relative rounded-lg overflow-hidden bg-white">
-        <Image
-          src="/images/vehicle-exploded.jpg"
-          alt="Exploded vehicle diagram showing covered components"
-          width={1200}
-          height={750}
-          className="w-full h-auto select-none"
-          draggable={false}
-          priority
-        />
+      {/* House illustration with hotspot pins */}
+      <div className="relative rounded-lg overflow-hidden bg-gradient-to-b from-sky-50 to-white" style={{ aspectRatio: '16/10' }}>
+        {/* SVG House Illustration */}
+        <svg viewBox="0 0 800 500" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          {/* Sky background */}
+          <rect width="800" height="500" fill="url(#skyGrad)" />
+          <defs>
+            <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#e0f2fe" />
+              <stop offset="100%" stopColor="#f0f9ff" />
+            </linearGradient>
+          </defs>
+
+          {/* Ground */}
+          <rect x="0" y="400" width="800" height="100" fill="#d1fae5" rx="0" />
+          <rect x="0" y="395" width="800" height="10" fill="#a7f3d0" rx="5" />
+
+          {/* Driveway */}
+          <rect x="50" y="400" width="120" height="100" fill="#d1d5db" rx="2" />
+
+          {/* Main House Body */}
+          <rect x="130" y="200" width="500" height="200" fill="#f8fafc" stroke="#94a3b8" strokeWidth="2" rx="4" />
+
+          {/* Roof */}
+          <polygon points="100,210 380,60 660,210" fill="#475569" stroke="#334155" strokeWidth="2" />
+          {/* Roof trim */}
+          <polygon points="120,210 380,75 640,210" fill="#64748b" stroke="none" />
+
+          {/* Chimney */}
+          <rect x="500" y="90" width="45" height="120" fill="#78716c" stroke="#57534e" strokeWidth="1.5" rx="2" />
+          <rect x="495" y="85" width="55" height="12" fill="#57534e" rx="2" />
+
+          {/* Garage */}
+          <rect x="50" y="240" width="120" height="160" fill="#e2e8f0" stroke="#94a3b8" strokeWidth="2" rx="4" />
+          {/* Garage door */}
+          <rect x="62" y="290" width="96" height="107" fill="#cbd5e1" stroke="#94a3b8" strokeWidth="1.5" rx="3" />
+          <line x1="62" y1="315" x2="158" y2="315" stroke="#94a3b8" strokeWidth="1" />
+          <line x1="62" y1="340" x2="158" y2="340" stroke="#94a3b8" strokeWidth="1" />
+          <line x1="62" y1="365" x2="158" y2="365" stroke="#94a3b8" strokeWidth="1" />
+          {/* Garage door handle */}
+          <rect x="102" y="370" width="16" height="4" fill="#64748b" rx="2" />
+
+          {/* Front Door */}
+          <rect x="330" y="280" width="60" height="118" fill="#0f145b" stroke="#1e1b4b" strokeWidth="2" rx="3" />
+          {/* Door handle */}
+          <circle cx="378" cy="345" r="4" fill="#fac142" />
+          {/* Door window */}
+          <rect x="342" y="292" width="36" height="30" fill="#bfdbfe" stroke="#1e1b4b" strokeWidth="1" rx="2" />
+
+          {/* Windows - left side */}
+          <rect x="185" y="250" width="80" height="65" fill="#bfdbfe" stroke="#94a3b8" strokeWidth="2" rx="3" />
+          <line x1="225" y1="250" x2="225" y2="315" stroke="#94a3b8" strokeWidth="1.5" />
+          <line x1="185" y1="282" x2="265" y2="282" stroke="#94a3b8" strokeWidth="1.5" />
+
+          {/* Windows - right side */}
+          <rect x="445" y="250" width="80" height="65" fill="#bfdbfe" stroke="#94a3b8" strokeWidth="2" rx="3" />
+          <line x1="485" y1="250" x2="485" y2="315" stroke="#94a3b8" strokeWidth="1.5" />
+          <line x1="445" y1="282" x2="525" y2="282" stroke="#94a3b8" strokeWidth="1.5" />
+
+          {/* Upper window (attic/loft) */}
+          <circle cx="380" cy="160" r="28" fill="#bfdbfe" stroke="#94a3b8" strokeWidth="2" />
+          <line x1="380" y1="132" x2="380" y2="188" stroke="#94a3b8" strokeWidth="1.5" />
+          <line x1="352" y1="160" x2="408" y2="160" stroke="#94a3b8" strokeWidth="1.5" />
+
+          {/* Utility area / side of house */}
+          <rect x="630" y="280" width="100" height="120" fill="#e2e8f0" stroke="#94a3b8" strokeWidth="2" rx="4" />
+          {/* Water heater */}
+          <rect x="648" y="310" width="30" height="50" fill="#f1f5f9" stroke="#94a3b8" strokeWidth="1.5" rx="3" />
+          {/* AC unit */}
+          <rect x="690" y="320" width="28" height="28" fill="#e0f2fe" stroke="#94a3b8" strokeWidth="1.5" rx="2" />
+          <line x1="692" y1="334" x2="716" y2="334" stroke="#94a3b8" strokeWidth="0.5" />
+          <line x1="692" y1="338" x2="716" y2="338" stroke="#94a3b8" strokeWidth="0.5" />
+
+          {/* Doorbell circle */}
+          <circle cx="322" cy="330" r="5" fill="#fac142" stroke="#94a3b8" strokeWidth="1" />
+
+          {/* Stepping stones */}
+          <ellipse cx="340" cy="420" rx="20" ry="8" fill="#d1d5db" />
+          <ellipse cx="350" cy="450" rx="18" ry="7" fill="#d1d5db" />
+          <ellipse cx="335" cy="475" rx="20" ry="8" fill="#d1d5db" />
+
+          {/* Bushes */}
+          <ellipse cx="175" cy="395" rx="30" ry="15" fill="#86efac" />
+          <ellipse cx="540" cy="395" rx="25" ry="13" fill="#86efac" />
+          <ellipse cx="580" cy="398" rx="20" ry="10" fill="#6ee7b7" />
+        </svg>
 
         {/* Hotspot pins */}
         {PARTS.map((part) => {

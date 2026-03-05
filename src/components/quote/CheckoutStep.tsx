@@ -204,7 +204,7 @@ export default function CheckoutStep() {
             }
             setError(
               contractFailed?.error?.error?.details?.[0]?.message ||
-                'Auto contract failed to create. Please make sure you have filled out all vehicle descriptors or do not have a current plan active.'
+                'Home warranty contract failed to create. Please make sure you have filled out all vehicle descriptors or do not have a current plan active.'
             );
           }
         }
@@ -361,11 +361,11 @@ export default function CheckoutStep() {
       return false;
     }
     if (!agreedToTerms) {
-      setError('You must agree to the Vehicle Service Contract Terms to proceed.');
+      setError('You must agree to the Home Warranty Contract Terms to proceed.');
       return false;
     }
     if (!agreedToConditions) {
-      setError('You must affirm that your vehicle has no pre-existing conditions and acknowledge the waiting period to proceed.');
+      setError('You must affirm that your home has no known pre-existing conditions and acknowledge the waiting period to proceed.');
       return false;
     }
     return true;
@@ -694,7 +694,7 @@ export default function CheckoutStep() {
           <span className="text-sm text-navy-700">
             I have read and agree to the{' '}
             <Link href="/terms" className="font-semibold text-accent underline underline-offset-2">
-              Vehicle Service Contract Terms
+              Home Warranty Contract Terms
             </Link>
             .
           </span>
@@ -707,7 +707,7 @@ export default function CheckoutStep() {
             className="mt-0.5 h-5 w-5 shrink-0 rounded border-navy-200 text-accent focus:ring-accent/20"
           />
           <span className="text-sm text-navy-700">
-            I affirm that my vehicle has no pre-existing conditions and I understand there is a 30-day / 1,000-mile waiting period before I can file a claim.
+            I affirm that my home systems and appliances have no known pre-existing conditions and I understand there is a 30-day waiting period before I can file a claim.
           </span>
         </label>
       </div>
