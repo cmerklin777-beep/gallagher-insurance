@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="relative bg-navy-950 border-t border-navy-800/40">
+    <footer className="relative bg-navy-950 border-t border-navy-800/40" role="contentinfo">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         {/* Top section: Logo + Tagline + Accent Divider */}
         <div className="mb-12">
@@ -16,8 +16,8 @@ export default function Footer() {
               className="h-10 w-auto brightness-0 invert"
             />
           </Link>
-          <p className="mt-1 text-xs text-navy-600">A Gallagher Company</p>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-navy-500">
+          <p className="mt-1 text-xs text-navy-100/60">A Gallagher Company</p>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-navy-100/70">
             Protecting your home with trusted Home Warranty plans.
             Nationwide coverage backed by licensed handymen.
           </p>
@@ -25,7 +25,7 @@ export default function Footer() {
         </div>
 
         {/* 4-Column Link Grid */}
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <nav aria-label="Footer navigation" className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Column 1 — Company Information */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-accent-light mb-5">
@@ -35,7 +35,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/about"
-                  className="text-sm text-navy-500 hover:text-white transition-colors"
+                  className="text-sm text-navy-100/70 hover:text-white transition-colors"
                 >
                   About AssuredPartners
                 </Link>
@@ -43,7 +43,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/about"
-                  className="text-sm text-navy-500 hover:text-white transition-colors"
+                  className="text-sm text-navy-100/70 hover:text-white transition-colors"
                 >
                   Our Mission &amp; Values
                 </Link>
@@ -51,7 +51,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/about"
-                  className="text-sm text-navy-500 hover:text-white transition-colors"
+                  className="text-sm text-navy-100/70 hover:text-white transition-colors"
                 >
                   Customer Testimonials
                 </Link>
@@ -68,7 +68,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/home-coverage"
-                  className="text-sm text-navy-500 hover:text-white transition-colors"
+                  className="text-sm text-navy-100/70 hover:text-white transition-colors"
                 >
                   Home Coverage
                 </Link>
@@ -76,7 +76,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/quote"
-                  className="text-sm text-navy-500 hover:text-white transition-colors"
+                  className="text-sm text-navy-100/70 hover:text-white transition-colors"
                 >
                   Get a Quote
                 </Link>
@@ -93,7 +93,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/terms"
-                  className="text-sm text-navy-500 hover:text-white transition-colors"
+                  className="text-sm text-navy-100/70 hover:text-white transition-colors"
                 >
                   Terms of Service
                 </Link>
@@ -101,7 +101,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-sm text-navy-500 hover:text-white transition-colors"
+                  className="text-sm text-navy-100/70 hover:text-white transition-colors"
                 >
                   Privacy Policy
                 </Link>
@@ -109,7 +109,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/cookies"
-                  className="text-sm text-navy-500 hover:text-white transition-colors"
+                  className="text-sm text-navy-100/70 hover:text-white transition-colors"
                 >
                   Cookie Policy
                 </Link>
@@ -117,7 +117,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-sm text-navy-500 hover:text-white transition-colors"
+                  className="text-sm text-navy-100/70 hover:text-white transition-colors"
                 >
                   Legal Notices
                 </Link>
@@ -134,7 +134,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contact"
-                  className="text-sm text-navy-500 hover:text-white transition-colors"
+                  className="text-sm text-navy-100/70 hover:text-white transition-colors"
                 >
                   Contact Support
                 </Link>
@@ -142,22 +142,30 @@ export default function Footer() {
               <li>
                 <Link
                   href="/faq"
-                  className="text-sm text-navy-500 hover:text-white transition-colors"
+                  className="text-sm text-navy-100/70 hover:text-white transition-colors"
                 >
                   FAQ
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/accessibility"
+                  className="text-sm text-navy-100/70 hover:text-white transition-colors"
+                >
+                  Accessibility
+                </Link>
+              </li>
             </ul>
           </div>
-        </div>
+        </nav>
 
         {/* Bottom Bar */}
         <div className="mt-12 border-t border-navy-800/60 pt-6 text-center">
-          <p className="text-sm text-navy-500">
+          <p className="text-sm text-navy-100/70">
             &copy; {new Date().getFullYear()} AssuredPartners. All rights
             reserved.
           </p>
-          <p className="mt-3 text-navy-600 text-xs max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-3 text-navy-100/60 text-xs max-w-2xl mx-auto leading-relaxed">
             AssuredPartners sells Home Warranty plans, not manufacturer
             coverage. All plans are administered by Lot Solutions Inc. and backed by licensed
             insurers. See your Home Warranty Contract for complete terms, conditions,

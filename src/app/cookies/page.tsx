@@ -18,7 +18,7 @@ export default function CookiesPage() {
                         <h1 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
                             Cookies Policy
                         </h1>
-                        <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-navy-100/80 sm:text-xl">
+                        <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-navy-100 sm:text-xl">
                             This Cookies Policy explains what cookies are, how we use them on
                             this website, and the choices you have about their use.
                         </p>

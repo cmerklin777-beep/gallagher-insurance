@@ -177,22 +177,25 @@ export default function ChatWidget() {
       {/* Chat Panel */}
       {isOpen && (
         <div
+          role="dialog"
+          aria-label="Chat with AssuredPartners Assistant"
+          aria-modal="false"
           className="fixed bottom-28 right-4 z-50 flex w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-navy-100 bg-white shadow-2xl sm:w-[400px] sm:right-6"
           style={{ height: 'min(500px, calc(100vh - 160px))' }}
         >
           {/* Header */}
           <div className="flex items-center justify-between bg-navy-900 px-4 py-3">
             <div className="flex items-center gap-2">
-              <div className="mascot-sprite shrink-0" style={{ width: 28, height: 28, backgroundSize: '800% 800%', backgroundPosition: '0% 0%' }} />
+              <div className="mascot-sprite shrink-0" aria-hidden="true" style={{ width: 28, height: 28, backgroundSize: '800% 800%', backgroundPosition: '0% 0%' }} />
               <span className="font-semibold text-white">AssuredPartners Assistant</span>
             </div>
             <button onClick={closeChat} className="rounded-lg p-1 text-navy-100 transition hover:bg-white/10 hover:text-white" aria-label="Close chat">
-              <X className="h-5 w-5" />
+              <X className="h-5 w-5" aria-hidden="true" />
             </button>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 space-y-3 overflow-y-auto p-4">
+          <div className="flex-1 space-y-3 overflow-y-auto p-4" role="log" aria-live="polite" aria-label="Chat messages">
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div
@@ -221,8 +224,10 @@ export default function ChatWidget() {
           {/* Input */}
           <div className="border-t border-navy-100 bg-white p-3">
             <div className="flex items-center gap-2">
+              <label htmlFor="chat-input" className="sr-only">Type your message</label>
               <input
                 ref={inputRef}
+                id="chat-input"
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -237,7 +242,7 @@ export default function ChatWidget() {
                 className="rounded-xl bg-accent p-2.5 text-white transition hover:bg-accent-hover disabled:opacity-50 disabled:hover:bg-accent"
                 aria-label="Send message"
               >
-                <Send className="h-4 w-4" />
+                <Send className="h-4 w-4" aria-hidden="true" />
               </button>
             </div>
           </div>
@@ -255,7 +260,7 @@ export default function ChatWidget() {
           >
             Need help?
             {/* Triangle pointer */}
-            <span className="absolute -bottom-1.5 right-6 h-3 w-3 rotate-45 bg-white" />
+            <span className="absolute -bottom-1.5 right-6 h-3 w-3 rotate-45 bg-white" aria-hidden="true" />
           </button>
         )}
 

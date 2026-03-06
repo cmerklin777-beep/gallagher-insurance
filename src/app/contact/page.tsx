@@ -34,10 +34,10 @@ export default function ContactPage() {
             <h1 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
               We&apos;d love to hear from you
             </h1>
-            <h3 className="mt-4 text-xl font-semibold text-accent-light sm:text-2xl">
+            <p className="mt-4 text-xl font-semibold text-accent-light sm:text-2xl">
               We&apos;re Here to Help You!
-            </h3>
-            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
+            </p>
+            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white sm:text-xl">
               Have a question about coverage, need help with a claim, or just want to say hi?
               Our team is friendly, responsive, and always happy to help.
             </p>
@@ -60,7 +60,7 @@ export default function ContactPage() {
             <div className="flex flex-col gap-6">
               <div className="flex shrink-0 items-center gap-4 rounded-2xl border-l-4 border-accent bg-white p-6 shadow-lg transition hover:shadow-xl">
                 <div className="inline-flex shrink-0 rounded-full bg-accent-muted p-3">
-                  <Phone className="h-6 w-6 text-accent" />
+                  <Phone className="h-6 w-6 text-accent" aria-hidden="true" />
                 </div>
                 <div>
                   <p className="text-sm font-medium text-navy-500">Call Us</p>
@@ -75,7 +75,7 @@ export default function ContactPage() {
 
               <div className="flex shrink-0 items-center gap-4 rounded-2xl border-l-4 border-accent bg-white p-6 shadow-lg transition hover:shadow-xl">
                 <div className="inline-flex shrink-0 rounded-full bg-accent-muted p-3">
-                  <Mail className="h-6 w-6 text-accent" />
+                  <Mail className="h-6 w-6 text-accent" aria-hidden="true" />
                 </div>
                 <div>
                   <p className="text-sm font-medium text-navy-500">Email Us</p>
@@ -209,7 +209,7 @@ export default function ContactPage() {
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             Ready to get covered?
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-white/90">
+          <p className="mt-6 text-lg leading-relaxed text-white">
             Our team is here whenever you need us. In the meantime, grab a free
             quote and see how affordable real protection can be.
           </p>

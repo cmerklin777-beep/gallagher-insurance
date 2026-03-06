@@ -33,7 +33,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden items-center gap-7 lg:flex">
+          <nav aria-label="Main navigation" className="hidden items-center gap-7 lg:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -55,7 +55,7 @@ export default function Header() {
               href="tel:+1-800-555-0199"
               className="hidden items-center gap-1.5 text-base font-medium text-navy-100/70 transition-colors hover:text-white sm:flex"
             >
-              <Phone className="h-4 w-4" />
+              <Phone className="h-4 w-4" aria-hidden="true" />
               <span>(800) 555-0199</span>
             </a>
             <Link
@@ -72,19 +72,21 @@ export default function Header() {
             className="inline-flex items-center justify-center rounded-md p-2 text-navy-100/70 transition-colors hover:text-white lg:hidden"
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
             {mobileOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-6 w-6" aria-hidden="true" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-6 w-6" aria-hidden="true" />
             )}
           </button>
         </div>
 
         {/* Mobile Dropdown Menu */}
         {mobileOpen && (
-          <div className="bg-navy-900 border-t border-navy-800 lg:hidden">
-            <nav className="mx-auto max-w-7xl space-y-1 px-4 py-4 sm:px-6">
+          <div id="mobile-menu" className="bg-navy-900 border-t border-navy-800 lg:hidden" role="region" aria-label="Mobile navigation">
+            <nav aria-label="Mobile navigation" className="mx-auto max-w-7xl space-y-1 px-4 py-4 sm:px-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -107,7 +109,7 @@ export default function Header() {
                 href="tel:+1-800-555-0199"
                 className="flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium text-navy-100/70 transition-colors hover:bg-navy-800 hover:text-white"
               >
-                <Phone className="h-4 w-4" />
+                <Phone className="h-4 w-4" aria-hidden="true" />
                 <span>(800) 555-0199</span>
               </a>
 

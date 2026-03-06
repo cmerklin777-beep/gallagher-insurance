@@ -11,7 +11,7 @@ export default function HeroSection() {
             <span className="text-action">you can count on</span>.
           </h1>
 
-          <p className="animate-fade-up stagger-2 mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/90">
+          <p className="animate-fade-up stagger-2 mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white">
             Get top-tier home protection at a competitive price — all
             online, in minutes. Backed by the strength of Gallagher.
           </p>
@@ -22,7 +22,7 @@ export default function HeroSection() {
               className="group inline-flex items-center justify-center gap-2 rounded-xl bg-action px-8 py-4 text-lg font-bold text-navy-950 shadow-lg shadow-action/20 transition hover:bg-action-hover hover:scale-105"
             >
               Get Your Free Quote
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </Link>
             <Link
               href="/#how-it-works"
@@ -34,16 +34,16 @@ export default function HeroSection() {
 
           {/* Micro stats */}
           <div className="animate-fade-up stagger-4 mt-8 flex flex-wrap items-center justify-center gap-6">
-            <div className="flex items-center gap-2 text-sm text-white/90">
-              <DollarSign className="h-4 w-4 text-accent-light" />
+            <div className="flex items-center gap-2 text-sm text-white">
+              <DollarSign className="h-4 w-4 text-accent-light" aria-hidden="true" />
               <span>Direct Online Pricing</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-white/90">
-              <MapPin className="h-4 w-4 text-accent-light" />
+            <div className="flex items-center gap-2 text-sm text-white">
+              <MapPin className="h-4 w-4 text-accent-light" aria-hidden="true" />
               <span>Nationwide Network</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-white/90">
-              <Star className="h-4 w-4 text-accent-light" />
+            <div className="flex items-center gap-2 text-sm text-white">
+              <Star className="h-4 w-4 text-accent-light" aria-hidden="true" />
               <span>$0 Deductible Options</span>
             </div>
           </div>

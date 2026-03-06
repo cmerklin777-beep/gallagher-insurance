@@ -29,7 +29,7 @@ export default function HomePage() {
               <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl lg:text-5xl">
                 Hassle free protection, without the middleman
               </h2>
-              <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-accent lg:mx-0" />
+              <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-accent lg:mx-0" aria-hidden="true" />
               <Link
                 href="/quote"
                 className="mt-10 inline-block rounded-xl bg-action px-10 py-4 text-lg font-bold text-navy-950 shadow-lg shadow-action/20 transition hover:bg-action-hover hover:scale-105"
@@ -47,7 +47,7 @@ export default function HomePage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <div className="card-lift rounded-2xl bg-white p-6 shadow-sm">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-muted">
-                <Shield className="h-6 w-6 text-accent" />
+                <Shield className="h-6 w-6 text-accent" aria-hidden="true" />
               </div>
               <h3 className="text-lg font-bold text-navy-900">Plans that fit your life</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
@@ -57,7 +57,7 @@ export default function HomePage() {
 
             <div className="card-lift rounded-2xl bg-white p-6 shadow-sm">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-muted">
-                <Zap className="h-6 w-6 text-accent" />
+                <Zap className="h-6 w-6 text-accent" aria-hidden="true" />
               </div>
               <h3 className="text-lg font-bold text-navy-900">Built for how you buy</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
@@ -67,7 +67,7 @@ export default function HomePage() {
 
             <div className="card-lift rounded-2xl bg-white p-6 shadow-sm">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-muted">
-                <Home className="h-6 w-6 text-accent" />
+                <Home className="h-6 w-6 text-accent" aria-hidden="true" />
               </div>
               <h3 className="text-lg font-bold text-navy-900">Three tiers of protection</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
@@ -77,7 +77,7 @@ export default function HomePage() {
 
             <div className="card-lift rounded-2xl bg-white p-6 shadow-sm">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-muted">
-                <MapPin className="h-6 w-6 text-accent" />
+                <MapPin className="h-6 w-6 text-accent" aria-hidden="true" />
               </div>
               <h3 className="text-lg font-bold text-navy-900">Service anywhere you are</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
@@ -98,7 +98,7 @@ export default function HomePage() {
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             See what coverage costs for your home
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-white/90">
+          <p className="mt-6 text-lg leading-relaxed text-white">
             It takes less than a minute to see your personalized options — with transparent pricing and no commitment required.
           </p>
           <Link

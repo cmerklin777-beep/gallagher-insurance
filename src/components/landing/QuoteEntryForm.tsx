@@ -90,7 +90,7 @@ export default function QuoteEntryForm() {
     'mt-2 block w-full rounded-lg border border-navy-100 bg-navy-50/50 px-4 py-3 text-sm text-navy-700 transition focus:border-accent focus:bg-white focus:ring-2 focus:ring-accent/20 focus:outline-none appearance-none cursor-pointer';
 
   return (
-    <section className="relative -mt-8 z-20 pb-16">
+    <section aria-label="Get a quote" className="relative -mt-8 z-20 pb-16">
       <div className="mx-auto max-w-2xl px-4 sm:px-6">
         <div className="rounded-2xl bg-white p-8 shadow-lg shadow-navy-900/8 sm:p-10">
           <h2 className="text-center font-display text-2xl text-navy-900 sm:text-3xl">
@@ -100,7 +100,7 @@ export default function QuoteEntryForm() {
             No phone call required. No commitment.
           </p>
 
-          <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+          <form onSubmit={handleSubmit} className="mt-8 space-y-5" aria-describedby={error ? 'form-error' : undefined} noValidate>
             {/* Property Address */}
             <div>
               <label htmlFor="vin" className="block text-sm font-medium text-navy-900">
@@ -113,9 +113,10 @@ export default function QuoteEntryForm() {
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 className={inputClass}
+                aria-describedby="vin-hint"
                 required
               />
-              <p className="mt-1.5 text-xs text-navy-500">
+              <p id="vin-hint" className="mt-1.5 text-xs text-navy-600">
                 Enter your full property address
               </p>
             </div>
@@ -124,7 +125,7 @@ export default function QuoteEntryForm() {
             <div>
               <label htmlFor="city" className="flex items-center gap-1.5 text-sm font-medium text-navy-900">
                 City
-                {zipLooking && <Loader2 className="h-3.5 w-3.5 animate-spin text-accent" />}
+                {zipLooking && <Loader2 className="h-3.5 w-3.5 animate-spin text-accent" aria-hidden="true" />}
               </label>
               <input
                 id="city"
@@ -214,8 +215,8 @@ export default function QuoteEntryForm() {
 
             {/* Error display */}
             {error && (
-              <div className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50/80 p-3 text-sm text-red-700">
-                <AlertCircle className="h-4 w-4 flex-shrink-0" />
+              <div id="form-error" role="alert" aria-live="assertive" className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50/80 p-3 text-sm text-red-700">
+                <AlertCircle className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
                 {error}
               </div>
             )}
@@ -226,7 +227,7 @@ export default function QuoteEntryForm() {
               className="group flex w-full items-center justify-center gap-2 rounded-xl bg-action px-6 py-3.5 text-base font-bold text-navy-950 shadow-lg shadow-action/20 transition hover:bg-action-hover hover:scale-[1.02] active:scale-100"
             >
               Get Your Free Quote
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </button>
           </form>
         </div>

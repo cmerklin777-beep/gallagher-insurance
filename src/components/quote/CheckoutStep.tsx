@@ -642,7 +642,7 @@ export default function CheckoutStep() {
       {/* Payment Fields (Collect.js iframes) */}
       <div className="rounded-2xl bg-white p-6 shadow-md">
         <div className="flex items-center gap-2 mb-4">
-          <Lock className="h-4 w-4 text-accent" />
+          <Lock className="h-4 w-4 text-accent" aria-hidden="true" />
           <h3 className="text-sm font-semibold text-navy-500 uppercase tracking-wide">
             Secure Payment
           </h3>

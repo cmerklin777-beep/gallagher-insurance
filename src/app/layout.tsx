@@ -26,8 +26,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={roboto.variable}>
       <body className="min-h-screen bg-background font-sans antialiased">
+        <a href="#main-content" className="skip-nav">
+          Skip to main content
+        </a>
         <Header />
-        <main>{children}</main>
+        <main id="main-content" role="main" tabIndex={-1}>
+          {children}
+        </main>
         <Footer />
         <ChatWidget />
       </body>

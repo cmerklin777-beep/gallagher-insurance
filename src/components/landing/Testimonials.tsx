@@ -46,11 +46,12 @@ export default function Testimonials() {
               className="card-lift rounded-2xl border border-navy-100 bg-white p-8 shadow-sm"
             >
               {/* Stars */}
-              <div className="mb-4 flex gap-0.5">
+              <div className="mb-4 flex gap-0.5" aria-label={`${t.rating} out of 5 stars`}>
                 {Array.from({ length: t.rating }).map((_, i) => (
                   <Star
                     key={i}
                     className="h-5 w-5 fill-action text-action"
+                    aria-hidden="true"
                   />
                 ))}
               </div>

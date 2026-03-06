@@ -80,7 +80,7 @@ export default function AutoCoveragePage() {
           <div className="mx-auto mt-14 grid max-w-4xl gap-6 sm:grid-cols-2">
             <div className="bg-white rounded-xl border border-navy-100 shadow-sm p-6">
               <div className="mb-3 inline-flex rounded-xl bg-accent-muted p-3">
-                <Shield className="h-6 w-6 text-accent" />
+                <Shield className="h-6 w-6 text-accent" aria-hidden="true" />
               </div>
               <h3 className="text-lg font-bold text-navy-900">Comprehensive Coverage</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
@@ -91,7 +91,7 @@ export default function AutoCoveragePage() {
 
             <div className="bg-white rounded-xl border border-navy-100 shadow-sm p-6">
               <div className="mb-3 inline-flex rounded-xl bg-accent-muted p-3">
-                <DollarSign className="h-6 w-6 text-accent" />
+                <DollarSign className="h-6 w-6 text-accent" aria-hidden="true" />
               </div>
               <h3 className="text-lg font-bold text-navy-900">Affordable Plans</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
@@ -187,7 +187,7 @@ export default function AutoCoveragePage() {
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             Secure Your Peace of Mind Today
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-navy-100/80">
+          <p className="mt-6 text-lg leading-relaxed text-navy-100">
             Choose the coverage tier that best suits your needs and enjoy peace of mind knowing
             you&apos;re protected. Explore our comprehensive coverage options and take the first step
             towards worry-free homeownership.

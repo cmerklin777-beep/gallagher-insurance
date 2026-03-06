@@ -260,7 +260,7 @@ export default function OptionsStep() {
       <div className="rounded-2xl bg-white p-5 shadow-md border border-navy-100">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-muted">
-            <ShieldCheck className="h-5 w-5 text-accent" />
+            <ShieldCheck className="h-5 w-5 text-accent" aria-hidden="true" />
           </div>
           <div>
             <h3 className="font-bold text-navy-900">{tierName}</h3>

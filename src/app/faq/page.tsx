@@ -70,7 +70,7 @@ export default function FaqPage() {
             <h1 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
               Your Questions Answered
             </h1>
-            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-navy-100/80 sm:text-xl">
+            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-navy-100 sm:text-xl">
               Find answers to common questions about our coverage plans, claims process, and more.
             </p>
           </div>
@@ -90,27 +90,36 @@ export default function FaqPage() {
                     : 'border-navy-100 shadow-sm hover:shadow-md'
                 }`}
               >
-                <button
-                  type="button"
-                  onClick={() => toggleItem(index)}
-                  className="flex w-full items-center justify-between px-6 py-5 text-left"
-                  aria-expanded={openIndex === index}
-                >
-                  <span className="pr-4 text-lg font-medium text-navy-900">
-                    {item.question}
-                  </span>
-                  <ChevronDown
-                    className={`h-5 w-5 flex-shrink-0 text-accent transition-transform duration-300 ${
-                      openIndex === index ? 'rotate-180' : ''
-                    }`}
-                  />
-                </button>
+                <h3>
+                  <button
+                    type="button"
+                    onClick={() => toggleItem(index)}
+                    className="flex w-full items-center justify-between px-6 py-5 text-left"
+                    aria-expanded={openIndex === index}
+                    aria-controls={`faq-panel-${index}`}
+                    id={`faq-button-${index}`}
+                  >
+                    <span className="pr-4 text-lg font-medium text-navy-900">
+                      {item.question}
+                    </span>
+                    <ChevronDown
+                      className={`h-5 w-5 flex-shrink-0 text-accent transition-transform duration-300 ${
+                        openIndex === index ? 'rotate-180' : ''
+                      }`}
+                      aria-hidden="true"
+                    />
+                  </button>
+                </h3>
                 <div
+                  id={`faq-panel-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-button-${index}`}
                   className={`overflow-hidden transition-all duration-300 ${
                     openIndex === index ? 'max-h-96 pb-6' : 'max-h-0'
                   }`}
+                  hidden={openIndex !== index}
                 >
-                  <p className="px-6 text-base leading-relaxed text-navy-600">{item.answer}</p>
+                  <p className="px-6 text-base leading-relaxed text-navy-700">{item.answer}</p>
                 </div>
               </div>
             ))}
@@ -124,7 +133,7 @@ export default function FaqPage() {
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             Still Have Questions?
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-navy-100/80">
+          <p className="mt-6 text-lg leading-relaxed text-navy-100">
             Our team is here to help. Reach out to us and we&apos;ll get you the answers you need.
           </p>
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

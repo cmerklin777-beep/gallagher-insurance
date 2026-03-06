@@ -55,7 +55,7 @@ export default function HowItWorks() {
 
                 {/* Icon */}
                 <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-muted">
-                  <item.icon className="h-7 w-7 text-accent" />
+                  <item.icon className="h-7 w-7 text-accent" aria-hidden="true" />
                 </div>
 
                 {/* Text */}

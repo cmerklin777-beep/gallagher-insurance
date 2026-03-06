@@ -43,7 +43,7 @@ export default function AboutPage() {
             <h1 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
               Driven by Excellence
             </h1>
-            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
+            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white sm:text-xl">
               At AssuredPartners, a Gallagher company, we believe protecting your home
               shouldn&apos;t be complicated. Backed by decades of industry expertise, we bring
               you a smarter way to get Home Warranty coverage.
@@ -98,7 +98,7 @@ export default function AboutPage() {
                 className="card-lift rounded-2xl bg-white p-8 shadow-md"
               >
                 <div className="mb-5 inline-flex rounded-full bg-accent-muted p-4">
-                  <value.icon className="h-6 w-6 text-accent" />
+                  <value.icon className="h-6 w-6 text-accent" aria-hidden="true" />
                 </div>
                 <h3 className="text-lg font-semibold text-navy-900">{value.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-navy-600">{value.description}</p>
@@ -114,7 +114,7 @@ export default function AboutPage() {
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
             Secure Your Coverage Today
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-white/90">
+          <p className="mt-6 text-lg leading-relaxed text-white">
             We&apos;d love to help you find the right plan. Get a personalized quote in under a
             minute — no pressure, no sales calls.
           </p>

@@ -101,7 +101,7 @@ export default function CartReview() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div className="flex items-center gap-3">
-        <ShoppingCart className="h-6 w-6 text-accent" />
+        <ShoppingCart className="h-6 w-6 text-accent" aria-hidden="true" />
         <h2 className="text-2xl font-bold font-display text-navy-900">Review Your Coverage</h2>
       </div>
 

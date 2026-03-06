@@ -25,7 +25,7 @@ export default function SuccessPage() {
       {/* Success Icon */}
       <div className="flex justify-center">
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-accent-muted">
-          <CheckCircle className="h-12 w-12 text-accent" />
+          <CheckCircle className="h-12 w-12 text-accent" aria-hidden="true" />
         </div>
       </div>
 

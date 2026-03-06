@@ -186,7 +186,7 @@ export default function VehicleInfoStep({ initialVin, initialMileage }: VehicleI
         )}
         <div className="flex items-center gap-3 mb-6">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-muted">
-            <Home className="h-5 w-5 text-accent" />
+            <Home className="h-5 w-5 text-accent" aria-hidden="true" />
           </div>
           <div>
             <h2 className="text-xl font-bold font-display text-navy-900">Home Information</h2>

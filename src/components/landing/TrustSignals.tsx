@@ -49,7 +49,7 @@ export default function TrustSignals() {
               className="card-lift rounded-2xl bg-white border border-navy-100 shadow-sm p-8 text-center"
             >
               <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-accent-muted">
-                <signal.icon className="h-7 w-7 text-accent" />
+                <signal.icon className="h-7 w-7 text-accent" aria-hidden="true" />
               </div>
               <h3 className="font-semibold text-navy-900">{signal.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">

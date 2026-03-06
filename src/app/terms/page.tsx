@@ -20,7 +20,7 @@ export default function TermsPage() {
                         <h1 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
                             Terms of Service
                         </h1>
-                        <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-navy-100/80 sm:text-xl">
+                        <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-navy-100 sm:text-xl">
                             These Terms of Service explain how AssuredPartners provides its services and how you
                             may use this website and our coverage offerings.
                         </p>

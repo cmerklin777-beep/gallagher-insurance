@@ -23,7 +23,7 @@ export default function VehicleCoverageSummary({
     <div className="rounded-2xl bg-white p-6 shadow-md">
       <div className="flex items-center gap-3 mb-4">
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-muted">
-          <Home className="h-5 w-5 text-accent" />
+          <Home className="h-5 w-5 text-accent" aria-hidden="true" />
         </div>
         <div className="flex-1">
           <h3 className="font-bold text-navy-900">
