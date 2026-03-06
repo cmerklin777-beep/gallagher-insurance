@@ -19,8 +19,8 @@ export default function HomePage() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="relative mx-auto h-80 w-full max-w-md overflow-hidden rounded-2xl shadow-lg lg:mx-0">
               <Image
-                src="/images/people/car-repair.jpg"
-                alt="Family in front of their home"
+                src="/images/people/hvac-inspection.jpg"
+                alt="HVAC handyman inspecting an air conditioning unit"
                 fill
                 className="object-cover"
               />
