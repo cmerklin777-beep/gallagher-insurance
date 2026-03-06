@@ -10,14 +10,13 @@ export default function HeroSection() {
           {/* Left — Copy */}
           <div className="text-center lg:text-left">
             <h1 className="animate-fade-up stagger-1 font-display text-4xl leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Coverage built for you,{' '}
-              <span className="text-action">not for middlemen</span>.
+              Home protection{' '}
+              <span className="text-action">you can count on</span>.
             </h1>
 
             <p className="animate-fade-up stagger-2 mt-6 max-w-xl text-lg leading-relaxed text-white/90">
-              We cut out the call center markup and broker commissions so you
-              get the same top-tier home protection at a fraction of the cost — all
-              online, in minutes.
+              Get top-tier home protection at a competitive price — all
+              online, in minutes. Backed by the strength of Gallagher.
             </p>
 
             <div className="animate-fade-up stagger-3 mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
@@ -40,7 +39,7 @@ export default function HeroSection() {
             <div className="animate-fade-up stagger-4 mt-8 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
               <div className="flex items-center gap-2 text-sm text-white/90">
                 <DollarSign className="h-4 w-4 text-accent-light" />
-                <span>No Call Center Markup</span>
+                <span>Direct Online Pricing</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-white/90">
                 <MapPin className="h-4 w-4 text-accent-light" />

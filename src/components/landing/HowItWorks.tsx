@@ -13,12 +13,12 @@ const steps = [
     step: '2',
     title: 'Compare your options',
     description:
-      'See coverage plans tailored to your vehicle with direct-to-you pricing — no hidden fees, no call center markups.',
+      'See coverage plans tailored to your home with transparent pricing — no hidden fees, no surprises.',
   },
   {
     icon: ShieldCheck,
     step: '3',
-    title: 'Drive with confidence',
+    title: 'Enjoy peace of mind',
     description:
       'Pick your plan, check out online, and you\'re covered. It\'s that easy.',
   },
@@ -34,7 +34,7 @@ export default function HowItWorks() {
             We made it this simple on purpose
           </h2>
           <p className="mt-4 text-lg text-navy-600">
-            No phone calls, no finance office, no pressure. Just you and your quote.
+            No phone calls, no lengthy paperwork, no pressure. Just you and your quote.
           </p>
         </div>
 

@@ -44,9 +44,9 @@ export default function AboutPage() {
               Driven by Excellence
             </h1>
             <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
-              We started AssuredPartners because we believe protecting your home shouldn&apos;t be
-              complicated. We&apos;re a small team with a big mission: making Home Warranty
-              plans simple, transparent, and actually worth it.
+              At AssuredPartners, a Gallagher company, we believe protecting your home
+              shouldn&apos;t be complicated. Backed by decades of industry expertise, we bring
+              you a smarter way to get Home Warranty coverage.
             </p>
           </div>
         </div>
@@ -69,11 +69,10 @@ export default function AboutPage() {
                 Building Trust Through Innovation
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-navy-600">
-                We know what it&apos;s like to get hit with an unexpected repair bill — it&apos;s
-                stressful. That&apos;s why we built AssuredPartners to be different. No confusing jargon, no
-                surprise exclusions, just honest coverage you can count on. From our first customer
-                to today, we treat every person like family, because that&apos;s exactly how we&apos;d
-                want to be treated.
+                Unexpected home repairs can be stressful and costly. That&apos;s why AssuredPartners
+                designed a Home Warranty experience that&apos;s transparent, straightforward, and built
+                around you. No confusing jargon, no surprise exclusions — just honest coverage
+                you can count on, backed by the strength and stability of Gallagher.
               </p>
             </div>
           </div>

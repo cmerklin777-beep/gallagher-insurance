@@ -17,7 +17,7 @@ const signals = [
     icon: DollarSign,
     title: '$0 Service Fee Options',
     description:
-      'Zero out-of-pocket on service calls — savings we can offer because we don\'t have a showroom to pay for.',
+      'Zero out-of-pocket on service calls — savings we pass directly to you through our streamlined online process.',
   },
   {
     icon: Clock,
@@ -37,7 +37,7 @@ export default function TrustSignals() {
             Why homeowners switch to us
           </h2>
           <p className="mt-4 text-lg text-navy-600">
-            Same certified protection. Direct pricing. No middlemen.
+            Trusted coverage. Transparent pricing. Nationwide service.
           </p>
         </div>
 

@@ -188,7 +188,7 @@ export default function AutoCoveragePage() {
             Secure Your Peace of Mind Today
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-navy-100/80">
-            Choose the coverage tier that best suits your needs and drive with confidence knowing
+            Choose the coverage tier that best suits your needs and enjoy peace of mind knowing
             you&apos;re protected. Explore our comprehensive coverage options and take the first step
             towards worry-free homeownership.
           </p>

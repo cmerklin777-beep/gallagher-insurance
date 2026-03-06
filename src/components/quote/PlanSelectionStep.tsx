@@ -103,7 +103,7 @@ export default function PlanSelectionStep() {
     return (
       <div className="mx-auto max-w-xl text-center">
         <div className="rounded-2xl bg-white p-8 shadow-md">
-          <p className="text-navy-600">No coverage plans available for this vehicle.</p>
+          <p className="text-navy-600">No coverage plans available for this property.</p>
           <button
             onClick={() => setStep('vehicle-info')}
             className="mt-4 rounded-lg bg-action px-6 py-2.5 text-sm font-semibold text-navy-950 hover:bg-action-hover"

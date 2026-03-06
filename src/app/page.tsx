@@ -27,18 +27,9 @@ export default function HomePage() {
             </div>
             <div className="text-center lg:text-left">
               <h2 className="font-display text-3xl tracking-tight text-navy-900 sm:text-4xl lg:text-5xl">
-                The protection you&apos;d expect from a call center — without the call center price tag.
+                Hassle free protection, without the middleman
               </h2>
               <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-accent lg:mx-0" />
-              <p className="mt-8 max-w-xl text-lg leading-relaxed text-navy-600">
-                Call centers charge a premium because they can. We built a smarter way — the same
-                certified coverage, sold directly to you online. No call center overhead, no broker
-                fees, just honest pricing on{' '}
-                <span className="font-semibold text-navy-900 underline decoration-accent/60 underline-offset-4">
-                  Home Warranty plans
-                </span>{' '}
-                that actually protect you.
-              </p>
               <Link
                 href="/quote"
                 className="mt-10 inline-block rounded-xl bg-action px-10 py-4 text-lg font-bold text-navy-950 shadow-lg shadow-action/20 transition hover:bg-action-hover hover:scale-105"
@@ -60,7 +51,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-lg font-bold text-navy-900">Plans that fit your life</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
-                From appliance basics to whole-home coverage, pick the tier that fits — priced without the call center markup baked in.
+                From appliance basics to whole-home coverage, pick the tier that fits — with transparent, competitive pricing.
               </p>
             </div>
 
@@ -70,7 +61,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-lg font-bold text-navy-900">Built for how you buy</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy-600">
-                No waiting rooms, no finance-office upsell. Our platform was designed from day one to get you covered online in minutes.
+                No phone tag, no lengthy paperwork. Our platform was designed from day one to get you covered online in minutes.
               </p>
             </div>
 
@@ -105,10 +96,10 @@ export default function HomePage() {
       <section className="hero-mesh relative py-24 text-center section-fade-top">
         <div className="relative z-10 mx-auto max-w-3xl px-4">
           <h2 className="font-display text-3xl text-white sm:text-4xl lg:text-5xl">
-            See what coverage costs without the markup
+            See what coverage costs for your home
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-white/90">
-            It takes less than a minute to see your personalized options — priced directly, with nothing added on. No sales calls, no commitment.
+            It takes less than a minute to see your personalized options — with transparent pricing and no commitment required.
           </p>
           <Link
             href="/quote"
